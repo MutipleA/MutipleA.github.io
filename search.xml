@@ -1,6 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj3252]]></title>
+    <url>%2F2018%2F02%2F26%2Fpoj3252%2F</url>
+    <content type="text"><![CDATA[链接:poj3252 DescriptionThe cows, as you know, have no fingers or thumbs and thus are unable to play Scissors, Paper, Stone&apos; (also known as &apos;Rock, Paper, Scissors&apos;, &apos;Ro, Sham, Bo&apos;, and a host of other names) in order to make arbitrary decisions such as who gets to be milked first. They can&apos;t even flip a coin because it&apos;s so hard to toss using hooves. They have thus resorted to &quot;round number&quot; matching. The first cow picks an integer less than two billion. The second cow does the same. If the numbers are both &quot;round numbers&quot;, the first cow wins, otherwise the second cow wins. A positive integer N is said to be a &quot;round number&quot; if the binary representation of N has as many or more zeroes than it has ones. For example, the integer 9, when written in binary form, is 1001. 1001 has two zeroes and two ones; thus, 9 is a round number. The integer 26 is 11010 in binary; since it has two zeroes and three ones, it is not a round number. Obviously, it takes cows a while to convert numbers to binary, so the winner takes a while to determine. Bessie wants to cheat and thinks she can do that if she knows how many &quot;round numbers&quot; are in a given range. Help her by writing a program that tells how many round numbers appear in the inclusive range given by the input (1 ≤ Start &lt; Finish ≤ 2,000,000,000). InputLine 1: Two space-separated integers, respectively Start and Finish. OutputLine 1: A single integer that is the count of round numbers in the inclusive range Start..Finish Sample Input2 12 Sample Output6 题解模板题 1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,l,n) for(register int i=l;i&lt;n;++i)const int N=66;int a[N],dp[N][N];//当前第i位，零的个数为j共有多少种情况 int dfs(int pos,int sta,int limit,int lead)&#123; if(pos==-1)return sta&gt;=32;; if(!limit&amp;&amp;!lead&amp;&amp;dp[pos][sta]!=-1)return dp[pos][sta]; int up=limit?a[pos]:1; int tmp=0; rep(i,0,up+1)&#123; if(i==0&amp;&amp;lead)tmp+=dfs(pos-1,sta,limit&amp;&amp;i==a[pos],lead); else tmp+=dfs(pos-1,sta+(i==0?1:-1),i==a[pos]&amp;&amp;limit,lead&amp;&amp;i==0); &#125; if(!limit&amp;&amp;!lead)dp[pos][sta]=tmp; return tmp;&#125;int solve(int x)&#123; int cnt=0; while(x)&#123; a[cnt++]=x&amp;1; x&gt;&gt;=1; &#125; return dfs(cnt-1,32,1,1);&#125;int main()&#123; int l,r; memset(dp,-1,sizeof(dp)); scanf("%d%d",&amp;l,&amp;r); printf("%d",solve(r)-solve(l-1)); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>数位dp</category>
+      </categories>
+      <tags>
+        <tag>数位dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu4734]]></title>
+    <url>%2F2018%2F02%2F26%2Fhdu4734%2F</url>
+    <content type="text"><![CDATA[链接:hdu4734 DescriptionFor a decimal number x with n digits (AnAn-1An-2 ... A2A1), we define its weight as F(x) = An * 2n-1 + An-1 * 2n-2 + ... + A2 * 2 + A1 * 1. Now you are given two numbers A and B, please calculate how many numbers are there between 0 and B, inclusive, whose weight is no more than F(A). InputThe first line has a number T (T &lt;= 10000) , indicating the number of test cases. For each test case, there are two numbers A and B (0 &lt;= A,B &lt; 109) OutputFor every case,you should output &quot;Case #t: &quot; at first, without quotes. The t is the case number starting from 1. Then output the answer. Sample Input3 0 100 1 10 5 100 Sample OutputCase #1: 1 Case #2: 2 Case #3: 13 题解模板题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,l,n) for(register int i=l;i&lt;n;++i)using namespace std;const int N=4600;int a[10],dp[10][N];int n;int dfs(int pos,int limit,int sum)&#123; if(sum&lt;0)return 0; if(pos==-1)return 1; if(!limit&amp;&amp;dp[pos][sum]!=-1)return dp[pos][sum]; int up=limit?a[pos]:9; int tmp=0; rep(i,0,up+1)&#123; tmp+=dfs(pos-1,limit&amp;&amp;i==a[pos],sum-i*(1&lt;&lt;pos)); &#125; if(!limit)dp[pos][sum]=tmp; return tmp;&#125;int solve(int x,int y)&#123; int cnt=0,len=0,ans=0; while(y)&#123; ans+=y%10*(1&lt;&lt;len); len++; y/=10; &#125; while(x)&#123; a[cnt++]=x%10; x/=10; &#125; return dfs(cnt-1,1,ans);&#125;int main()&#123; scanf("%d",&amp;n); memset(dp,-1,sizeof(dp)); rep(i,0,n)&#123; int A,B; scanf("%d%d",&amp;A,&amp;B); printf("Case #%d: %d\n",i+1,solve(B,A)); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>数位dp</category>
+      </categories>
+      <tags>
+        <tag>数位dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu3709]]></title>
+    <url>%2F2018%2F02%2F26%2Fhdu3709%2F</url>
+    <content type="text"><![CDATA[链接:hdu3709 DescriptionA balanced number is a non-negative integer that can be balanced if a pivot is placed at some digit. More specifically, imagine each digit as a box with weight indicated by the digit. When a pivot is placed at some digit of the number, the distance from a digit to the pivot is the offset between it and the pivot. Then the torques of left part and right part can be calculated. It is balanced if they are the same. A balanced number must be balanced with the pivot at some of its digits. For example, 4139 is a balanced number with pivot fixed at 3. The torqueses are 4*2 + 1*1 = 9 and 9*1 = 9, for left part and right part, respectively. It&apos;s your job to calculate the number of balanced numbers in a given range [x, y]. InputThe input contains multiple test cases. The first line is the total number of cases T (0 &lt; T ≤ 30). For each case, there are two integers separated by a space in a line, x and y. (0 ≤ x ≤ y ≤ 1018). OutputFor each case, print the number of balanced numbers in the range [x, y] in a line. Sample Input2 0 9 7604 24324 Sample Output10 897 题解模板题 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,l,n) for(register int i=l;i&lt;n;++i)#define ll long longusing namespace std;const int N=22;ll dp[N][N][2000];//第i位，枢轴为j的时候和为k时共有多少种情况满足符合要求 int a[N];ll dfs(int len,int pos,int limit,int sta)&#123; if(len==-1)return sta?0:1; if(sta&lt;0)return 0; if(!limit&amp;&amp;dp[len][pos][sta]!=-1)return dp[len][pos][sta]; int up=limit?a[len]:9; ll tmp=0; rep(i,0,up+1)&#123; tmp+=dfs(len-1,pos,limit&amp;&amp;i==a[len],sta+i*(len-pos)); &#125; if(!limit)dp[len][pos][sta]=tmp; return tmp;&#125;ll solve(ll x)&#123; int cnt=0; while(x)&#123; a[cnt++]=x%10; x/=10; &#125; ll ans=0; rep(i,0,cnt)&#123; ans+=dfs(cnt-1,i,1,0); &#125; return ans-cnt+1;&#125;int main()&#123; ll l,r; int T; scanf("%d",&amp;T); memset(dp,-1,sizeof(dp)); while(T--)&#123; scanf("%lld%lld",&amp;l,&amp;r); printf("%lld\n",solve(r)-solve(l-1)); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>数位dp</category>
+      </categories>
+      <tags>
+        <tag>数位dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu2089]]></title>
+    <url>%2F2018%2F02%2F26%2Fhdu2089%2F</url>
+    <content type="text"><![CDATA[链接:hdu2089 Description杭州人称那些傻乎乎粘嗒嗒的人为62（音：laoer）。 杭州交通管理局经常会扩充一些的士车牌照，新近出来一个好消息，以后上牌照，不再含有不吉利的数字了，这样一来，就可以消除个别 的士司机和乘客的心理障碍，更安全地服务大众。 不吉利的数字为所有含有4或62的号码。例如： 62315 73418 88914 都属于不吉利号码。但是，61152虽然含有6和2，但不是62连号，所以不属于不吉利数字之列。 你的任务是，对于每次给出的一个牌照区间号，推断出交管局今次又要实际上给多少辆新的士车上牌照了。 Input输入的都是整数对n、m（0&lt;n≤m&lt;1000000），如果遇到都是0的整数对，则输入结束。 Output对于每个整数对，输出一个不含有不吉利数字的统计个数，该数值占一行位置。 Sample Input1 100 0 0 Sample Output80 题解模板题 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#define rep(i,l,n)for(register int i=l;i&lt;n;++i)#define ll long longusing namespace std;const int N=55;int a[N];ll dp[N][2];//当前第i位，前置有或没有6共有多少种情况 int dfs(int pos,int pre,int sta,int limit)&#123; if(pos==-1)return 1; if(!limit&amp;&amp;dp[pos][sta]!=-1)return dp[pos][sta]; int up=limit?a[pos]:9; int tmp=0; rep(i,0,up+1)&#123; if(pre==6&amp;&amp;i==2)continue; if(i==4)continue; tmp+=dfs(pos-1,i,i==6,limit&amp;&amp;a[pos]==i); &#125; if(!limit)dp[pos][sta]=tmp; return tmp;&#125;int solve(int x)&#123; int cnt=0; while(x)&#123; a[cnt++]=x%10; x/=10; &#125; return dfs(cnt-1,-1,0,true);&#125;int main()&#123; int l,r; memset(dp,-1,sizeof(dp));//不管l与r怎么给 已经计算出来的状态是不会改变的 while(~scanf("%d%d",&amp;l,&amp;r))&#123; if(l==0&amp;&amp;r==0)break; printf("%d\n",solve(r)-solve(l-1)); &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>数位dp</category>
+      </categories>
+      <tags>
+        <tag>数位dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lg1352]]></title>
+    <url>%2F2018%2F02%2F26%2Flg1352%2F</url>
+    <content type="text"><![CDATA[链接:lg1352 Description InputOutputSample InputSample Output题解模板题 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regsiter int i=x;i&gt;=y;--i)using namespace std;const int N=1e4;int fa[N],r[N],dp[N][2],vis[N];int n,root=1;template &lt;typename T&gt;inline void read(T&amp;x)&#123; x=0;char c;int sign=1; do&#123; c=getchar(); if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123; x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;void tdp(int node)&#123; vis[node]=1; rep(i,1,n)if(!vis[i]&amp;&amp;fa[i]==node)&#123; tdp(i); dp[node][1]+=dp[i][0]; dp[node][0]+=max(dp[i][1],dp[i][0]); &#125;&#125;int main()&#123; read(n); rep(i,1,n)read(dp[i][1]); rep(i,1,n-1)&#123; int x,y; read(x);read(y); fa[x]=y; &#125; rep(i,1,n)if(!fa[i])&#123; root=i;break; &#125; tdp(root); printf("%d",max(dp[root][1],dp[root][0])); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>树形dp</category>
+      </categories>
+      <tags>
+        <tag>树形dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu5647]]></title>
+    <url>%2F2018%2F02%2F26%2Fhdu5647%2F</url>
+    <content type="text"><![CDATA[链接:hdu5647 DescriptionDZY has an unrooted tree consisting of n nodes labeled from 1 to n. DZY likes connected sets on the tree. A connected set S is a set of nodes, such that every two nodes u,v in S can be connected by a path on the tree, and the path should only contain nodes from S. Obviously, a set consisting of a single node is also considered a connected set. The size of a connected set is defined by the number of nodes which it contains. DZY wants to know the sum of the sizes of all the connected sets. Can you help him count it? The answer may be large. Please output modulo 109+7. InputFirst line contains t denoting the number of testcases.t testcases follow. In each testcase, first line contains n. In lines 2∼n, ith line contains pi, meaning there is an edge between node i and node pi. (1≤pi≤i−1,2≤i≤n) (n≥1， sum of n in all testcases does not exceed 200000) OutputOutput one line for each testcase, modulo 109+7. Sample Input2 1 5 1 2 2 3 Sample Output1 42 题解ans[i]由两部分组成，这个节点做的贡献dp[u]*(sum[x]+1) 孩子做的贡献dp[x]*sum[u] 具体看代码 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6;const int mod=1e9+7;int T,n;ll dp[N],sum[N],head[N],cnt;ll ans;struct node&#123; int v,nxt;&#125;e[N];void readin()&#123; scanf("%d",&amp;n); rep(i,2,n)&#123; int x; scanf("%d",&amp;x); e[cnt].v=i; e[cnt].nxt=head[x]; head[x]=cnt++; &#125;&#125;void dfs(int u)&#123; sum[u]=1; dp[u]=1; for(int i=head[u];i!=-1;i=e[i].nxt)&#123; int x=e[i].v; dfs(x); dp[u]=(dp[u]*(sum[x]+1)%mod+dp[x]*sum[u]%mod)%mod;//新加的点做的贡献+这个孩子原来做的贡献 sum[u]=(sum[u]*(sum[x]+1))%mod; &#125; ans=(ans+dp[u])%mod;&#125;int main()&#123; //ios::sync_with_stdio(false); scanf("%d",&amp;T); while(T--)&#123; ans=0; cnt=0; memset(head,-1,sizeof(head)); readin(); dfs(1); //cout&lt;&lt;ans&lt;&lt;endl; printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>树形dp</category>
+      </categories>
+      <tags>
+        <tag>树形dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu2196]]></title>
+    <url>%2F2018%2F02%2F26%2Fhdu2196%2F</url>
+    <content type="text"><![CDATA[链接:hdu2196 DescriptionA school bought the first computer some time ago(so this computer&apos;s id is 1). During the recent years the school bought N-1 new computers. Each new computer was connected to one of settled earlier. Managers of school are anxious about slow functioning of the net and want to know the maximum distance Si for which i-th computer needs to send signal (i.e. length of cable to the most distant computer). You need to provide this information. Hint: the example input is corresponding to this graph. And from the graph, you can see that the computer 4 is farthest one from 1, so S1 = 3. Computer 4 and 5 are the farthest ones from 2, so S2 = 2. Computer 5 is the farthest one from 3, so S3 = 3. we also get S4 = 4, S5 = 4. InputInput file contains multiple test cases.In each case there is natural number N (N&lt;=10000) in the first line, followed by (N-1) lines with descriptions of computers. i-th line contains two natural numbers - number of computer, to which i-th computer is connected and length of cable used for connection. Total length of cable does not exceed 10^9. Numbers in lines of input are separated by a space. OutputFor each case output N lines. i-th line must contain number Si for i-th computer (1&lt;=i&lt;=N). Sample Input5 1 1 2 1 3 1 1 1 Sample Output3 2 3 4 4 题解对于任意一个节点，他能到达的最远的节点一定是他子树中的一个节点， 或者经过他父亲到达的一个节点。但是可能当前节点在根节点最远距离的路径上 父节点存的最大值可能正好是从该点过来的 1]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>树形dp</category>
+      </categories>
+      <tags>
+        <tag>树形dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu5627]]></title>
     <url>%2F2018%2F02%2F26%2Fhdu5627%2F</url>
     <content type="text"><![CDATA[链接:hdu5627 DescriptionClarke is a patient with multiple personality disorder. One day he turned into a learner of graph theory. He learned some algorithms of minimum spanning tree. Then he had a good idea, he wanted to find the maximum spanning tree with bit operation AND. A spanning tree is composed by n−1 edges. Each two points of n points can reach each other. The size of a spanning tree is generated by bit operation AND with values of n−1 edges. Now he wants to figure out the maximum spanning tree. InputThe first line contains an integer T(1≤T≤5), the number of test cases. For each test case, the first line contains two integers n,m(2≤n≤300000,1≤m≤300000), denoting the number of points and the number of edge 、 respectively. Then mlines followed, each line contains three integers x,y,w(1≤x,y≤n,0≤w≤109), denoting an 、 edge between x,ywith value w. The number of test case with n,m&gt;100000 will not exceed 1. OutputFor each test case, print a line contained an integer represented the answer. If there is no any spanning tree, print 0. Sample Input1 4 5 1 2 5 1 3 3 1 4 2 2 3 1 3 4 7 Sample Output1 题解按位与最大生成树，从最高位贪心到最低位，看该位和其他已经获得的位能否构成生成树 能构成就加上这一位，不然就扔掉 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)using namespace std;const int N=1e6;int x[N],y[N],w[N],f[N];int find(int x)&#123; return f[x]==x?x:f[x]=find(f[x]);&#125;int un(int x,int y)&#123; x=find(x);y=find(y); if(x!=y)&#123; f[x]=y; return 1; &#125; return 0;&#125;int main()&#123; int t,n,m; scanf("%d",&amp;t); while(t--)&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)scanf("%d%d%d",&amp;x[i],&amp;y[i],&amp;w[i]); int ans=0; repd(i,20,0)&#123; ans+=(1&lt;&lt;i); rep(j,1,m)f[j]=j; int cnt=0; rep(j,1,m)if((w[j]&amp;ans)==ans&amp;&amp;un(x[j],y[j]))cnt++; //注意此处不是(w[j]&amp;(1&lt;&lt;i))==(1&lt;&lt;i) if(cnt!=n-1)ans-=(1&lt;&lt;i); &#125; printf("%d\n",ans); &#125; return 0;&#125;]]></content>

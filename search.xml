@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[spfa]]></title>
+    <url>%2Fspfa%2F</url>
+    <content type="text"><![CDATA[SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。 SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路 而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题 SPFA 算法的最坏复杂度为 O(2*E)。。 SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。 这里用邻接表形式写下spfa 的模板 后面再介绍它的其它功能，这里只知道它处理最短路很快即可 优点可以处理负权，判负环，快 代码` c++ queue q; int spfa(int s,int t){ memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(vis)); //memset(c,0,sizeof(c)); q.push(s); in[s]=1; //c[s]=1; while(!q.empty()){ int k=q.front();q.pop(); in[k]=0; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i]&lt;d[i]){ d[i]=e[i].w+d[k]; if(!in[e[i].t]){ q.push(e[i].t); in[e[i].t]++; c[e[i].t]++; //if(c[e[i].t]&gt;n)return ok=0 } } } }]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[dijkstra优化]]></title>
+    <url>%2Fdijkstra%E4%BC%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[优化dijkstra 注意到贪心的过程是每次选取最小的dis值出来，这里是O(n)的，我们可以用优先队列把他优化到O(logn) 12345678910111213141516171819typedef pair&lt;int,int&gt; l;priority_queue&lt;s,vector&lt;s&gt;,greater&lt;s&gt; &gt;q;int dijkstra(int s,int t)&#123; while(!q.empty())q.pop(); memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(0)); d[s]=0;in[s]=1; q.push(l(0,s)); while(!q.empty())&#123; int k=q.top().second; q.pop(); in[k]=1; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i].w&lt;d[i])&#123; d[i]=e[i].w+d[k]; if(!in[e[i].t])q.push(l(d[i],e[i].t)); &#125; &#125; return d[t]!=inf?d[t]:-1;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[dijkstra算法详解]]></title>
+    <url>%2Fdijkstra%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3%2F</url>
+    <content type="text"><![CDATA[最短路从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径 解决算法： floyd dijkstra spfa dijktsra优化 spfa优化 dijkstra算法介绍 算法思路: 利用贪心的思想，维护一个dis数组，值为源点到各个顶点的最短距离，以及一个vis数组，表示该点已经算出最短路的点的集合 每次找到dis值最小的顶点（这个dis值就是改点到源点的最短距离），标记它，然后用它来松弛可以松弛的点， 时间复杂度： 很显然是O(n2)的 *缺点：无法处理负权代码int dijkstra(int s,int t){ rep(i,1,n+1){ d[i]=g[s][i]; vis[i]=0; } vis[s]=1; rep(i,2,n+1){ int mx=inf,k=1; rep(j,1,n+1)if(!vis[j]&amp;&amp;d[j]&lt;mx){ mx=d[j]; k=j; } vis[k]=1; rep(j,1,n+1)if(!vis[j]&amp;&amp;mx+g[k][j]&lt;d[j]){ d[j]=mx+g[k][j]; } } return d[t]!=inf?d[t]:-1; }]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj3252]]></title>
     <url>%2Fpoj3252%2F</url>
     <content type="text"><![CDATA[链接:poj3252 DescriptionThe cows, as you know, have no fingers or thumbs and thus are unable to play Scissors, Paper, Stone&apos; (also known as &apos;Rock, Paper, Scissors&apos;, &apos;Ro, Sham, Bo&apos;, and a host of other names) in order to make arbitrary decisions such as who gets to be milked first. They can&apos;t even flip a coin because it&apos;s so hard to toss using hooves. They have thus resorted to &quot;round number&quot; matching. The first cow picks an integer less than two billion. The second cow does the same. If the numbers are both &quot;round numbers&quot;, the first cow wins, otherwise the second cow wins. A positive integer N is said to be a &quot;round number&quot; if the binary representation of N has as many or more zeroes than it has ones. For example, the integer 9, when written in binary form, is 1001. 1001 has two zeroes and two ones; thus, 9 is a round number. The integer 26 is 11010 in binary; since it has two zeroes and three ones, it is not a round number. Obviously, it takes cows a while to convert numbers to binary, so the winner takes a while to determine. Bessie wants to cheat and thinks she can do that if she knows how many &quot;round numbers&quot; are in a given range. Help her by writing a program that tells how many round numbers appear in the inclusive range given by the input (1 ≤ Start &lt; Finish ≤ 2,000,000,000). InputLine 1: Two space-separated integers, respectively Start and Finish. OutputLine 1: A single integer that is the count of round numbers in the inclusive range Start..Finish Sample Input2 12 Sample Output6 题解模板题 1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,l,n) for(register int i=l;i&lt;n;++i)const int N=66;int a[N],dp[N][N];//当前第i位，零的个数为j共有多少种情况 int dfs(int pos,int sta,int limit,int lead)&#123; if(pos==-1)return sta&gt;=32;; if(!limit&amp;&amp;!lead&amp;&amp;dp[pos][sta]!=-1)return dp[pos][sta]; int up=limit?a[pos]:1; int tmp=0; rep(i,0,up+1)&#123; if(i==0&amp;&amp;lead)tmp+=dfs(pos-1,sta,limit&amp;&amp;i==a[pos],lead); else tmp+=dfs(pos-1,sta+(i==0?1:-1),i==a[pos]&amp;&amp;limit,lead&amp;&amp;i==0); &#125; if(!limit&amp;&amp;!lead)dp[pos][sta]=tmp; return tmp;&#125;int solve(int x)&#123; int cnt=0; while(x)&#123; a[cnt++]=x&amp;1; x&gt;&gt;=1; &#125; return dfs(cnt-1,32,1,1);&#125;int main()&#123; int l,r; memset(dp,-1,sizeof(dp)); scanf("%d%d",&amp;l,&amp;r); printf("%d",solve(r)-solve(l-1)); return 0;&#125;]]></content>

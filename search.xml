@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[spfa]]></title>
     <url>%2Fspfa%2F</url>
-    <content type="text"><![CDATA[SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。 SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路 而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题 SPFA 算法的最坏复杂度为 O(2*E)。。 SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。 这里用邻接表形式写下spfa 的模板 后面再介绍它的其它功能，这里只知道它处理最短路很快即可 优点可以处理负权，判负环，快 代码` c++ queue q; int spfa(int s,int t){ memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(vis)); //memset(c,0,sizeof(c)); q.push(s); in[s]=1; //c[s]=1; while(!q.empty()){ int k=q.front();q.pop(); in[k]=0; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i]&lt;d[i]){ d[i]=e[i].w+d[k]; if(!in[e[i].t]){ q.push(e[i].t); in[e[i].t]++; c[e[i].t]++; //if(c[e[i].t]&gt;n)return ok=0 } } } }]]></content>
+    <content type="text"><![CDATA[SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。 SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路 而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题 SPFA 算法的最坏复杂度为 O(2*E)。。 SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。 这里用邻接表形式写下spfa 的模板 后面再介绍它的其它功能，这里只知道它处理最短路很快即可 优点可以处理负权，判负环，快 代码12345678910111213141516171819202122queue&lt;int&gt; q;int spfa(int s,int t)&#123; memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(vis)); //memset(c,0,sizeof(c)); q.push(s); in[s]=1; //c[s]=1; while(!q.empty())&#123; int k=q.front();q.pop(); in[k]=0; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i]&lt;d[i])&#123; d[i]=e[i].w+d[k]; if(!in[e[i].t])&#123; q.push(e[i].t); in[e[i].t]++; c[e[i].t]++; //if(c[e[i].t]&gt;n)return ok=0 &#125; &#125; &#125;&#125;]]></content>
       <categories>
         <category>算法</category>
         <category>图论</category>
@@ -140,8 +140,8 @@
         <category>生成树</category>
       </categories>
       <tags>
-        <tag>位运算</tag>
         <tag>生成树</tag>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>

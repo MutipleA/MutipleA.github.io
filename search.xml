@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg1119]]></title>
+    <url>%2Flg1119%2F</url>
+    <content type="text"><![CDATA[链接:lg1119 DescriptionB地区在地震过后，所有村庄都造成了一定的损毁，而这场地震却没对公路造成什么影响。但是在村庄重建好之前，所有与未重建完成的村庄的公路均无法通车。换句话说，只有连接着两个重建完成的村庄的公路才能通车，只能到达重建完成的村庄。 给出B地区的村庄数N，村庄编号从0到N-1，和所有M条公路的长度，公路是双向的。并给出第i个村庄重建完成的时间t[i]，你可以认为 是同时开始重建并在第t[i]天重建完成，并且在当天即可通车。若t[i]为0则说明地震未对此地区造成损坏，一开始就可以通车。之后有 Q个询问(x, y, t)，对于每个询问你要回答在第t天，从村庄x到村庄y的最短路径长度为多少。如果无法找到从x村庄到y村庄的路径，经 过若干个已重建完成的村庄，或者村庄x或村庄y在第t天仍未重建完成 ，则需要返回-1。 Input输入文件rebuild.in的第一行包含两个正整数N，M，表示了村庄的数目与公路的数量。 第二行包含N个非负整数t[0], t[1], …, t[N – 1]，表示了每个村庄重建完成的时间，数据保证了t[0] ≤ t[1] ≤ … ≤ t[N – 1]。 接下来M行，每行3个非负整数i, j, w，w为不超过10000的正整数，表示了有一条连接村庄i与村庄j的道路，长度为w，保证i≠j，且对 于任意一对村庄只会存在一条道路。 接下来一行也就是M+3行包含一个正整数Q，表示Q个询问。 接下来Q行，每行3个非负整数x, y, t，询问在第t天，从村庄x到村庄y的最短路径长度为多少，数据保证了t是不下降的。 Output输出文件rebuild.out包含Q行，对每一个询问(x, y, t)输出对应的答案，即在第t天，从村庄x到村庄y的最短路径长度为多少。如果在 第t天无法找到从x村庄到y村庄的路径，经过若干个已重建完成的村庄，或者村庄x或村庄y在第t天仍未修复完成，则输出-1。 Sample Input4 5 1 2 3 4 0 2 1 2 3 1 3 1 2 2 1 4 0 3 5 4 2 0 2 0 1 2 0 1 3 0 1 4 Sample Output-1 -1 5 4 题解n&lt;=200 floyd就可以了，每次提问，枚举中间的k 如果k这个点重建完成或者没访问过就用它松弛其他路径 12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;const int N=307;int t[N],dis[N][N],vis[N];int n,m,q;int main()&#123; ios::sync_with_stdio(false); memset(dis,0x3f,sizeof(dis)); cin&gt;&gt;n&gt;&gt;m; rep(i,0,n-1)cin&gt;&gt;t[i]; rep(i,1,m)&#123; int a,b,c; cin&gt;&gt;a&gt;&gt;b&gt;&gt;c; dis[a][b]=dis[b][a]=c; &#125; cin&gt;&gt;q; while(q--)&#123; int a,b,c; cin&gt;&gt;a&gt;&gt;b&gt;&gt;c; rep(k,0,n-1)&#123; if(t[k]&gt;c||vis[k])continue; rep(i,0,n-1)if(i!=k)rep(j,0,n-1)dis[i][j]=min(dis[i][j],dis[i][k]+dis[k][j]); vis[k]=1; &#125; if(dis[a][b]==0x3f3f3f3f||!vis[a]||!vis[b])cout&lt;&lt;"-1"&lt;&lt;endl; else cout&lt;&lt;dis[a][b]&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路</category>
+        <category>floyd</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[spfa]]></title>
     <url>%2Fspfa%2F</url>
     <content type="text"><![CDATA[SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。 SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路 而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题 SPFA 算法的最坏复杂度为 O(2*E)。。 SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。 这里用邻接表形式写下spfa 的模板 后面再介绍它的其它功能，这里只知道它处理最短路很快即可 优点可以处理负权，判负环，快 代码12345678910111213141516171819202122queue&lt;int&gt; q;int spfa(int s,int t)&#123; memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(vis)); //memset(c,0,sizeof(c)); q.push(s); in[s]=1; //c[s]=1; while(!q.empty())&#123; int k=q.front();q.pop(); in[k]=0; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i]&lt;d[i])&#123; d[i]=e[i].w+d[k]; if(!in[e[i].t])&#123; q.push(e[i].t); in[e[i].t]++; c[e[i].t]++; //if(c[e[i].t]&gt;n)return ok=0 &#125; &#125; &#125;&#125;]]></content>
@@ -140,8 +154,8 @@
         <category>生成树</category>
       </categories>
       <tags>
-        <tag>生成树</tag>
         <tag>位运算</tag>
+        <tag>生成树</tag>
       </tags>
   </entry>
   <entry>

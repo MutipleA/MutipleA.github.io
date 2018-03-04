@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[青出于蓝胜于蓝]]></title>
+    <url>%2F%E9%9D%92%E5%87%BA%E4%BA%8E%E8%93%9D%E8%83%9C%E4%BA%8E%E8%93%9D%2F</url>
+    <content type="text"><![CDATA[链接:青出于蓝胜于蓝 Description武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，...武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算每个人的所有子弟（包括徒弟的徒弟，徒弟的徒弟的徒弟....）中，有多少人的武功超过了他自己。 Input输入第一行两个整数 n,p(1≤n≤100000,1≤p≤n)。 接下来 n−1 行，每行输入两个整数u,v(1≤u,v≤n)，表示 u 和 v 之间存在师徒关系。 Output输出一行 n 个整数，第 i 个整数表示武功排行为 i 的人的子弟有多少人超过了他。行末不要输出多余的空格。 Sample Input10 5 5 3 5 8 3 4 3 1 2 1 6 7 8 7 9 8 8 10 Sample Output0 0 2 0 4 0 1 2 0 0 题解树状数组维护dfs的时间戳，每访问一个点，in数组标记他，标记完所有子树的节点后，out数组取消标记 然后这个点的答案就是out[u]到in[u]区间内的和 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define lowbit(i) i&amp;(-i)#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=100070;int f[N],tr[N&lt;&lt;2],p,n,cnt,in[N],out[N ];vector&lt;int&gt;e[N];void add(int x,int y)&#123; for(int i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;&#125;int ask(int x)&#123; int tp=0; for(int i=x;i;i-=lowbit(i))tp+=tr[i]; return tp;&#125;void dfs(int u,int fa)&#123; in[u]=++cnt; int len=e[u].size(); rep(i,0,len-1)if(e[u][i]!=fa)dfs(e[u][i],u); out[u]=cnt;&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n&gt;&gt;p; rep(i,2,n)&#123; int x,y; cin&gt;&gt;x&gt;&gt;y; e[x].push_back(y); e[y].push_back(x); &#125; dfs(p,-1); rep(i,1,n)&#123; cout&lt;&lt;ask(out[i])-ask(in[i]); if(i!=n)cout&lt;&lt;' '; add(in[i],1); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>树状数组</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+        <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[数列求值]]></title>
     <url>%2F%E6%95%B0%E5%88%97%E6%B1%82%E5%80%BC%2F</url>
     <content type="text"><![CDATA[链接:数列求值 Description对于一个含有 n+2个元素的数列A0, A1, ... , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci 1≤i≤n 现在我们知道A0, An+1和C1, C2, ... , Cn 现在请你帮忙计算A1的值。 Input第一行输入一个整数n(1≤n≤1000)。 第二行输入两个数A0, An+1，接着是 n个数据分别是C1, C2, ... , Cn。所有的数据均是两位小数的浮点数。 Output输出A1的值，结果保留两位小数。 Sample Input1 50.50 25.50 10.15 2 -756.89 52.52 172.22 67.17 Sample Output27.85 -761.49 题解根据公式可以推导出 A(2)==2*A(1)-A(0)+2*C(1) 先不看后面的C A(3)==2*A(2)-A(1)==3*A(1)-2*A(0) . . . A(n+1)==(n+1)*A(1)-(n)*A(0) 由于我们已知A(n+1) 看起来好像只需要这个公式就可以求出A(1) 然而还有我们忽略的C 由于未知A(1) 先将A(1)看成0 然后根据这个式子地推出A(n+1)暂时命名为tp,跟正确的A(n+1)相差的只有(n+1)*A(1) 剩下的就不用说了吧。。。 123456789101112131415161718192021222324#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+11;int n;double tp,f[N],c;int main()&#123; cin&gt;&gt;n; cin&gt;&gt;f[0]&gt;&gt;tp; rep(i,2,n+1)&#123; cin&gt;&gt;c; f[i]=2*f[i-1]-f[i-2]+2*c; &#125; printf("%.2lf\n",(tp-f[n+1])/(n+1)); return 0;&#125;]]></content>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="链接:poj2299 DescriptionIn this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct  integers by swapping two adjacent sequence elements until t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-26T04:44:02.719Z">
+<meta property="og:updated_time" content="2018-03-06T16:00:58.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj2299">
 <meta name="twitter:description" content="链接:poj2299 DescriptionIn this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct  integers by swapping two adjacent sequence elements until t">
@@ -425,7 +425,7 @@ operations necessary to sort the given input sequence.
 </code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>6
 0
 </code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>求逆序对数目
-开一个能大小为这些数的最大值的树状数组，并全部置0。从头到尾读入这些数，每读入一个数就更新树状数组，查看它前面比它小的已出现过的有多少个数
+开一个大小为这些数的最大值的树状数组，并全部置0。从头到尾读入这些数，每读入一个数就更新树状数组，查看它前面比它小的已出现过的有多少个数
 sum，然后用当前位置减去该sum，就可以得到当前数导致的逆序对数了。把所有的加起来就是总的逆序对数。 
 然而问题来了，数据最大999999999，显然开不下
 解决方法是离散化一下

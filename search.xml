@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[cf#469D]]></title>
-    <url>%2Fcf-469%2F</url>
-    <content type="text"><![CDATA[链接:cf#469D C题目大意：有一个01串，现在问能否分成k个子串（子串中0和1不一定在原串中连续），每个子串以0作为开始和结尾，0和1在串中交替。给出任意一 种可行方案。 题解用两个数组分别记录以0结尾的字符串，以1为结尾的字符串，当前字符串为1的时候如果没有以0为结尾的串，那么输出-1. 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;const int N=200010; char s[N];vector&lt;int&gt; ans[N],z1,z0;int main()&#123; scanf("%s",s+1); int len=strlen(s+1); rep(i,1,len)&#123; if(s[i]=='1')&#123; if(!z0.size())&#123; puts("-1");return 0; &#125; int t=z0.back();z0.pop_back(); ans[t].push_back(i);z1.push_back(t); &#125; else &#123; if(!z1.size())&#123; z0.push_back(i);ans[i].push_back(i); &#125; else &#123; int t=z1.back();z1.pop_back(); ans[t].push_back(i);z0.push_back(t); &#125; &#125; &#125; if(z1.size())&#123; puts("-1");return 0; &#125; printf("%d\n",z0.size()); len=z0.size(); rep(i,0,len-1)&#123; int tp=ans[z0[i]].size(); printf("%d",tp); rep(j,0,tp-1)printf(" %d",ans[z0[i]][j]); printf("\n"); &#125; return 0;&#125; D题目大意最开始n个数字放在2*n-1的位置，之后从右至左依次用数字填充，最后q个询问，问xi位置上的数字是什么 题解n是1e18次方，模拟肯定是不可行的，很明显有规律，多列几组出来观察可以发现，对于query中的xi，如果xi&amp;1==1，那么显然答案就是 xi，问题是如果xi&amp;1==0的时候的答案。 观察可以发现，对于原数列的第x个数，每一次转移到2*(x-n)的位置上去即P(k-1)=2*(P(k)-n),即P(k+1)=n-P(k-1)/2 然后递推一下就好了 1234567891011121314151617181920212223#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define reod(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;ll ans,n,q,x;int main()&#123; while(~scanf("%I64d%I64d",&amp;n,&amp;q))&#123; while(q--)&#123; scanf("%I64d",&amp;x); while(!(x&amp;1))&#123; x+=n-x/2; &#125; printf("%I64d\n",(x+1)/2); &#125; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>比赛</category>
-        <category>cf</category>
-        <category>round#469(div 2)</category>
-      </categories>
-      <tags>
-        <tag>比赛</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[cfround#469]]></title>
     <url>%2Fcfround-469%2F</url>
     <content type="text"><![CDATA[链接:cfround#469 Description InputOutputSample InputSample Output题解1]]></content>
@@ -21,6 +8,20 @@
   <entry>
     <title><![CDATA[ccf认证2017-12-4行车路线]]></title>
     <url>%2Fccf%E8%AE%A4%E8%AF%812017-12-4%E8%A1%8C%E8%BD%A6%E8%B7%AF%E7%BA%BF%2F</url>
+    <content type="text"><![CDATA[链接:ccf认证2017-12-4行车路线 Description小明和小芳出去乡村玩，小明负责开车，小芳来导航。 小芳将可能的道路分为大道和小道。大道比较好走，每走1公里小明会增加1的疲劳度。小道不好走，如果连续走小道，小明的疲劳值会快 速增加，连续走s公里小明会增加s2的疲劳度。 例如：有5个路口，1号路口到2号路口为小道，2号路口到3号路口为小道，3号路口到4号路口为大道，4号路口到5号路口为小道，相邻路 口之间的距离都是2公里。如果小明从1号路口到5号路口，则总疲劳值为(2+2)2+2+22=16+2+4=22。 现在小芳拿到了地图，请帮助她规划一个开车的路线，使得按这个路线开车小明的疲劳度最小。 Input输入的第一行包含两个整数n, m，分别表示路口的数量和道路的数量。路口由1至n编号，小明需要开车从1号路口到n号路口。 接下来m行描述道路，每行包含四个整数t, a, b, c，表示一条类型为t，连接a与b两个路口，长度为c公里的双向道路。其中t为0表示大 道，t为1表示小道。保证1号路口和n号路口是连通的。 Output输出一个整数，表示最优路线下小明的疲劳度。 Sample Input6 7 1 1 2 3 1 2 3 2 0 1 3 30 0 3 4 20 0 4 5 30 1 3 5 6 1 5 6 1 Sample Output76 题解最短路，小路和大路分开来计算，注意中间结果可能爆int，并且可能给出重复的路，需要取最优值 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regsiter int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+10;const ll inf=1e18+7;ll dis[N],dis0[N],n,m,in[N],g[N][N],g0[N][N];queue&lt;int&gt; q;void spfa(int s,int t)&#123; q.push(s); dis[s]=dis0[s]=0; in[s]=1; rep(i,1,n)if(i!=s)dis[i]=dis0[i]=inf; while(!q.empty())&#123; int k=q.front(); q.pop(); in[k]=0; rep(i,1,n)&#123; ll tp=g[k][i]; if(dis[i]&gt;dis[k]+tp)&#123; //前一次走的大路 dis[i]=dis[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; if(dis[i]&gt;dis0[k]+tp)&#123; //前一次走的小路 dis[i]=dis0[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; if(g0[k][i]!=inf)&#123; //现在走小路 tp=g0[k][i]*g0[k][i]; if(dis0[i]&gt;dis[k]+tp)&#123; dis0[i]=dis[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)rep(j,i,n)g[i][j]=g[j][i]=g0[i][j]=g0[j][i]=inf; rep(i,1,m)&#123; int a,b,c,d; scanf("%d%d%d%d",&amp;d,&amp;a,&amp;b,&amp;c); if(d==0)g[a][b]=g[b][a]=min(g[a][b],(ll)c); else g0[a][b]=g0[b][a]=min(g0[a][b],(ll)c); &#125; rep(k,1,n)rep(i,1,n)rep(j,i+1,n)g0[i][j]=min(g0[i][k]+g0[k][j],g0[i][j]); //floyd先求出两点间最小的小路 spfa(1,n); printf("%lld\n",min(dis[n],dis0[n])); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最短路</category>
+        <category>spfa</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ccf认证2017-12-4行车路线]]></title>
+    <url>%2Fcf-469%2F</url>
     <content type="text"><![CDATA[链接:ccf认证2017-12-4行车路线 Description小明和小芳出去乡村玩，小明负责开车，小芳来导航。 小芳将可能的道路分为大道和小道。大道比较好走，每走1公里小明会增加1的疲劳度。小道不好走，如果连续走小道，小明的疲劳值会快 速增加，连续走s公里小明会增加s2的疲劳度。 例如：有5个路口，1号路口到2号路口为小道，2号路口到3号路口为小道，3号路口到4号路口为大道，4号路口到5号路口为小道，相邻路 口之间的距离都是2公里。如果小明从1号路口到5号路口，则总疲劳值为(2+2)2+2+22=16+2+4=22。 现在小芳拿到了地图，请帮助她规划一个开车的路线，使得按这个路线开车小明的疲劳度最小。 Input输入的第一行包含两个整数n, m，分别表示路口的数量和道路的数量。路口由1至n编号，小明需要开车从1号路口到n号路口。 接下来m行描述道路，每行包含四个整数t, a, b, c，表示一条类型为t，连接a与b两个路口，长度为c公里的双向道路。其中t为0表示大 道，t为1表示小道。保证1号路口和n号路口是连通的。 Output输出一个整数，表示最优路线下小明的疲劳度。 Sample Input6 7 1 1 2 3 1 2 3 2 0 1 3 30 0 3 4 20 0 4 5 30 1 3 5 6 1 5 6 1 Sample Output76 题解最短路，小路和大路分开来计算，注意中间结果可能爆int，并且可能给出重复的路，需要取最优值 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regsiter int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+10;const ll inf=1e18+7;ll dis[N],dis0[N],n,m,in[N],g[N][N],g0[N][N];queue&lt;int&gt; q;void spfa(int s,int t)&#123; q.push(s); dis[s]=dis0[s]=0; in[s]=1; rep(i,1,n)if(i!=s)dis[i]=dis0[i]=inf; while(!q.empty())&#123; int k=q.front(); q.pop(); in[k]=0; rep(i,1,n)&#123; ll tp=g[k][i]; if(dis[i]&gt;dis[k]+tp)&#123; //前一次走的大路 dis[i]=dis[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; if(dis[i]&gt;dis0[k]+tp)&#123; //前一次走的小路 dis[i]=dis0[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; if(g0[k][i]!=inf)&#123; //现在走小路 tp=g0[k][i]*g0[k][i]; if(dis0[i]&gt;dis[k]+tp)&#123; dis0[i]=dis[k]+tp; if(!in[i])&#123; q.push(i); in[i]=1; &#125; &#125; &#125; &#125; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)rep(j,i,n)g[i][j]=g[j][i]=g0[i][j]=g0[j][i]=inf; rep(i,1,m)&#123; int a,b,c,d; scanf("%d%d%d%d",&amp;d,&amp;a,&amp;b,&amp;c); if(d==0)g[a][b]=g[b][a]=min(g[a][b],(ll)c); else g0[a][b]=g0[b][a]=min(g0[a][b],(ll)c); &#125; rep(k,1,n)rep(i,1,n)rep(j,i+1,n)g0[i][j]=min(g0[i][k]+g0[k][j],g0[i][j]); //floyd先求出两点间最小的小路 spfa(1,n); printf("%lld\n",min(dis[n],dis0[n])); return 0;&#125;]]></content>
       <categories>
         <category>算法</category>

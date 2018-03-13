@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu1233]]></title>
+    <url>%2Fhdu1233%2F</url>
+    <content type="text"><![CDATA[链接:hdu1233 Description某省调查乡村交通状况，得到的统计表中列出了任意两村庄间的距离。省政府“畅通工程”的目标是使全省任何两个村庄间都可以实现公路 交通（但不一定有直接的公路相连，只要能间接通过公路可达即可），并要求铺设的公路总长度为最小。请计算最小的公路总长度。 Input测试输入包含若干测试用例。每个测试用例的第1行给出村庄数目N ( &lt; 100 )；随后的N(N-1)/2行对应村庄间的距离，每行给出一对正 整数，分别是两个村庄的编号，以及此两村庄间的距离。为简单起见，村庄从1到N编号。 当N为0时，输入结束，该用例不被处理。 Output对每个测试用例，在1行里输出最小的公路总长度。 Sample Input3 1 2 1 1 3 2 2 3 4 4 1 2 1 1 3 4 1 4 1 2 3 3 2 4 2 3 4 5 0 Sample Output3 5 题解模板题 写的kruskal 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define abs(x) x=x&gt;0?x:(-x)#define ll long longusing namespace std;const int N=1e5;struct node&#123; int u,v,w; bool operator &lt;(const node y)&#123;return w&lt;y.w;&#125; inline void init(int a,int b,int c)&#123;u=a; v=b; w=c;&#125;&#125;e[N];int f[N],n,m;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar(); if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int find(int x)&#123;return f[x]==x?x:f[x]=find(f[x]);&#125;int un(int x,int y)&#123;x=find(x); y=find(y); return x==y?0:f[x]=y;&#125;int kruskal()&#123; rep(i,1,n)f[i]=i; int ans=0,cnt=0; rep(i,1,m)&#123; int x=find(e[i].u); int y=find(e[i].v); if(un(x,y))ans+=e[i].w,cnt++; if(cnt==n-1)return ans; &#125;&#125;int main()&#123; while(~scanf("%d",&amp;n)&amp;&amp;n)&#123; m=n*(n-1)/2; rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); e[i].init(a,b,c); e[m+i].init(b,a,c); &#125; m&lt;&lt;=1; sort(e+1,e+m+1); printf("%d\n",kruskal()); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最小生成树</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+        <tag>最小生成树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu1875]]></title>
+    <url>%2Fhdu1875%2F</url>
+    <content type="text"><![CDATA[链接:hdu1875 Description相信大家都听说一个“百岛湖”的地方吧，百岛湖的居民生活在不同的小岛中，当他们想去其他的小岛时都要通过划小船来实现。现在政府 决定大力发展百岛湖，发展首先要解决的问题当然是交通问题，政府决定实现百岛湖的全畅通！经过考察小组RPRush对百岛湖的情况充分 了解后，决定在符合条件的小岛间建上桥，所谓符合条件，就是2个小岛之间的距离不能小于10米，也不能大于1000米。当然，为了节省 资金，只要求实现任意2个小岛之间有路通即可。其中桥的价格为 100元/米。 Input输入包括多组数据。输入首先包括一个整数T(T &lt;= 200)，代表有T组数据。 每组数据首先是一个整数C(C &lt;= 100),代表小岛的个数，接下来是C组坐标，代表每个小岛的坐标，这些坐标都是 0 &lt;= x, y &lt;= 1000 的整数。 Output每组输入数据输出一行，代表建桥的最小花费，结果保留一位小数。如果无法实现工程以达到全部畅通，输出”oh!”. Sample Input2 2 10 10 20 20 3 1 1 2 2 1000 1000 Sample Output1414.2 oh! 题解模板题 用kruskal做的，智障地答案不清零，wa了一发 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;const int N=1e7;struct node&#123; int u,v; double w; inline void init(int a,int b,double c)&#123;u=a; v=b; w=c;&#125;&#125;e[N];int x[N],y[N],f[N],ct,n,T;double ans;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;x=0;int sign=1; do&#123;c=getchar(); if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;double dis(int a,int b)&#123;return sqrt(pow((double)x[a]-x[b],2)+pow((double)y[a]-y[b],2));&#125;int find(int a)&#123;return f[a]==a?a:f[a]=find(f[a]);&#125;void un(int a,int b)&#123;a=find(a); b=find(b); if(a!=b)f[a]=b;&#125; bool cmp(node a,node b)&#123;return a.w&lt;b.w;&#125;int spfa()&#123; rep(i,1,n)f[i]=i; int cnt=0; rep(i,0,ct-1)&#123; int a=find(e[i].u),b=find(e[i].v); if(a!=b)&#123; un(a,b); cnt++; ans+=e[i].w; &#125; if(cnt==n-1)return 1; &#125; if(cnt!=n-1)return 0;&#125;int main()&#123; read(T); while(T--)&#123; ct=0; ans=0; read(n); rep(i,1,n)read(x[i]),read(y[i]); rep(i,1,n)rep(j,i+1,n)&#123; double a=dis(i,j); if(a&lt;10||a&gt;1000)continue; e[ct++].init(i,j,a); e[ct++].init(j,i,a); &#125; sort(e,e+ct,cmp); if(spfa())printf("%.1lf\n",ans*100); else puts("oh!"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最小生成树</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+        <tag>最小生成树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cf#469]]></title>
     <url>%2Fcf-469%2F</url>
     <content type="text"><![CDATA[链接:cf#469 C题目大意给你一个01串，将他分成k个子串，每个子串由0开始0结尾，01交替出现 题解两个数组分别存以0结尾，以1结尾的串的序号，当当前字符为1的时候，如果以0结尾的串为空，输出-1 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;const int N=200010; char s[N];vector&lt;int&gt; ans[N],z1,z0;int main()&#123; scanf("%s",s+1); int len=strlen(s+1); rep(i,1,len)&#123; if(s[i]=='1')&#123; if(!z0.size())&#123; puts("-1");return 0; &#125; int t=z0.back();z0.pop_back(); ans[t].push_back(i);z1.push_back(t); &#125; else &#123; if(!z1.size())&#123; z0.push_back(i);ans[i].push_back(i); &#125; else &#123; int t=z1.back();z1.pop_back(); ans[t].push_back(i);z0.push_back(t); &#125; &#125; &#125; if(z1.size())&#123; puts("-1");return 0; &#125; printf("%d\n",z0.size()); len=z0.size(); rep(i,0,len-1)&#123; int tp=ans[z0[i]].size(); printf("%d",tp); rep(j,0,tp-1)printf(" %d",ans[z0[i]][j]); printf("\n"); &#125; return 0;&#125; D题目大意n个数字，每两个数字中间插一个空，每次将最右边的数移动到最右边的空格处，q个询问，问最后在xi位置的元素 题解数据范围是1e18次方，显然需要找规律，显然n/2左边的数字都是不动的，对于第x(i)个位置的元素，他会转移到2*(x(i)-n)的位置 上去，即是P(x)=n+x/2 (x位置上的元素由P(x)转移过来) 12345678910111213141516171819202122#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long using namespace std;ll n,q,x;int main()&#123; while(~scanf("%I64d%I64d",&amp;n,&amp;q))&#123; while(q--)&#123; scanf("%I64d",&amp;x); while(!(x&amp;1))x+=n-x/2; printf("%I64d\n",(x+1)/2); &#125; &#125; return 0;&#125; 总结考场上两道题都没做出来，没状态，code能力太弱。 再弱小也还是要努力地活下去。]]></content>

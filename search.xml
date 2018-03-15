@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lightoj1042]]></title>
+    <url>%2Flightoj1042%2F</url>
+    <content type="text"><![CDATA[链接:lightoj1042 DescriptionThis is the tale of Zephyr, the greatest time traveler the world will never know. Even those who are aware of Zephyr&apos;s existence know very little about her. For example, no one has any clue as to which time period she is originally from. But we do know the story of the first time she set out to chart her own path in the time stream. Zephyr had just finished building her time machine which she named - &quot;Dokhina Batash&quot;. She was making the final adjustments for her first trip when she noticed that a vital program was not working correctly. The program was supposed to take a number N, and find what Zephyr called its Onoroy value. The Onoroy value of an integer N is the number of ones in its binary representation. For example, the number 13 (11012) has an Onoroy value of 3. Needless to say, this was an easy problem for the great mind of Zephyr. She solved it quickly, and was on her way. You are now given a similar task. Find the first number after N which has the same Onoroy value as N. InputInput starts with an integer T (≤ 65), denoting the number of test cases. Each case begins with an integer N (1 ≤ N ≤ 109). OutputFor each case of input you have to print the case number and the desired result. Sample Input5 23 14232 391 7 8 Sample OutputCase 1: 27 Case 2: 14241 Case 3: 395 Case 4: 11 Case 5: 16 题解思路还行，代码实现有点困难，太弱了 把n最右边的连续的1向右移动直到个数-1，把n最左边连续的1的末尾的相邻0改为1就是答案了 以下是我的代码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long#define lowbit(i) i&amp;(-i)using namespace std;int pre,T,n,ct,now,bit[40],id;int get(int x)&#123; int cnt=0; while(x)&#123; if(x&amp;1)cnt++; x&gt;&gt;=1; &#125; return cnt;&#125;int getbit(int x)&#123; rep(i,0,30)&#123; if(x&amp;1)bit[i]=1; else bit[i]=0; x&gt;&gt;=1; &#125;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; scanf("%d",&amp;n); ct=get(n); n+=lowbit(n);getbit(n);now=get(n); while(ct!=now)&#123; rep(i,0,30)if(!bit[i])&#123; now++;bit[i]=1; n|=(1&lt;&lt;i);break; &#125; &#125; printf("Case %d: %d\n",++id,n); &#125; return 0;&#125; 以下是大佬的代码，我只想说。。差距好大12345678910111213141516171819#include&lt;cstdio&gt; #include&lt;cstring&gt; #include&lt;cmath&gt; using namespace std; typedef long long ll; int main() &#123; ll t; scanf("%lld",&amp;t); for(ll k=1;k&lt;=t;++k) &#123; ll n; scanf("%lld",&amp;n); ll x=n&amp;-n,y=n+x; n=((n&amp;~y)/x&gt;&gt;1)|y; printf("Case %lld: %lld\n",k,n); &#125; return 0; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数论</category>
+        <category>思维</category>
+      </categories>
+      <tags>
+        <tag>位运算</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[P2825[HEOI2016/TJOI2016]]]></title>
     <url>%2FP2825-HEOI2016-TJOI2016%2F</url>
     <content type="text"><![CDATA[链接:P2825[HEOI2016/TJOI2016] Description在2016年，佳缘姐姐喜欢上了一款游戏，叫做泡泡堂。简单的说，这个游戏就是在一张地图上放上若干个炸弹，看是否能炸到对手，或者 躲开对手的炸弹。在玩游戏的过程中，小H想到了这样一个问题：当给定一张地图，在这张地图上最多能放上多少个炸弹能使得任意两个 炸弹之间不会互相炸到。炸弹能炸到的范围是该炸弹所在的一行和一列，炸弹的威力可以穿透软石头，但是不能穿透硬石头。给定一张 n*m的网格地图:其中*代表空地，炸弹的威力可以穿透，可以在空地上放置一枚炸弹。x代表软石头，炸弹的威力可以穿透，不能在此放置 炸弹。#代表硬石头，炸弹的威力是不能穿透的，不能在此放置炸弹。例如：给出1*4的网格地图*xx*，这个地图上最多只能放置一个炸 弹。给出另一个1*4的网格地图*x#*，这个地图最多能放置两个炸弹。现在小H任意给出一张n*m的网格地图，问你最多能放置多少炸弹。 Input第一行输入两个正整数n,m,n表示地图的行数，m表示地图的列数。1≤n,m≤50。接下来输入n行m列个字符，代表网格地图。*的个数不超过 n*m个。 Output输出一个整数a，表示最多能放置炸弹的个数 Sample Input4 4 #*** *#** **#* xxx# Sample Output5 题解提取出每一行和每一列的极长连续不含#的非空字串 显然，炸弹只能放在*上，而放一个就会把它周围清空，这样显然就是二分图最大匹配了 以他们为节点，每一行和每一列连边。跑一个匈牙利就出来了。 zz地弄了个骚操作加边，然后WA一万次。。。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=55;const int M=3e3;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a; nxt=b;&#125;&#125;e[M];int head[M],cnt,tol,col[N][N],row[N][N],n,m,vis[M],mark[M],ans;char str[N][N];inline void add(int a,int b)&#123; e[++cnt].init(b,head[a]); head[a]=cnt;&#125;int find(int u)&#123; for(int i=head[u];i;i=e[i].nxt)if(!vis[e[i].v])&#123; vis[e[i].v]=1; if(!mark[e[i].v]||find(mark[e[i].v]))&#123; mark[e[i].v]=u; return 1; &#125; &#125; return 0;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)rep(j,1,m)cin&gt;&gt;str[i][j]; rep(i,1,n)rep(j,1,m)if(str[i][j]!='#')&#123; if(j==1||str[i][j-1]=='#')tol++; row[i][j]=tol; &#125; rep(j,1,m)rep(i,1,n)if(str[i][j]!='#')&#123; if(i==1||str[i-1][j]=='#')tol++; col[i][j]=tol; &#125; rep(i,1,n)rep(j,1,m)if(str[i][j]=='*')add(row[i][j],col[i][j]); rep(i,1,tol)&#123;memset(vis,0,sizeof(vis));ans+=find(i);&#125; printf("%d\n",ans); return 0;&#125;]]></content>
@@ -365,8 +378,8 @@
         <category>生成树</category>
       </categories>
       <tags>
-        <tag>生成树</tag>
         <tag>位运算</tag>
+        <tag>生成树</tag>
       </tags>
   </entry>
   <entry>

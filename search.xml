@@ -320,9 +320,8 @@
     <url>%2Fspfa%2F</url>
     <content type="text"><![CDATA[SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。 SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路 而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题 SPFA 算法的最坏复杂度为 O(2*E)。。 SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。 这里用邻接表形式写下spfa 的模板 后面再介绍它的其它功能，这里只知道它处理最短路很快即可 优点可以处理负权，判负环，快 代码12345678910111213141516171819202122queue&lt;int&gt; q;int spfa(int s,int t)&#123; memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(vis)); //memset(c,0,sizeof(c)); q.push(s); in[s]=1; //c[s]=1; while(!q.empty())&#123; int k=q.front();q.pop(); in[k]=0; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i]&lt;d[i])&#123; d[i]=e[i].w+d[k]; if(!in[e[i].t])&#123; q.push(e[i].t); in[e[i].t]++; c[e[i].t]++; //if(c[e[i].t]&gt;n)return ok=0 &#125; &#125; &#125;&#125;]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
         <category>图论</category>
-        <category>最短路</category>
       </categories>
       <tags>
         <tag>最短路</tag>
@@ -333,9 +332,8 @@
     <url>%2Fdijkstra%E4%BC%98%E5%8C%96%2F</url>
     <content type="text"><![CDATA[优化dijkstra 注意到贪心的过程是每次选取最小的dis值出来，这里是O(n)的，我们可以用优先队列把他优化到O(logn) 12345678910111213141516171819typedef pair&lt;int,int&gt; l;priority_queue&lt;s,vector&lt;s&gt;,greater&lt;s&gt; &gt;q;int dijkstra(int s,int t)&#123; while(!q.empty())q.pop(); memset(d,0x3f,sizeof(d)); memset(in,0,sizeof(0)); d[s]=0;in[s]=1; q.push(l(0,s)); while(!q.empty())&#123; int k=q.top().second; q.pop(); in[k]=1; for(int i=head[k];i!=-1;i=e[i].nxt)if(d[k]+e[i].w&lt;d[i])&#123; d[i]=e[i].w+d[k]; if(!in[e[i].t])q.push(l(d[i],e[i].t)); &#125; &#125; return d[t]!=inf?d[t]:-1;&#125;]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
         <category>图论</category>
-        <category>最短路</category>
       </categories>
       <tags>
         <tag>最短路</tag>
@@ -346,9 +344,8 @@
     <url>%2Fdijkstra%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[最短路从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径 解决算法： floyd dijkstra spfa dijktsra优化 spfa优化 dijkstra算法介绍 算法思路: 利用贪心的思想，维护一个dis数组，值为源点到各个顶点的最短距离，以及一个vis数组，表示该点已经算出最短路的点的集合 每次找到dis值最小的顶点（这个dis值就是改点到源点的最短距离），标记它，然后用它来松弛可以松弛的点， 时间复杂度： 很显然是O(n2)的 *缺点：无法处理负权代码int dijkstra(int s,int t){ rep(i,1,n+1){ d[i]=g[s][i]; vis[i]=0; } vis[s]=1; rep(i,2,n+1){ int mx=inf,k=1; rep(j,1,n+1)if(!vis[j]&amp;&amp;d[j]&lt;mx){ mx=d[j]; k=j; } vis[k]=1; rep(j,1,n+1)if(!vis[j]&amp;&amp;mx+g[k][j]&lt;d[j]){ d[j]=mx+g[k][j]; } } return d[t]!=inf?d[t]:-1; }]]></content>
       <categories>
-        <category>算法</category>
+        <category>学习笔记</category>
         <category>图论</category>
-        <category>最短路</category>
       </categories>
       <tags>
         <tag>最短路</tag>

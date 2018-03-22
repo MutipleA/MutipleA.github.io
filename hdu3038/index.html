@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:hdu3038 DescriptionTT and FF are ... friends. Uh... very very good friends -________-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To">
+<meta name="description" content="链接:hdu3038 Description  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To  begin">
 <meta name="keywords" content="并查集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hdu3038">
 <meta property="og:url" content="http://yoursite.com/hdu3038/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:hdu3038 DescriptionTT and FF are ... friends. Uh... very very good friends -________-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To">
+<meta property="og:description" content="链接:hdu3038 Description  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To  begin">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T09:01:08.435Z">
+<meta property="og:updated_time" content="2018-03-22T06:40:01.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hdu3038">
-<meta name="twitter:description" content="链接:hdu3038 DescriptionTT and FF are ... friends. Uh... very very good friends -________-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To">
+<meta name="twitter:description" content="链接:hdu3038 Description  TT and FF are … friends. Uh… very very good friends -____-b FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To  begin">
 
 
 
@@ -404,42 +404,39 @@
 
       
         <p>链接:<a href="http://acm.hdu.edu.cn/showproblem.php?pid=3038" target="_blank" rel="noopener">hdu3038</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>TT and FF are ... friends. Uh... very very good friends -________-b
-FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To 
-begin with, TT should write down a sequence of integers-_-!!(bored).
-Then, FF can choose a continuous subsequence from it(for example the subsequence from the third to the fifth 
-integer inclusively). After that, FF will ask TT what the sum of the subsequence he chose is. The next, TT 
-will answer FF&apos;s question. Then, FF can redo this process. In the end, FF must work out the entire sequence 
-of integers.
-Boring~~Boring~~a very very boring game!!! TT doesn&apos;t want to play with FF at all. To punish FF, she often 
-tells FF the wrong answers on purpose.
-The bad boy is not a fool man. FF detects some answers are incompatible. Of course, these contradictions make 
-it difficult to calculate the sequence.
-However, TT is a nice and lovely girl. She doesn&apos;t have the heart to be hard on FF. To save time, she 
-guarantees that the answers are all right if there is no logical mistakes indeed.
-What&apos;s more, if FF finds an answer to be wrong, he will ignore it when judging next answers.
-But there will be so many questions that poor FF can&apos;t make sure whether the current answer is right or wrong 
-in a moment. So he decides to write a program to help him with this matter. The program will receive a series 
-of questions from FF together with the answers FF has received from TT. The aim of this program is to find 
-how many answers are wrong. Only by ignoring the wrong answers can FF work out the entire sequence of 
-integers. Poor FF has no time to do this job. And now he is asking for your help~(Why asking trouble for 
-himself~~Bad boy)
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>Line 1: Two integers, N and M (1 &lt;= N &lt;= 200000, 1 &lt;= M &lt;= 40000). Means TT wrote N integers and FF asked her 
-M questions.
-Line 2..M+1: Line i+1 contains three integer: Ai, Bi and Si. Means TT answered FF that the sum from Ai to Bi 
-is Si. It&apos;s guaranteed that 0 &lt; Ai &lt;= Bi &lt;= N.
-You can assume that any sum of subsequence is fit in 32-bit integer.
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>A single line with a integer denotes how many answers are wrong.
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>10 5
-1 10 100
-7 10 28
-1 3 32
-4 6 41
-6 6 1
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>1
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>带权并查集问题，一样的找向量偏移量 然后这题卡多组。。。
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(regsiter int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],rl[N],n,m,t,a,b,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> t=find(f[x]);</span><br><span class="line">    rl[x]+=rl[f[x]];</span><br><span class="line">    <span class="keyword">return</span> f[x]=t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=find(x);</span><br><span class="line">    <span class="keyword">int</span> b=find(y);</span><br><span class="line">    <span class="keyword">if</span>(a==b&amp;&amp;rl[y]-rl[x]!=t)&#123;ans++; <span class="keyword">return</span> ;&#125;</span><br><span class="line">    f[b]=a;</span><br><span class="line">    rl[b]=rl[x]-rl[y]+t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m))&#123;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)f[i]=i;</span><br><span class="line">        rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;t);</span><br><span class="line">            un(--a,b);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>TT and FF are … friends. Uh… very very good friends -<strong>____</strong>-b</li>
+<li>FF is a bad boy, he is always wooing TT to play the following game with him. This is a very humdrum game. To </li>
+<li>begin with, TT should write down a sequence of integers-_-!!(bored).</li>
+<li>Then, FF can choose a continuous subsequence from it(for example the subsequence from the third to the fifth </li>
+<li>integer inclusively). After that, FF will ask TT what the sum of the subsequence he chose is. The next, TT </li>
+<li>will answer FF’s question. Then, FF can redo this process. In the end, FF must work out the entire sequence </li>
+<li>of integers.</li>
+<li>Boring<del>Boring</del>a very very boring game!!! TT doesn’t want to play with FF at all. To punish FF, she often </li>
+<li>tells FF the wrong answers on purpose.</li>
+<li>The bad boy is not a fool man. FF detects some answers are incompatible. Of course, these contradictions make </li>
+<li>it difficult to calculate the sequence.</li>
+<li>However, TT is a nice and lovely girl. She doesn’t have the heart to be hard on FF. To save time, she </li>
+<li>guarantees that the answers are all right if there is no logical mistakes indeed.</li>
+<li>What’s more, if FF finds an answer to be wrong, he will ignore it when judging next answers.</li>
+<li>But there will be so many questions that poor FF can’t make sure whether the current answer is right or wrong </li>
+<li>in a moment. So he decides to write a program to help him with this matter. The program will receive a series </li>
+<li>of questions from FF together with the answers FF has received from TT. The aim of this program is to find </li>
+<li>how many answers are wrong. Only by ignoring the wrong answers can FF work out the entire sequence of </li>
+<li>integers. Poor FF has no time to do this job. And now he is asking for your help~(Why asking trouble for </li>
+<li>himself~~Bad boy)<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>Line 1: Two integers, N and M (1 &lt;= N &lt;= 200000, 1 &lt;= M &lt;= 40000). Means TT wrote N integers and FF asked her </li>
+<li>M questions.</li>
+<li>Line 2..M+1: Line i+1 contains three integer: Ai, Bi and Si. Means TT answered FF that the sum from Ai to Bi </li>
+<li>is Si. It’s guaranteed that 0 &lt; Ai &lt;= Bi &lt;= N.</li>
+<li>You can assume that any sum of subsequence is fit in 32-bit integer.<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>A single line with a integer denotes how many answers are wrong.<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  10 5<br>  1 10 100<br>  7 10 28<br>  1 3 32<br>  4 6 41<br>  6 6 1<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>  1<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1></li>
+<li>带权并查集问题，一样的找向量偏移量 然后这题卡多组。。。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(regsiter int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],rl[N],n,m,t,a,b,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> t=find(f[x]);</span><br><span class="line">    rl[x]+=rl[f[x]];</span><br><span class="line">    <span class="keyword">return</span> f[x]=t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=find(x);</span><br><span class="line">    <span class="keyword">int</span> b=find(y);</span><br><span class="line">    <span class="keyword">if</span>(a==b&amp;&amp;rl[y]-rl[x]!=t)&#123;ans++; <span class="keyword">return</span> ;&#125;</span><br><span class="line">    f[b]=a;</span><br><span class="line">    rl[b]=rl[x]-rl[y]+t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m))&#123;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)f[i]=i;</span><br><span class="line">        rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;t);</span><br><span class="line">            un(--a,b);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1200,6 +1197,28 @@ You can assume that any sum of subsequence is fit in 32-bit integer.
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

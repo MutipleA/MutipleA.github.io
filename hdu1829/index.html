@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:hdu1829 DescriptionBackground  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with bu">
+<meta name="description" content="链接:hdu1829 Description  Background  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with">
 <meta name="keywords" content="并查集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hdu1829">
 <meta property="og:url" content="http://yoursite.com/hdu1829/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:hdu1829 DescriptionBackground  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with bu">
+<meta property="og:description" content="链接:hdu1829 Description  Background  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T08:34:20.157Z">
+<meta property="og:updated_time" content="2018-03-22T06:37:26.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hdu1829">
-<meta name="twitter:description" content="链接:hdu1829 DescriptionBackground  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with bu">
+<meta name="twitter:description" content="链接:hdu1829 Description  Background  Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature  two different genders and that they only interact with">
 
 
 
@@ -404,39 +404,37 @@
 
       
         <p>链接:<a href="http://acm.hdu.edu.cn/showproblem.php?pid=1829" target="_blank" rel="noopener">hdu1829</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>Background 
-Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature 
-two different genders and that they only interact with bugs of the opposite gender. In his experiment, 
-individual bugs and their interactions were easy to identify, because numbers were printed on their backs. 
-
-Problem 
-Given a list of bug interactions, decide whether the experiment supports his assumption of two genders with 
-no homosexual bugs or if it contains some bug interactions that falsify it.
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>The first line of the input contains the number of scenarios. Each scenario starts with one line giving the 
-number of bugs (at least one, and up to 2000) and the number of interactions (up to 1000000) separated by a 
-single space. In the following lines, each interaction is given in the form of two distinct bug numbers 
-separated by a single space. Bugs are numbered consecutively starting from one.
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>The output for every scenario is a line containing &quot;Scenario #i:&quot;, where i is the number of the scenario 
-starting at 1, followed by one line saying either &quot;No suspicious bugs found!&quot; if the experiment is consistent 
-with his assumption about the bugs&apos; sexual behavior, or &quot;Suspicious bugs found!&quot; if Professor Hopper&apos;s 
-assumption is definitely wrong.
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>2
-3 3
-1 2
-2 3
-1 3
-4 2
-1 2
-3 4
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>Scenario #1:
-Suspicious bugs found!
-
-Scenario #2:
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>Background </li>
+<li>Professor Hopper is researching the sexual behavior of a rare species of bugs. He assumes that they feature </li>
+<li>two different genders and that they only interact with bugs of the opposite gender. In his experiment, </li>
+<li><p>individual bugs and their interactions were easy to identify, because numbers were printed on their backs. </p>
+</li>
+<li><p>Problem </p>
+</li>
+<li>Given a list of bug interactions, decide whether the experiment supports his assumption of two genders with </li>
+<li>no homosexual bugs or if it contains some bug interactions that falsify it.<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>The first line of the input contains the number of scenarios. Each scenario starts with one line giving the </li>
+<li>number of bugs (at least one, and up to 2000) and the number of interactions (up to 1000000) separated by a </li>
+<li>single space. In the following lines, each interaction is given in the form of two distinct bug numbers </li>
+<li>separated by a single space. Bugs are numbered consecutively starting from one.<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>The output for every scenario is a line containing “Scenario #i:”, where i is the number of the scenario </li>
+<li>starting at 1, followed by one line saying either “No suspicious bugs found!” if the experiment is consistent </li>
+<li>with his assumption about the bugs’ sexual behavior, or “Suspicious bugs found!” if Professor Hopper’s </li>
+<li>assumption is definitely wrong.<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  2<br>  3 3<br>  1 2<br>  2 3<br>  1 3<br>  4 2<br>  1 2<br>  3 4<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>  Scenario #1:<br>  Suspicious bugs found!</li>
+</ul>
+</blockquote>
+<pre><code>Scenario #2:
 No suspicious bugs found!
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>这题很好玩，找gay   也是带权并查集
-算一下向量偏移量就好了 压缩路径的偏移量算错了wa了一发，输出标记错了又wa一发。。。
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e4</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],rl[N],T,a,b,cnt,ans,n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> t=find(f[x]);</span><br><span class="line">    rl[x]=(rl[x]+rl[f[x]])&amp;<span class="number">1</span>;   <span class="comment">//rl[x] 表示x与f[x]的关系 </span></span><br><span class="line">    <span class="keyword">return</span> f[x]=t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=find(x);</span><br><span class="line">    <span class="keyword">int</span> b=find(y);</span><br><span class="line">    <span class="keyword">if</span>(a==b)<span class="keyword">if</span>(rl[x]==rl[y])<span class="keyword">return</span> ans=<span class="number">1</span>;</span><br><span class="line">    f[b]=a;</span><br><span class="line">    rl[b]=(rl[x]-rl[y]+<span class="number">1</span>)&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="built_in">memset</span>(rl,<span class="number">0</span>,<span class="keyword">sizeof</span>(rl));</span><br><span class="line">        rep(i,<span class="number">1</span>,n)f[i]=i;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d:\n"</span>,++cnt);</span><br><span class="line">        rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">            <span class="keyword">if</span>(ans)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(un(a,b))<span class="built_in">puts</span>(<span class="string">"Suspicious bugs found!\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!ans)<span class="built_in">puts</span>(<span class="string">"No suspicious bugs found!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
+<ul>
+<li>这题很好玩，找gay   也是带权并查集</li>
+<li>算一下向量偏移量就好了 压缩路径的偏移量算错了wa了一发，输出标记错了又wa一发。。。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e4</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],rl[N],T,a,b,cnt,ans,n,m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">int</span> t=find(f[x]);</span><br><span class="line">    rl[x]=(rl[x]+rl[f[x]])&amp;<span class="number">1</span>;   <span class="comment">//rl[x] 表示x与f[x]的关系 </span></span><br><span class="line">    <span class="keyword">return</span> f[x]=t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=find(x);</span><br><span class="line">    <span class="keyword">int</span> b=find(y);</span><br><span class="line">    <span class="keyword">if</span>(a==b)<span class="keyword">if</span>(rl[x]==rl[y])<span class="keyword">return</span> ans=<span class="number">1</span>;</span><br><span class="line">    f[b]=a;</span><br><span class="line">    rl[b]=(rl[x]-rl[y]+<span class="number">1</span>)&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="built_in">memset</span>(rl,<span class="number">0</span>,<span class="keyword">sizeof</span>(rl));</span><br><span class="line">        rep(i,<span class="number">1</span>,n)f[i]=i;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d:\n"</span>,++cnt);</span><br><span class="line">        rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">            <span class="keyword">if</span>(ans)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(un(a,b))<span class="built_in">puts</span>(<span class="string">"Suspicious bugs found!\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!ans)<span class="built_in">puts</span>(<span class="string">"No suspicious bugs found!\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1201,6 +1199,28 @@ No suspicious bugs found!
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

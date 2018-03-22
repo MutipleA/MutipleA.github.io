@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:poj2253 DescriptionFreddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty an">
+<meta name="description" content="链接:poj2253 Description  Freddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty">
 <meta name="keywords" content="最短路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj2253">
 <meta property="og:url" content="http://yoursite.com/poj2253/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:poj2253 DescriptionFreddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty an">
+<meta property="og:description" content="链接:poj2253 Description  Freddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-01T05:58:29.171Z">
+<meta property="og:updated_time" content="2018-03-22T07:15:59.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj2253">
-<meta name="twitter:description" content="链接:poj2253 DescriptionFreddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty an">
+<meta name="twitter:description" content="链接:poj2253 Description  Freddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on  another stone. He plans to visit her, but since the water is dirty">
 
 
 
@@ -404,43 +404,49 @@
 
       
         <p>链接:<a href="http://poj.org/problem?id=2253" target="_blank" rel="noopener">poj2253</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>Freddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on 
-another stone. He plans to visit her, but since the water is dirty and full of tourists&apos; sunscreen, he wants 
-to avoid swimming and instead reach her by jumping. 
-Unfortunately Fiona&apos;s stone is out of his jump range. Therefore Freddy considers to use other stones as 
-intermediate stops and reach her by a sequence of several small jumps. 
-To execute a given sequence of jumps, a frog&apos;s jump range obviously must be at least as long as the longest 
-jump occuring in the sequence. 
-The frog distance (humans also call it minimax distance) between two stones therefore is defined as the 
-minimum necessary jump range over all possible paths between the two stones. 
-
-You are given the coordinates of Freddy&apos;s stone, Fiona&apos;s stone and all other stones in the lake. Your job is 
-to compute the frog distance between Freddy&apos;s and Fiona&apos;s stone. 
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>The input will contain one or more test cases. The first line of each test case will contain the number of 
-stones n (2&lt;=n&lt;=200). The next n lines each contain two integers xi,yi (0 &lt;= xi,yi &lt;= 1000) representing the 
-coordinates of stone #i. Stone #1 is Freddy&apos;s stone, stone #2 is Fiona&apos;s stone, the other n-2 stones are 
-unoccupied. There&apos;s a blank line following each test case. Input is terminated by a value of zero (0) for n. 
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>For each test case, print a line saying &quot;Scenario #x&quot; and a line saying &quot;Frog Distance = y&quot; where x is 
-replaced by the test case number (they are numbered from 1) and y is replaced by the appropriate real number, 
-printed to three decimals. Put a blank line after each test case, even after the last one. 
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>2
-0 0
-3 4
-
-3
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>Freddy Frog is sitting on a stone in the middle of a lake. Suddenly he notices Fiona Frog who is sitting on </li>
+<li>another stone. He plans to visit her, but since the water is dirty and full of tourists’ sunscreen, he wants </li>
+<li>to avoid swimming and instead reach her by jumping. </li>
+<li>Unfortunately Fiona’s stone is out of his jump range. Therefore Freddy considers to use other stones as </li>
+<li>intermediate stops and reach her by a sequence of several small jumps. </li>
+<li>To execute a given sequence of jumps, a frog’s jump range obviously must be at least as long as the longest </li>
+<li>jump occuring in the sequence. </li>
+<li>The frog distance (humans also call it minimax distance) between two stones therefore is defined as the </li>
+<li><p>minimum necessary jump range over all possible paths between the two stones. </p>
+</li>
+<li><p>You are given the coordinates of Freddy’s stone, Fiona’s stone and all other stones in the lake. Your job is </p>
+</li>
+<li>to compute the frog distance between Freddy’s and Fiona’s stone. <a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>The input will contain one or more test cases. The first line of each test case will contain the number of </li>
+<li>stones n (2&lt;=n&lt;=200). The next n lines each contain two integers xi,yi (0 &lt;= xi,yi &lt;= 1000) representing the </li>
+<li>coordinates of stone #i. Stone #1 is Freddy’s stone, stone #2 is Fiona’s stone, the other n-2 stones are </li>
+<li>unoccupied. There’s a blank line following each test case. Input is terminated by a value of zero (0) for n. <h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>For each test case, print a line saying “Scenario #x” and a line saying “Frog Distance = y” where x is </li>
+<li>replaced by the test case number (they are numbered from 1) and y is replaced by the appropriate real number, </li>
+<li>printed to three decimals. Put a blank line after each test case, even after the last one. <h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  2<br>  0 0<br>  3 4</li>
+</ul>
+</blockquote>
+<pre><code>3
 17 4
 19 4
 18 5
 
 0
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>Scenario #1
-Frog Distance = 5.000
+</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><blockquote>
+<ul>
+<li>Scenario #1</li>
+<li><p>Frog Distance = 5.000</p>
+</li>
+<li><p>Scenario #2</p>
+</li>
+<li>Frog Distance = 1.414<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1></li>
+<li>最短路变形，松弛及松弛条件改为max(dis[k],g[k][i])&lt;dis[i],<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">double</span>,<span class="keyword">int</span>&gt; l;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">507</span>;</span><br><span class="line"><span class="keyword">double</span> g[N][N],dis[N];</span><br><span class="line"><span class="keyword">int</span> vis[N],x[N],y[N],n,cnt;</span><br><span class="line">priority_queue&lt;l,<span class="built_in">vector</span>&lt;l&gt;,greater&lt;l&gt; &gt;q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">len</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>((<span class="keyword">double</span>)x[a]-x[b],<span class="number">2</span>)+<span class="built_in">pow</span>((<span class="keyword">double</span>)y[a]-y[b],<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())q.pop();</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    rep(i,<span class="number">1</span>,n)dis[i]=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    q.push(l(dis[s]=<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> k=q.top().second;</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[k]=<span class="number">1</span>;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)<span class="keyword">if</span>(max(dis[k],g[k][i])&lt;dis[i])&#123;</span><br><span class="line">            dis[i]=max(dis[k],g[k][i]);</span><br><span class="line">            <span class="keyword">if</span>(!vis[i])q.push(l(dis[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[t];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)&amp;&amp;n)&#123;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x[i],&amp;y[i]);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)rep(j,<span class="number">1</span>,i<span class="number">-1</span>)g[i][j]=g[j][i]=len(i,j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d\nFrog Distance = %.3lf\n\n"</span>,++cnt,dijkstra(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
 
-Scenario #2
-Frog Distance = 1.414
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>最短路变形，松弛及松弛条件改为max(dis[k],g[k][i])&lt;dis[i],
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">double</span>,<span class="keyword">int</span>&gt; l;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">507</span>;</span><br><span class="line"><span class="keyword">double</span> g[N][N],dis[N];</span><br><span class="line"><span class="keyword">int</span> vis[N],x[N],y[N],n,cnt;</span><br><span class="line">priority_queue&lt;l,<span class="built_in">vector</span>&lt;l&gt;,greater&lt;l&gt; &gt;q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">len</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>(<span class="built_in">pow</span>((<span class="keyword">double</span>)x[a]-x[b],<span class="number">2</span>)+<span class="built_in">pow</span>((<span class="keyword">double</span>)y[a]-y[b],<span class="number">2</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())q.pop();</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    rep(i,<span class="number">1</span>,n)dis[i]=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    q.push(l(dis[s]=<span class="number">0</span>,s));</span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> k=q.top().second;</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[k]=<span class="number">1</span>;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)<span class="keyword">if</span>(max(dis[k],g[k][i])&lt;dis[i])&#123;</span><br><span class="line">            dis[i]=max(dis[k],g[k][i]);</span><br><span class="line">            <span class="keyword">if</span>(!vis[i])q.push(l(dis[i],i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[t];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)&amp;&amp;n)&#123;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x[i],&amp;y[i]);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)rep(j,<span class="number">1</span>,i<span class="number">-1</span>)g[i][j]=g[j][i]=len(i,j);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d\nFrog Distance = %.3lf\n\n"</span>,++cnt,dijkstra(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -1205,6 +1211,28 @@ Frog Distance = 1.414
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

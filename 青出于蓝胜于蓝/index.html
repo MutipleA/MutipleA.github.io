@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:青出于蓝胜于蓝 Description武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，...武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
+<meta name="description" content="链接:青出于蓝胜于蓝 Description  武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，…武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
 <meta name="keywords" content="树状数组,dfs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="青出于蓝胜于蓝">
 <meta property="og:url" content="http://yoursite.com/青出于蓝胜于蓝/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:青出于蓝胜于蓝 Description武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，...武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
+<meta property="og:description" content="链接:青出于蓝胜于蓝 Description  武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，…武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-04T09:07:47.946Z">
+<meta property="og:updated_time" content="2018-03-22T07:29:23.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="青出于蓝胜于蓝">
-<meta name="twitter:description" content="链接:青出于蓝胜于蓝 Description武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，...武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
+<meta name="twitter:description" content="链接:青出于蓝胜于蓝 Description  武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，…武功最低的人排名第 n。现 在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。 我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。 请你帮忙计算">
 
 
 
@@ -404,28 +404,21 @@
 
       
         <p>链接:<a href="https://nanti.jisuanke.com/t/20690" target="_blank" rel="noopener">青出于蓝胜于蓝</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，...武功最低的人排名第 n。现
-在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。
-我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。
-请你帮忙计算每个人的所有子弟（包括徒弟的徒弟，徒弟的徒弟的徒弟....）中，有多少人的武功超过了他自己。
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>输入第一行两个整数 n,p(1≤n≤100000,1≤p≤n)。
-接下来 n−1 行，每行输入两个整数u,v(1≤u,v≤n)，表示 u 和 v 之间存在师徒关系。
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>输出一行 n 个整数，第 i 个整数表示武功排行为 i 的人的子弟有多少人超过了他。行末不要输出多余的空格。
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>10 5
-5 3
-5 8
-3 4
-3 1
-2 1
-6 7
-8 7
-9 8
-8 10
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>0 0 2 0 4 0 1 2 0 0
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>树状数组维护dfs的时间戳，每访问一个点，in数组标记他，标记完所有子树的节点后，out数组取消标记
-然后这个点的答案就是out[u]到in[u]区间内的和
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100070</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],tr[N&lt;&lt;<span class="number">2</span>],p,n,cnt,in[N],out[N ];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;e[N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i;i-=lowbit(i))tp+=tr[i];</span><br><span class="line">    <span class="keyword">return</span> tp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">    in[u]=++cnt;</span><br><span class="line">    <span class="keyword">int</span> len=e[u].size();</span><br><span class="line">    rep(i,<span class="number">0</span>,len<span class="number">-1</span>)<span class="keyword">if</span>(e[u][i]!=fa)dfs(e[u][i],u);</span><br><span class="line">    out[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;p;</span><br><span class="line">    rep(i,<span class="number">2</span>,n)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">        e[x].push_back(y);</span><br><span class="line">        e[y].push_back(x); </span><br><span class="line">    &#125;</span><br><span class="line">    dfs(p,<span class="number">-1</span>);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ask(out[i])-ask(in[i]);</span><br><span class="line">        <span class="keyword">if</span>(i!=n)<span class="built_in">cout</span>&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">        add(in[i],<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>武当派一共有 n 人，门派内 n 人按照武功高低进行排名，武功最高的人排名第 1，次高的人排名第 2，…武功最低的人排名第 n。现</li>
+<li>在我们用武功的排名来给每个人标号，除了祖师爷，每个人都有一个师父，每个人可能有多个徒弟。</li>
+<li>我们知道，武当派人才辈出，连祖师爷的武功都只能排行到 p。也就是说徒弟的武功是可能超过师父的，所谓的青出于蓝胜于蓝。</li>
+<li>请你帮忙计算每个人的所有子弟（包括徒弟的徒弟，徒弟的徒弟的徒弟….）中，有多少人的武功超过了他自己。<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>输入第一行两个整数 n,p(1≤n≤100000,1≤p≤n)。</li>
+<li>接下来 n−1 行，每行输入两个整数u,v(1≤u,v≤n)，表示 u 和 v 之间存在师徒关系。<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>输出一行 n 个整数，第 i 个整数表示武功排行为 i 的人的子弟有多少人超过了他。行末不要输出多余的空格。<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  10 5<br>  5 3<br>  5 8<br>  3 4<br>  3 1<br>  2 1<br>  6 7<br>  8 7<br>  9 8<br>  8 10<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>  0 0 2 0 4 0 1 2 0 0<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1></li>
+<li>树状数组维护dfs的时间戳，每访问一个点，in数组标记他，标记完所有子树的节点后，out数组取消标记</li>
+<li>然后这个点的答案就是out[u]到in[u]区间内的和<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100070</span>;</span><br><span class="line"><span class="keyword">int</span> f[N],tr[N&lt;&lt;<span class="number">2</span>],p,n,cnt,in[N],out[N ];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;e[N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i;i-=lowbit(i))tp+=tr[i];</span><br><span class="line">    <span class="keyword">return</span> tp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">    in[u]=++cnt;</span><br><span class="line">    <span class="keyword">int</span> len=e[u].size();</span><br><span class="line">    rep(i,<span class="number">0</span>,len<span class="number">-1</span>)<span class="keyword">if</span>(e[u][i]!=fa)dfs(e[u][i],u);</span><br><span class="line">    out[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;p;</span><br><span class="line">    rep(i,<span class="number">2</span>,n)&#123;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y;</span><br><span class="line">        e[x].push_back(y);</span><br><span class="line">        e[y].push_back(x); </span><br><span class="line">    &#125;</span><br><span class="line">    dfs(p,<span class="number">-1</span>);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ask(out[i])-ask(in[i]);</span><br><span class="line">        <span class="keyword">if</span>(i!=n)<span class="built_in">cout</span>&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">        add(in[i],<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1192,6 +1185,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最短路从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径 解决算法：  floyd  dijkstra  spfa dijktsra优化 spfa优化">
+<meta name="description" content="最短路  从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径解决算法： floyd dijkstra spfa dijktsra优化 spfa优化">
 <meta name="keywords" content="最短路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="dijkstra算法详解">
 <meta property="og:url" content="http://yoursite.com/dijkstra算法详解/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="最短路从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径 解决算法：  floyd  dijkstra  spfa dijktsra优化 spfa优化">
+<meta property="og:description" content="最短路  从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径解决算法： floyd dijkstra spfa dijktsra优化 spfa优化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T09:09:10.201Z">
+<meta property="og:updated_time" content="2018-03-22T06:30:26.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dijkstra算法详解">
-<meta name="twitter:description" content="最短路从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径 解决算法：  floyd  dijkstra  spfa dijktsra优化 spfa优化">
+<meta name="twitter:description" content="最短路  从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径解决算法： floyd dijkstra spfa dijktsra优化 spfa优化">
 
 
 
@@ -392,35 +392,43 @@
       
 
       
-        <h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><pre><code>从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径
-</code></pre><h2 id="解决算法："><a href="#解决算法：" class="headerlink" title="解决算法："></a>解决算法：</h2><p>  floyd<br>  dijkstra</p>
+        <h1 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h1><blockquote>
 <ul>
+<li>从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径<h2 id="解决算法："><a href="#解决算法：" class="headerlink" title="解决算法："></a>解决算法：</h2></li>
+<li>floyd</li>
+<li>dijkstra</li>
 <li><a href="/spfa/">spfa</a></li>
 <li><a href="/dijkstra优化/">dijktsra优化</a></li>
 <li><a href="/spfa优化/">spfa优化</a><a id="more"></a>
-<h1 id="dijkstra算法介绍"><a href="#dijkstra算法介绍" class="headerlink" title="dijkstra算法介绍"></a>dijkstra算法介绍</h1>  <em>算法思路:<br>  利用贪心的思想，维护一个dis数组，值为源点到各个顶点的最短距离，以及一个vis数组，表示该点已经算出最短路的点的集合<br>  每次找到dis值最小的顶点（这个dis值就是改点到源点的最短距离），标记它，然后用它来松弛可以松弛的点，
-  </em>时间复杂度：<br>  很显然是O(n2)的<br>  *缺点：无法处理负权<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="c++"><span class="function"><span class="keyword">int</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>{
-    rep(i,<span class="number">1</span>,n+<span class="number">1</span>){
-        d[i]=g[s][i];
-        vis[i]=<span class="number">0</span>;
-    }
-    vis[s]=<span class="number">1</span>;
-    rep(i,<span class="number">2</span>,n+<span class="number">1</span>){
-        <span class="keyword">int</span> mx=inf,k=<span class="number">1</span>;
-        rep(j,<span class="number">1</span>,n+<span class="number">1</span>)<span class="keyword">if</span>(!vis[j]&amp;&amp;d[j]&lt;mx){
-            mx=d[j];
-            k=j;
-        }
-        vis[k]=<span class="number">1</span>;
-        rep(j,<span class="number">1</span>,n+<span class="number">1</span>)<span class="keyword">if</span>(!vis[j]&amp;&amp;mx+g[k][j]&lt;d[j]){
-            d[j]=mx+g[k][j];
-        }
-    }
-    <span class="keyword">return</span> d[t]!=inf?d[t]:<span class="number">-1</span>;
-}
+<h1 id="dijkstra算法介绍"><a href="#dijkstra算法介绍" class="headerlink" title="dijkstra算法介绍"></a>dijkstra算法介绍</h1></li>
+<li>算法思路: </li>
+<li>利用贪心的思想，维护一个dis数组，值为源点到各个顶点的最短距离，以及一个vis数组，表示该点已经算出最短路的点的集合</li>
+<li>每次找到dis值最小的顶点（这个dis值就是改点到源点的最短距离），标记它，然后用它来松弛可以松弛的点，</li>
+<li>时间复杂度：</li>
+<li>很显然是O(n2)的</li>
+<li>缺点：无法处理负权<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="lang-c++">  int dijkstra(int s,int t){
+      rep(i,1,n+1){
+          d[i]=g[s][i];
+          vis[i]=0;
+      }
+      vis[s]=1;
+      rep(i,2,n+1){
+          int mx=inf,k=1;
+          rep(j,1,n+1)if(!vis[j]&amp;&amp;d[j]&lt;mx){
+              mx=d[j];
+              k=j;
+          }
+          vis[k]=1;
+          rep(j,1,n+1)if(!vis[j]&amp;&amp;mx+g[k][j]&lt;d[j]){
+              d[j]=mx+g[k][j];
+          }
+      }
+      return d[t]!=inf?d[t]:-1;
+  }
 </code></pre>
 </li>
 </ul>
+</blockquote>
 
       
     </div>
@@ -1186,6 +1194,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

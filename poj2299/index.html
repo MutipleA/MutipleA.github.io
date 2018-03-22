@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:poj2299 DescriptionIn this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct  integers by swapping two adjacent sequence elements until t">
+<meta name="description" content="链接:poj2299 Description  In this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n  distinct  integers by swapping two adjacent sequence elements unti">
 <meta name="keywords" content="树状数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj2299">
 <meta property="og:url" content="http://yoursite.com/poj2299/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:poj2299 DescriptionIn this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct  integers by swapping two adjacent sequence elements until t">
+<meta property="og:description" content="链接:poj2299 Description  In this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n  distinct  integers by swapping two adjacent sequence elements unti">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T16:00:58.631Z">
+<meta property="og:updated_time" content="2018-03-22T07:16:57.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="poj2299">
-<meta name="twitter:description" content="链接:poj2299 DescriptionIn this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct  integers by swapping two adjacent sequence elements until t">
+<meta name="twitter:description" content="链接:poj2299 Description  In this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n  distinct  integers by swapping two adjacent sequence elements unti">
 
 
 
@@ -404,37 +404,35 @@
 
       
         <p>链接:<a href="http://poj.org/problem?id=2299" target="_blank" rel="noopener">poj2299</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>In this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n distinct 
-integers by swapping two adjacent sequence elements until the sequence is sorted in ascending order. For the input sequence 
-9 1 0 5 4 , 
-Ultra-QuickSort produces the output 
-0 1 4 5 9 . 
-Your task is to determine how many swap operations Ultra-QuickSort needs to perform in order to sort a given input sequence.
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>The input contains several test cases. Every test case begins with a line that contains a single integer n &lt; 500,000 -- the 
-length of the input sequence. Each of the the following n lines contains a single integer 0 ≤ a[i] ≤ 999,999,999, the i-th 
-input sequence element. Input is terminated by a sequence of length n = 0. This sequence must not be processed.
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>For every input sequence, your program prints a single line containing an integer number op, the minimum number of swap 
-operations necessary to sort the given input sequence.
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>5
-9
-1
-0
-5
-4
-3
-1
-2
-3
-0
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>6
-0
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>求逆序对数目
-开一个大小为这些数的最大值的树状数组，并全部置0。从头到尾读入这些数，每读入一个数就更新树状数组，查看它前面比它小的已出现过的有多少个数
-sum，然后用当前位置减去该sum，就可以得到当前数导致的逆序对数了。把所有的加起来就是总的逆序对数。 
-然而问题来了，数据最大999999999，显然开不下
-解决方法是离散化一下
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5e6</span>+<span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val,pos;</span><br><span class="line">&#125;b[N];</span><br><span class="line"><span class="keyword">int</span> a[N],tree[N],n;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node x,node y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.val&lt;y.val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&lt;=n;i+=lowbit(i))tree[i]+=k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&gt;<span class="number">0</span>;i-=lowbit(i))ans+=tree[i];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readin</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;b[i].val;</span><br><span class="line">        b[i].pos=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="built_in">memset</span>(tree,<span class="number">0</span>,<span class="keyword">sizeof</span>(tree));</span><br><span class="line">    sort(b+<span class="number">1</span>,b+n+<span class="number">1</span>,cmp);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        add(b[i].pos,<span class="number">1</span>);                    <span class="comment">//离散化</span></span><br><span class="line">        ans+=i-getsum(b[i].pos);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        readin();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>In this problem, you have to analyze a particular sorting algorithm. The algorithm processes a sequence of n </li>
+<li>distinct </li>
+<li>integers by swapping two adjacent sequence elements until the sequence is sorted in ascending order. For the </li>
+<li>input sequence </li>
+<li>9 1 0 5 4 , </li>
+<li>Ultra-QuickSort produces the output </li>
+<li>0 1 4 5 9 . </li>
+<li>Your task is to determine how many swap operations Ultra-QuickSort needs to perform in order to sort a given </li>
+<li>input sequence.<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>The input contains several test cases. Every test case begins with a line that contains a single integer n &lt; </li>
+<li>500,000 — the </li>
+<li>length of the input sequence. Each of the the following n lines contains a single integer 0 ≤ a[i] ≤ 999,999,</li>
+<li>999, the i-th </li>
+<li>input sequence element. Input is terminated by a sequence of length n = 0. This sequence must not be processed.<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>For every input sequence, your program prints a single line containing an integer number op, the minimum </li>
+<li>number of swap </li>
+<li>operations necessary to sort the given input sequence.<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  5<br>  9<br>  1<br>  0<br>  5<br>  4<br>  3<br>  1<br>  2<br>  3<br>  0<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>  6<br>  0<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1></li>
+<li>求逆序对数目</li>
+<li>开一个大小为这些数的最大值的树状数组，并全部置0。从头到尾读入这些数，每读入一个数就更新树状数组，查看它前面比它小的已出现</li>
+<li>过的有多少个数</li>
+<li>sum，然后用当前位置减去该sum，就可以得到当前数导致的逆序对数了。把所有的加起来就是总的逆序对数。 </li>
+<li>然而问题来了，数据最大999999999，显然开不下</li>
+<li>解决方法是离散化一下<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">5e6</span>+<span class="number">100</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val,pos;</span><br><span class="line">&#125;b[N];</span><br><span class="line"><span class="keyword">int</span> a[N],tree[N],n;</span><br><span class="line">ll ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node x,node y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.val&lt;y.val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&lt;=n;i+=lowbit(i))tree[i]+=k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getsum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=x;i&gt;<span class="number">0</span>;i-=lowbit(i))ans+=tree[i];</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readin</span><span class="params">()</span></span>&#123;</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;b[i].val;</span><br><span class="line">        b[i].pos=i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="built_in">memset</span>(tree,<span class="number">0</span>,<span class="keyword">sizeof</span>(tree));</span><br><span class="line">    sort(b+<span class="number">1</span>,b+n+<span class="number">1</span>,cmp);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        add(b[i].pos,<span class="number">1</span>);                    <span class="comment">//离散化</span></span><br><span class="line">        ans+=i-getsum(b[i].pos);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">        ans=<span class="number">0</span>;</span><br><span class="line">        readin();</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1199,6 +1197,28 @@ sum，然后用当前位置减去该sum，就可以得到当前数导致的逆�
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

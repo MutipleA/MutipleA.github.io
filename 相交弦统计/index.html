@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="DescriptionKimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
+<meta name="description" content="Description  Kimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
 <meta name="keywords" content="树状数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="相交弦统计">
 <meta property="og:url" content="http://yoursite.com/相交弦统计/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="DescriptionKimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
+<meta property="og:description" content="Description  Kimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-26T01:22:08.029Z">
+<meta property="og:updated_time" content="2018-03-22T07:28:29.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="相交弦统计">
-<meta name="twitter:description" content="DescriptionKimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
+<meta name="twitter:description" content="Description  Kimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端 点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生 了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？">
 
 
 
@@ -403,20 +403,20 @@
       
 
       
-        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>Kimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端
-点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生
-了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>输入文件的第一行包含一个整数 N。
-接下来 N 行，每行包含两个整数 a、b(1≤a，b≤2*N)，表示一条连接 a，b 的弦
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>输出文件中近包含一个整数，表示相交弦的对
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>3 2
-5 2
-6 3
-</code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>1
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>两条弦相交只需要保证其中一条的一个点在另一条的两个端点之间
-然后树状数组or线段树维护一下前n个数有多少个左or右端点就好 
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>;</span><br><span class="line">ll tr[N&lt;&lt;<span class="number">1</span>],n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r;</span><br><span class="line">&#125;e[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(node x,node y)</span></span>&#123;<span class="keyword">return</span> x.l&lt;y.l;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=x;i&lt;=n&lt;&lt;<span class="number">1</span>;i+=lowbit(i))tr[i]+=k;&#125;</span><br><span class="line"><span class="function">ll <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;ll ans=<span class="number">0</span>; <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=x;i;i-=lowbit(i))ans+=tr[i];<span class="keyword">return</span> ans;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        ll ans=<span class="number">0</span>;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;e[i].l&gt;&gt;e[i].r;</span><br><span class="line">            <span class="keyword">if</span>(e[i].l&gt;e[i].r)swap(e[i].l,e[i].r);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(e+<span class="number">1</span>,e+n+<span class="number">1</span>,cmp);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">                ans+=ask(e[i].r<span class="number">-1</span>)-ask(e[i].l);</span><br><span class="line">                update(e[i].r,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>Kimi 最近得到了一个玩具，玩具由环和弦两个部分组成。环上有 2*N 个端</li>
+<li>点，而 N 条弦，每条连接其中的两个，既不重复也不遗漏。Kimi 对这些弦产生</li>
+<li>了浓厚的兴趣，他想数一数，一共有多少对弦是相交的呢？<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>输入文件的第一行包含一个整数 N。</li>
+<li>接下来 N 行，每行包含两个整数 a、b(1≤a，b≤2*N)，表示一条连接 a，b 的弦<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>输出文件中近包含一个整数，表示相交弦的对<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  3 2<br>  5 2<br>  6 3<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2>  1<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1></li>
+<li>两条弦相交只需要保证其中一条的一个点在另一条的两个端点之间</li>
+<li>然后树状数组or线段树维护一下前n个数有多少个左or右端点就好 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(i) i&amp;(-i)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>;</span><br><span class="line">ll tr[N&lt;&lt;<span class="number">1</span>],n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r;</span><br><span class="line">&#125;e[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(node x,node y)</span></span>&#123;<span class="keyword">return</span> x.l&lt;y.l;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span>&#123;<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=x;i&lt;=n&lt;&lt;<span class="number">1</span>;i+=lowbit(i))tr[i]+=k;&#125;</span><br><span class="line"><span class="function">ll <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;ll ans=<span class="number">0</span>; <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=x;i;i-=lowbit(i))ans+=tr[i];<span class="keyword">return</span> ans;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n)&#123;</span><br><span class="line">        ll ans=<span class="number">0</span>;</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;e[i].l&gt;&gt;e[i].r;</span><br><span class="line">            <span class="keyword">if</span>(e[i].l&gt;e[i].r)swap(e[i].l,e[i].r);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(e+<span class="number">1</span>,e+n+<span class="number">1</span>,cmp);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">                ans+=ask(e[i].r<span class="number">-1</span>)-ask(e[i].l);</span><br><span class="line">                update(e[i].r,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1181,6 +1181,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

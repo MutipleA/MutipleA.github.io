@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很接近">
+<meta name="description" content="SPFA: Shortest Path Faster Algorithm  看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很">
 <meta name="keywords" content="最短路">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spfa">
 <meta property="og:url" content="http://yoursite.com/spfa/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很接近">
+<meta property="og:description" content="SPFA: Shortest Path Faster Algorithm  看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-20T09:08:23.626Z">
+<meta property="og:updated_time" content="2018-03-22T07:18:23.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spfa">
-<meta name="twitter:description" content="SPFA: Shortest Path Faster Algorithm看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很接近">
+<meta name="twitter:description" content="SPFA: Shortest Path Faster Algorithm  看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。   SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路   而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题     SPFA 算法的最坏复杂度为 O(2*E)。。    SPFA 和dijkstra 格式很">
 
 
 
@@ -392,20 +392,25 @@
       
 
       
-        <h1 id="SPFA-Shortest-Path-Faster-Algorithm"><a href="#SPFA-Shortest-Path-Faster-Algorithm" class="headerlink" title="SPFA: Shortest Path Faster Algorithm"></a>SPFA: Shortest Path Faster Algorithm</h1><pre><code>看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。  
-SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路  
-而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题   
+        <h1 id="SPFA-Shortest-Path-Faster-Algorithm"><a href="#SPFA-Shortest-Path-Faster-Algorithm" class="headerlink" title="SPFA: Shortest Path Faster Algorithm"></a>SPFA: Shortest Path Faster Algorithm</h1><blockquote>
+<ul>
+<li>看到名字不禁为之一颤，SPFA算法是西南交通大学段凡丁于1994年发表的。  </li>
+<li>SPFA 也是竞赛中最常见的算法之一，不仅仅用来解决带负权的单源最短路  </li>
+<li><p>而且是求解差分约束问题的专用算法，也常用它和最大流合作解决最小费问题   </p>
+</li>
+<li><p>SPFA 算法的最坏复杂度为 O(2*E)。。  </p>
+</li>
+<li><p>SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。  </p>
+</li>
+<li><p>这里用邻接表形式写下spfa 的模板  </p>
+</li>
+<li><p>后面再介绍它的其它功能，这里只知道它处理最短路很快即可  </p>
+<a id="more"></a>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2></li>
+<li>可以处理负权，判负环，快<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="comment">//memset(c,0,sizeof(c));</span></span><br><span class="line">    q.push(s);</span><br><span class="line">    in[s]=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//c[s]=1;</span></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> k=q.front();q.pop();</span><br><span class="line">        in[k]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=head[k];i!=<span class="number">-1</span>;i=e[i].nxt)<span class="keyword">if</span>(d[k]+e[i]&lt;d[i])&#123;</span><br><span class="line">            d[i]=e[i].w+d[k];</span><br><span class="line">            <span class="keyword">if</span>(!in[e[i].t])&#123;</span><br><span class="line">                q.push(e[i].t);</span><br><span class="line">                in[e[i].t]++;</span><br><span class="line">                c[e[i].t]++;</span><br><span class="line">                <span class="comment">//if(c[e[i].t]&gt;n)return ok=0 </span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
 
-SPFA 算法的最坏复杂度为 O(2*E)。。  
-
-SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神奇了。  
-
-这里用邻接表形式写下spfa 的模板  
-
-后面再介绍它的其它功能，这里只知道它处理最短路很快即可  
-</code></pre><a id="more"></a>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><pre><code>可以处理负权，判负环，快
-</code></pre><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(d,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(d));</span><br><span class="line">    <span class="built_in">memset</span>(in,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="comment">//memset(c,0,sizeof(c));</span></span><br><span class="line">    q.push(s);</span><br><span class="line">    in[s]=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//c[s]=1;</span></span><br><span class="line">    <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">        <span class="keyword">int</span> k=q.front();q.pop();</span><br><span class="line">        in[k]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=head[k];i!=<span class="number">-1</span>;i=e[i].nxt)<span class="keyword">if</span>(d[k]+e[i]&lt;d[i])&#123;</span><br><span class="line">            d[i]=e[i].w+d[k];</span><br><span class="line">            <span class="keyword">if</span>(!in[e[i].t])&#123;</span><br><span class="line">                q.push(e[i].t);</span><br><span class="line">                in[e[i].t]++;</span><br><span class="line">                c[e[i].t]++;</span><br><span class="line">                <span class="comment">//if(c[e[i].t]&gt;n)return ok=0 </span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -1170,6 +1175,28 @@ SPFA 和dijkstra 格式很接近，只是加了个队列或栈就变得无比神
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

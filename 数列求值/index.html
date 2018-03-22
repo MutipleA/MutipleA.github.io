@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:数列求值 Description对于一个含有 n+2个元素的数列A0, A1, ... , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, ... , Cn 现在请你帮忙计算A1的值。">
+<meta name="description" content="链接:数列求值 Description  对于一个含有 n+2个元素的数列A0, A1, … , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, … , Cn 现在请你帮忙计算A1的值。">
 <meta name="keywords" content="思维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数列求值">
 <meta property="og:url" content="http://yoursite.com/数列求值/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:数列求值 Description对于一个含有 n+2个元素的数列A0, A1, ... , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, ... , Cn 现在请你帮忙计算A1的值。">
+<meta property="og:description" content="链接:数列求值 Description  对于一个含有 n+2个元素的数列A0, A1, … , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, … , Cn 现在请你帮忙计算A1的值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-03T16:29:47.246Z">
+<meta property="og:updated_time" content="2018-03-22T07:19:08.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数列求值">
-<meta name="twitter:description" content="链接:数列求值 Description对于一个含有 n+2个元素的数列A0, A1, ... , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, ... , Cn 现在请你帮忙计算A1的值。">
+<meta name="twitter:description" content="链接:数列求值 Description  对于一个含有 n+2个元素的数列A0, A1, … , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n 现在我们知道A0, An+1和C1, C2, … , Cn 现在请你帮忙计算A1的值。">
 
 
 
@@ -404,33 +404,37 @@
 
       
         <p>链接:<a href="https://nanti.jisuanke.com/t/20688" target="_blank" rel="noopener">数列求值</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><pre><code>对于一个含有 n+2个元素的数列A0, A1, ... , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n
-现在我们知道A0, An+1和C1, C2, ... , Cn
-现在请你帮忙计算A1的值。
-</code></pre><a id="more"></a>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><pre><code>第一行输入一个整数n(1≤n≤1000)。
-第二行输入两个数A0, An+1，接着是 n个数据分别是C1, C2, ... , Cn。所有的数据均是两位小数的浮点数。
-</code></pre><h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><pre><code>输出A1的值，结果保留两位小数。
-</code></pre><h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><pre><code>1
-50.50 25.50
-10.15
-
-2
+<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><blockquote>
+<ul>
+<li>对于一个含有 n+2个元素的数列A0, A1, … , An，满足这样的递归公式: Ai = (Ai-1 + Ai+1) /2 - Ci  1≤i≤n</li>
+<li>现在我们知道A0, An+1和C1, C2, … , Cn</li>
+<li>现在请你帮忙计算A1的值。<a id="more"></a>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2></li>
+<li>第一行输入一个整数n(1≤n≤1000)。</li>
+<li>第二行输入两个数A0, An+1，接着是 n个数据分别是C1, C2, … , Cn。所有的数据均是两位小数的浮点数。<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2></li>
+<li>输出A1的值，结果保留两位小数。<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2>  1<br>  50.50 25.50<br>  10.15</li>
+</ul>
+</blockquote>
+<pre><code>2
 -756.89 52.52
 172.22 67.17
 </code></pre><h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><pre><code>27.85
 -761.49
-</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><pre><code>根据公式可以推导出
-A(2)==2*A(1)-A(0)+2*C(1)   先不看后面的C
-A(3)==2*A(2)-A(1)==3*A(1)-2*A(0)
-.
-.
-.
-A(n+1)==(n+1)*A(1)-(n)*A(0)
-由于我们已知A(n+1)  看起来好像只需要这个公式就可以求出A(1)   然而还有我们忽略的C
-由于未知A(1)   先将A(1)看成0  然后根据这个式子地推出A(n+1)暂时命名为tp,跟正确的A(n+1)相差的只有(n+1)*A(1)
-剩下的就不用说了吧。。。
-</code></pre><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e3</span>+<span class="number">11</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> tp,f[N],c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;f[<span class="number">0</span>]&gt;&gt;tp;</span><br><span class="line">    rep(i,<span class="number">2</span>,n+<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">        f[i]=<span class="number">2</span>*f[i<span class="number">-1</span>]-f[i<span class="number">-2</span>]+<span class="number">2</span>*c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,(tp-f[n+<span class="number">1</span>])/(n+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
+<ul>
+<li>根据公式可以推导出</li>
+<li>A(2)==2<em>A(1)-A(0)+2</em>C(1)   先不看后面的C</li>
+<li>A(3)==2<em>A(2)-A(1)==3</em>A(1)-2*A(0)</li>
+<li>.</li>
+<li>.</li>
+<li>.</li>
+<li>A(n+1)==(n+1)<em>A(1)-(n)</em>A(0)</li>
+<li>由于我们已知A(n+1)  看起来好像只需要这个公式就可以求出A(1)   然而还有我们忽略的C</li>
+<li>由于未知A(1)   先将A(1)看成0  然后根据这个式子地推出A(n+1)暂时命名为tp,跟正确的A(n+1)相差的只有(n+1)*A(1)</li>
+<li>剩下的就不用说了吧。。。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e3</span>+<span class="number">11</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> tp,f[N],c;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;f[<span class="number">0</span>]&gt;&gt;tp;</span><br><span class="line">    rep(i,<span class="number">2</span>,n+<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">        f[i]=<span class="number">2</span>*f[i<span class="number">-1</span>]-f[i<span class="number">-2</span>]+<span class="number">2</span>*c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,(tp-f[n+<span class="number">1</span>])/(n+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+
       
     </div>
     
@@ -1195,6 +1199,28 @@ A(n+1)==(n+1)*A(1)-(n)*A(0)
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

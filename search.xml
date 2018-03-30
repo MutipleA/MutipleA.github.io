@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg1963[NOI2009]变换序列]]></title>
+    <url>%2Flg1963-NOI2009-%E5%8F%98%E6%8D%A2%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[链接:lg1963[NOI2009]变换序列 题解这题难点在于要求字典序最小的匹配 首先建图的时候要先连大的点,因为处理的时候,是倒序 匈牙利算法是当前点无法匹配的时候尝试更改之前匹配的点,所以倒着匈牙利就可以保证小的点优先匹配小的点 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a;nxt=b;&#125;&#125;e[N];int mark[N],n,vis[N],head[N],cnt,ans;inline int solve(int x)&#123;if(x&lt;0)x+=n; if(x&gt;n-1)x-=n; return x+n;&#125;void add(int u,int x)&#123; int v1=solve(u+x),v2=solve(u-x); if(v1&lt;v2)swap(v1,v2); e[++cnt].init(v1,head[u]);head[u]=cnt; e[++cnt].init(v2,head[u]);head[u]=cnt;&#125;int find(int x)&#123; vis[x]=1; for(int i=head[x],v;i;i=e[i].nxt)if(!vis[v=e[i].v])&#123; vis[v]=1; if(!mark[v]||find(mark[v]))&#123; mark[v]=x;mark[x]=v; return 1; &#125; &#125; return 0;&#125;int r()&#123; repd(i,n-1,0)if(!mark[i])&#123; memset(vis,0,sizeof(vis)); ans+=find(i); &#125; return ans==n;&#125;int main()&#123; scanf("%d",&amp;n); rep(i,0,n-1)&#123;int x;scanf("%d",&amp;x); add(i,x);&#125; if(r())rep(i,0,n-1)printf("%d ",mark[i]-n); else puts("No Answer"); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>二分图匹配</category>
+      </categories>
+      <tags>
+        <tag>二分图匹配</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[牛客练习赛13]]></title>
+    <url>%2F%E7%89%9B%E5%AE%A2%E7%BB%83%E4%B9%A0%E8%B5%9B13%2F</url>
+    <content type="text"><![CDATA[链接:牛客练习赛13 A幸运数字1 幸运数字是只含4,7的数字,给一个字符串,求出现次数最多的且是幸运数字的子串 题解 没啥说的,答案只有4,7,-1三种可能B幸运数字2 next(x)表示比x大的第一个幸运数字,给定l,r,求出next(l)+…+next(r)题解 我的做法是跑出所有幸运数字，1-1e10中最多2^9个，然后二分l和r在数组中的位置，累加答案 实际上不需要二分,对于幸运数字i来说,满足next(x)==i的只有上一个幸运数字y的后一个数y+1到i的那些 不多说,上代码123456789101112131415161718192021222324#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6;ll c[N],len,ans,l,r;int main()&#123; rep(i,1,10)rep(j,0,(1&lt;&lt;i)-1)&#123; ll num=0; rep(k,0,i-1)if(j&gt;&gt;k&amp;1)num=num*10+4;else num=num*10+7; c[++len]=num; &#125; sort(c+1,c+len+1); scanf("%d%d",&amp;l,&amp;r); for(int i=1;l&lt;=r;++i)if(c[i]&gt;=l)ans+=(ll)(min(r,c[i])-l+1)*c[i],l=c[i]+1; printf("%lld",ans); return 0;&#125; C幸运数字3]]></content>
+      <categories>
+        <category>比赛</category>
+        <category>牛客</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[poj1988]]></title>
     <url>%2Fpoj1988%2F</url>
     <content type="text"><![CDATA[链接:poj1988 Description Farmer John and Betsy are playing a game with N (1 &lt;= N &lt;= 30,000)identical cubes labeled 1 through N. They start with N stacks, each containing a single cube. Farmer John asks Betsy to perform P (1&lt;= P &lt;= 100,000) operation. There are two types of operations: moves and counts. In a move operation, Farmer John asks Bessie to move the stack containing cube X on top of the stack containing cube Y. In a count operation, Farmer John asks Bessie to count the number of cubes on the stack with cube X that are under the cube X and report that value. Write a program that can verify the results of the game. Input Line 1: A single integer, P Lines 2..P+1: Each of these lines describes a legal operation. Line 2 describes the first operation, etc. Each line begins with a ‘M’ for a move operation or a ‘C’ for a count operation. For move operations, the line also contains two integers: X and Y.For count operations, the line also contains a single integer: X. Note that the value for N does not appear in the input file. No move operation will request a move a stack onto itself. Output Print the output from each of the count operations in the same order as the input file. Sample Input 6 M 1 6 C 1 M 2 4 M 2 6 C 3 C 4Sample Output 1 0 2题解 带权并查集，和lg1196差不多1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regiser int i=x;i&gt;=y;--i)#define ll long long using namespace std;const int N=1e5+7;int f[N],rl[N],n,a,b,nm[N];char c;int find(int x)&#123; if(f[x]==x)return x; int t=find(f[x]); rl[x]+=rl[f[x]]; return f[x]=t;&#125;inline void un(int x,int y)&#123; int a=find(x); int b=find(y); f[b]=a; rl[b]=nm[a]; //更新x所在列头 nm[a]+=nm[b]; //更新b的长度 //nm[a]=0; &#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n; rep(i,1,30000)f[i]=i,nm[i]=1; rep(i,1,n)&#123; cin&gt;&gt;c&gt;&gt;a; if(c=='M')&#123;cin&gt;&gt;b;un(a,b);&#125; else cout&lt;&lt;nm[find(a)]-rl[a]-1&lt;&lt;endl; &#125; return 0;&#125; 更厉害的 看了大神的博客，发现，根本不需要多开一个rl数组保存列长度 果然是太弱了1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;int f[N],dis[N],n,a,b;char c;int find(int x)&#123; if(f[x]&lt;0)return x; int t=find(f[x]); dis[x]+=dis[f[x]]; return f[x]=t;&#125;inline void un(int x,int y)&#123; x=find(x); y=find(y); if(x!=y)&#123; dis[y]=(-f[x]); f[x]+=f[y]; f[y]=x; &#125;&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n; memset(f,-1,sizeof(f)); rep(i,1,n)&#123; cin&gt;&gt;c&gt;&gt;a; if(c=='M')&#123;cin&gt;&gt;b; un(a,b);&#125; else cout&lt;&lt;f[find(a)]*(-1)-dis[a]-1&lt;&lt;endl; &#125; return 0;&#125;]]></content>
@@ -256,9 +278,6 @@
         <category>比赛</category>
         <category>cf</category>
       </categories>
-      <tags>
-        <tag>cf</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[ccf认证2017-12-4行车路线]]></title>

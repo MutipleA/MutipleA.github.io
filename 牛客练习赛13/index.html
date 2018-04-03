@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="链接:牛客练习赛13 A幸运数字1  幸运数字是只含4,7的数字,给一个字符串,求出现次数最多的且是幸运数字的子串">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-28T04:54:25.526Z">
+<meta property="og:updated_time" content="2018-04-03T16:41:52.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="牛客练习赛13">
 <meta name="twitter:description" content="链接:牛客练习赛13 A幸运数字1  幸运数字是只含4,7的数字,给一个字符串,求出现次数最多的且是幸运数字的子串">
@@ -395,7 +395,8 @@
 <h1 id="A幸运数字1"><a href="#A幸运数字1" class="headerlink" title="A幸运数字1"></a>A幸运数字1</h1><blockquote>
 <ul>
 <li>幸运数字是只含4,7的数字,给一个字符串,求出现次数最多的且是幸运数字的子串<a id="more"></a>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2>  没啥说的,答案只有4,7,-1三种可能<h1 id="B幸运数字2"><a href="#B幸运数字2" class="headerlink" title="B幸运数字2"></a>B幸运数字2</h1></li>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2></li>
+<li>没啥说的,答案只有4,7,-1三种可能<h1 id="B幸运数字2"><a href="#B幸运数字2" class="headerlink" title="B幸运数字2"></a>B幸运数字2</h1></li>
 <li>next(x)表示比x大的第一个幸运数字,给定l,r,求出next(l)+…+next(r)<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2></li>
 <li>我的做法是跑出所有幸运数字，1-1e10中最多2^9个，然后二分l和r在数组中的位置，累加答案</li>
 <li>实际上不需要二分,对于幸运数字i来说,满足next(x)==i的只有上一个幸运数字y的后一个数y+1到i的那些</li>

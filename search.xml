@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lgP2746[USACO5.3]校园网]]></title>
+    <url>%2FlgP2746-USACO5-3-%E6%A0%A1%E5%9B%AD%E7%BD%91%2F</url>
+    <content type="text"><![CDATA[链接:lgP2746[USACO5.3]校园网 题解 显然分发学校向接受学校连一条边，然后缩点。 子任务A显然就是入度为零的缩点个数 子任务B则是入度为零和出度为零的缩点个数的最大值 有一个坑点，只有一个强连通分量的情况12345678910111213141516171819202122232425262728293031323334353637383940414243444546 #include&lt;iostream&gt; #include&lt;cstdio&gt; #include&lt;cstdlib&gt; #include&lt;cmath&gt; #include&lt;cstring&gt; #include&lt;algorithm&gt; #define rep(i,x,y) for(register int i=x;i&lt;=y;++i) #define repd(i,x,y) for(register int i=x;i&gt;=y;--i) #define ll long long using namespace std; const int N=1e5; struct node&#123; int v,nxt; inline void init(int x,int y)&#123;v=x; nxt=y;&#125; &#125;e[N]; int head[N],dfn[N],low[N],cnt,bl[N],du[N][2],n,m,in[N],stck[N],idx,tot,x,ans,res[2]; inline void adde(int x,int y)&#123;e[cnt].init(y,head[x]);head[x]=cnt++;&#125; void tarjan(int u)&#123; in[u]=1; stck[++idx]=u; dfn[u]=low[u]=++tot; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123;tarjan(v); low[u]=min(low[u],low[v]);&#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(dfn[u]==low[u])&#123; cnt++; do&#123;in[stck[idx]]=0; bl[stck[idx--]]=cnt;&#125;while(u!=stck[idx+1]); &#125; &#125; int main()&#123; memset(head,-1,sizeof(head)); scanf("%d",&amp;n); rep(i,1,n)while(~scanf("%d",&amp;x)&amp;&amp;x)&#123; adde(i,x); &#125;cnt=0; rep(i,1,n)if(!dfn[i])tarjan(i); rep(u,1,n)for(int i=head[u],v;i!=-1;i=e[i].nxt)if(bl[v=e[i].v]!=bl[u])&#123; du[bl[u]][0]++; du[bl[v]][1]++; &#125; rep(i,1,cnt)&#123;ans+=(du[i][1]==0); res[0]+=(du[i][0]==0);res[1]+=(du[i][1]==0);&#125; printf("%d\n%d",ans,cnt!=1?max(res[0],res[1]):0); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>tarjan</category>
+      </categories>
+      <tags>
+        <tag>trajan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lgP2341[HAOI2006]受欢迎的牛]]></title>
+    <url>%2FlgP2341-HAOI2006-%E5%8F%97%E6%AC%A2%E8%BF%8E%E7%9A%84%E7%89%9B%2F</url>
+    <content type="text"><![CDATA[链接:lgP2341[HAOI2006]受欢迎的牛 题解 爱慕可以传递，很自然想到缩点，所以只需要找到可以被所有缩点遍历到的那个缩点，自然想到出度为零的缩点就是我们要求的 但是如果有两个这样的缩点，自然无解，然后很迷人的操作WA 3发123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a;nxt=b;&#125;&#125;e[N];int head[N],cnt,n,m,dfn[N],low[N],tot,ans[N],idx,stck[N],in[N],lg[N],du[N],tp;inline void adde(int x,int y)&#123;e[cnt].init(y,head[x]);head[x]=cnt++;&#125;void tarjan(int u)&#123; in[u]=1; stck[++idx]=u; dfn[u]=low[u]=++tot; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123; tarjan(v); low[u]=min(low[u],low[v]); &#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(dfn[u]==low[u])&#123; int x; cnt++; do&#123;in[idx]=0;lg[stck[idx--]]=cnt;ans[cnt]++;&#125;while(stck[idx+1]!=u); &#125;&#125;int main()&#123; memset(head,-1,sizeof(head)); scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)&#123;int x,y;scanf("%d%d",&amp;x,&amp;y);adde(x,y);&#125;cnt=0; rep(i,1,n)if(!dfn[i])tarjan(i); rep(i,1,n)for(int j=head[i];j!=-1;j=e[j].nxt)if(lg[e[j].v]!=lg[i])du[lg[i]]++; rep(i,1,cnt)if(!du[i])&#123;if(tp)&#123;puts("0");return 0;&#125; tp=i;&#125; printf("%d",ans[tp]); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>tarjan</category>
+      </categories>
+      <tags>
+        <tag>tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lgP1407[国家集训队]稳定婚姻]]></title>
+    <url>%2FlgP1407-%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E7%A8%B3%E5%AE%9A%E5%A9%9A%E5%A7%BB%2F</url>
+    <content type="text"><![CDATA[链接:lgP1407[国家集训队]稳定婚姻 题解 尝试将所有丈夫和夫妻连起来，表示他们之间存在过关系，那么显然无论是之前还是现在，他们总有关系，所以这两种情况是一样的 那么怎么判断是否安全呢。 由于已经将所有存在过关系的丈夫和夫妻连起来了，那么显然如果如果丈夫和夫妻在一个环里，那么不安全 注意连接的时候一定要是男-&gt;女-&gt;男-&gt;女这样链接123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;map&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a;nxt=b;&#125;&#125;e[N];string a,b;map&lt;string,int&gt; id;int n,m,bl[N],head[N],cnt,in[N],dfn[N],low[N],tot,stck[N],idx;inline void adde(int x,int y)&#123;e[cnt].init(y,head[x]);head[x]=cnt++;&#125;void tarjan(int u)&#123; in[u]=1; low[u]=dfn[u]=++tot; stck[++idx]=u; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123; tarjan(v); low[u]=min(low[u],low[v]); &#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(dfn[u]==low[u])&#123; cnt++; do&#123; bl[stck[idx--]]=cnt; in[stck[idx+1]]=0; &#125;while(stck[idx+1]!=u); &#125;&#125;int main()&#123; memset(head,-1,sizeof(head)); scanf("%d",&amp;n); rep(i,1,n)&#123;cin&gt;&gt;a&gt;&gt;b;id[a]=i;id[b]=i+n;adde(i,i+n);&#125; scanf("%d",&amp;m); rep(i,1,m)&#123;cin&gt;&gt;a&gt;&gt;b;adde(id[b],id[a]);&#125; cnt=0; rep(i,1,2*n)if(!dfn[i])tarjan(i); rep(i,1,n)if(bl[i]==bl[i+n])puts("Unsafe");else puts("Safe"); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>tarjan</category>
+      </categories>
+      <tags>
+        <tag>tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg2863[USACO06JAN]牛的舞会]]></title>
     <url>%2Flg2863-USACO06JAN-%E7%89%9B%E7%9A%84%E8%88%9E%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[链接:lg2863[USACO06JAN]牛的舞会 题解tarjan模板 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a;nxt=b;&#125;&#125;e[N];int dfn[N],low[N],in[N],ans,cnt,head[N],n,m,stck[N],indx;inline void adde(int a,int b)&#123; e[cnt].init(b,head[a]); head[a]=cnt++;&#125;void tarjan(int u)&#123; in[u]=1; low[u]=dfn[u]=++cnt; stck[++indx]=u; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123;tarjan(v); low[u]=min(low[u],low[v]);&#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(low[u]==dfn[u])&#123; int k=0; do&#123; --indx; k++; &#125;while(stck[indx+1]!=u); if(k&gt;1)ans++; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); memset(head,-1,sizeof(head)); rep(i,1,m)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); adde(x,y); //adde(y,x); &#125; cnt=0; rep(i,1,n)&#123; if(!dfn[i])tarjan(i); &#125; printf("%d\n",ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[链接:lg2863[USACO06JAN]牛的舞会 题解tarjan模板 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5;struct node&#123; int v,nxt; inline void init(int a,int b)&#123;v=a;nxt=b;&#125;&#125;e[N];int dfn[N],low[N],in[N],ans,cnt,head[N],n,m,stck[N],indx;inline void adde(int a,int b)&#123; e[cnt].init(b,head[a]); head[a]=cnt++;&#125;void tarjan(int u)&#123; in[u]=1; low[u]=dfn[u]=++cnt; stck[++indx]=u; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123;tarjan(v); low[u]=min(low[u],low[v]);&#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(low[u]==dfn[u])&#123; int k=0; do&#123; in[indx]=0; --indx; k++; &#125;while(stck[indx+1]!=u); if(k&gt;1)ans++; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); memset(head,-1,sizeof(head)); rep(i,1,m)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); adde(x,y); //adde(y,x); &#125; cnt=0; rep(i,1,n)&#123; if(!dfn[i])tarjan(i); &#125; printf("%d\n",ans); return 0;&#125;]]></content>
       <categories>
         <category>算法</category>
         <category>图论</category>

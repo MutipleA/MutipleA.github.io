@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lgP2862[USACO06JAN]]]></title>
+    <url>%2FlgP2862-USACO06JAN%2F</url>
+    <content type="text"><![CDATA[链接:lgP2862[USACO06JAN] 题解 500的N，直接枚举左上角和长，时间复杂度$O(N^3)$，可以过，但是很显然长度是可以二分处理的于是复杂度为$O(N^2log_2N)$ 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3;struct node&#123; int x,y;&#125;a[N];int n,m,t[N],l,r=1000000;inline int cmp(node x,node y)&#123;return x.x&lt;y.x;&#125;int ok(int l,int r,int L)&#123; if(r-l+1&lt;m)return 0; int tp=0; rep(i,l,r)t[++tp]=a[i].y; sort(t+1,t+tp+1); rep(i,m,tp)if(t[i]-t[i-m+1]&lt;=L)return 1; return 0;&#125;int judge(int L)&#123; int tp=1; rep(i,1,n)&#123; if(a[i].x-a[tp].x&gt;L&amp;&amp;ok(tp,i-1,L))return 1; while(a[i].x-a[tp].x&gt;L)tp++; &#125; return ok(tp,n,L);&#125;int main()&#123; scanf("%d%d",&amp;m,&amp;n); rep(i,1,n)scanf("%d%d",&amp;a[i].x,&amp;a[i].y); sort(a+1,a+n+1,cmp); while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; if(judge(mid))r=mid; else l=mid+1; &#125; printf("%d",l+1); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>二分</category>
+      </categories>
+      <tags>
+        <tag>二分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lgP2746[USACO5.3]校园网]]></title>
     <url>%2FlgP2746-USACO5-3-%E6%A0%A1%E5%9B%AD%E7%BD%91%2F</url>
     <content type="text"><![CDATA[链接:lgP2746[USACO5.3]校园网 题解 显然分发学校向接受学校连一条边，然后缩点。 子任务A显然就是入度为零的缩点个数 子任务B则是入度为零和出度为零的缩点个数的最大值 有一个坑点，只有一个强连通分量的情况12345678910111213141516171819202122232425262728293031323334353637383940414243444546 #include&lt;iostream&gt; #include&lt;cstdio&gt; #include&lt;cstdlib&gt; #include&lt;cmath&gt; #include&lt;cstring&gt; #include&lt;algorithm&gt; #define rep(i,x,y) for(register int i=x;i&lt;=y;++i) #define repd(i,x,y) for(register int i=x;i&gt;=y;--i) #define ll long long using namespace std; const int N=1e5; struct node&#123; int v,nxt; inline void init(int x,int y)&#123;v=x; nxt=y;&#125; &#125;e[N]; int head[N],dfn[N],low[N],cnt,bl[N],du[N][2],n,m,in[N],stck[N],idx,tot,x,ans,res[2]; inline void adde(int x,int y)&#123;e[cnt].init(y,head[x]);head[x]=cnt++;&#125; void tarjan(int u)&#123; in[u]=1; stck[++idx]=u; dfn[u]=low[u]=++tot; for(int i=head[u],v;i!=-1;i=e[i].nxt)&#123; if(!dfn[v=e[i].v])&#123;tarjan(v); low[u]=min(low[u],low[v]);&#125; else if(in[v])low[u]=min(low[u],dfn[v]); &#125; if(dfn[u]==low[u])&#123; cnt++; do&#123;in[stck[idx]]=0; bl[stck[idx--]]=cnt;&#125;while(u!=stck[idx+1]); &#125; &#125; int main()&#123; memset(head,-1,sizeof(head)); scanf("%d",&amp;n); rep(i,1,n)while(~scanf("%d",&amp;x)&amp;&amp;x)&#123; adde(i,x); &#125;cnt=0; rep(i,1,n)if(!dfn[i])tarjan(i); rep(u,1,n)for(int i=head[u],v;i!=-1;i=e[i].nxt)if(bl[v=e[i].v]!=bl[u])&#123; du[bl[u]][0]++; du[bl[v]][1]++; &#125; rep(i,1,cnt)&#123;ans+=(du[i][1]==0); res[0]+=(du[i][0]==0);res[1]+=(du[i][1]==0);&#125; printf("%d\n%d",ans,cnt!=1?max(res[0],res[1]):0); return 0;&#125;]]></content>

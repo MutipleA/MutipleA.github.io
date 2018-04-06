@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj3026]]></title>
+    <url>%2Fpoj3026%2F</url>
+    <content type="text"><![CDATA[链接:poj3026 题解 这题很有意思,不用管A,S,当成一样的就好,跑一遍bfs跑出所有A的相关信息,然后套模板,然而我疯狂WA,原因是输入有坑,巨坑,详情看代 码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;typedef pair&lt;int,int&gt; s;int T,n,m,dis[N][N],d[N][N],cnt,t[N][N],vis[N],ds[N];int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;char g[107][107];queue&lt;s&gt; q;void bfs(int a,int b)&#123; while(!q.empty())q.pop(); memset(t,-1,sizeof(t)); q.push(s(a,b)); t[a][b]=0; while(!q.empty())&#123; int x=q.front().first; int y=q.front().second; if(d[x][y])dis[d[a][b]][d[x][y]]=t[x][y]; q.pop(); rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||g[nx][ny]=='#'||t[nx][ny]!=-1)continue; t[nx][ny]=t[x][y]+1; q.push(s(nx,ny)); &#125; &#125;&#125;int prim(int n)&#123; int ans=0; memset(ds,0,sizeof(ds)); memset(vis,0,sizeof(vis)); vis[1]=1; rep(i,1,n)ds[i]=dis[1][i]; rep(i,2,n)&#123; int minm=inf,p; rep(j,1,n)if(!vis[j]&amp;&amp;ds[j]&lt;minm)minm=ds[j],p=j; if(minm==inf)return -1; ans+=minm; vis[p]=1; rep(j,1,n)if(!vis[j]&amp;&amp;ds[j]&gt;dis[p][j])ds[j]=dis[p][j]; &#125; return ans;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; char c; cnt=0; scanf("%d%d",&amp;m,&amp;n); memset(d,0,sizeof(d)); do&#123; //坑点 c=getchar(); &#125;while(c!='\n'); rep(i,1,n)&#123; gets(g[i]+1); rep(j,1,m)if(g[i][j]=='S'||g[i][j]=='A')d[i][j]=++cnt; &#125; rep(i,1,n)rep(j,1,m)if(d[i][j])bfs(i,j); printf("%d\n",prim(cnt)); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>图论</category>
+        <category>最小生成树</category>
+      </categories>
+      <tags>
+        <tag>最小生成树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lgP2862[USACO06JAN]]]></title>
     <url>%2FlgP2862-USACO06JAN%2F</url>
     <content type="text"><![CDATA[链接:lgP2862[USACO06JAN] 题解 500的N，直接枚举左上角和长，时间复杂度$O(N^3)$，可以过，但是很显然长度是可以二分处理的于是复杂度为$O(N^2log_2N)$ 注意题目描述，最后答案要+1，并且判断的时候也有坑。wa了一下午，不知道哪里写挂了，一下午都没找出来，最后重写一遍AC。。。12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3;struct node&#123; int x,y;&#125;a[N];int n,m,t[N],l,r=1000000;inline int cmp(node x,node y)&#123;return x.x&lt;y.x;&#125;int ok(int l,int r,int L)&#123; if(r-l+1&lt;m)return 0; int tp=0; rep(i,l,r)t[++tp]=a[i].y; sort(t+1,t+tp+1); rep(i,m,tp)if(t[i]-t[i-m+1]&lt;=L)return 1; return 0;&#125;int judge(int L)&#123; int tp=1; rep(i,1,n)&#123; if(a[i].x-a[tp].x&gt;L&amp;&amp;ok(tp,i-1,L))return 1; while(a[i].x-a[tp].x&gt;L)tp++; &#125; return ok(tp,n,L);&#125;int main()&#123; scanf("%d%d",&amp;m,&amp;n); rep(i,1,n)scanf("%d%d",&amp;a[i].x,&amp;a[i].y); sort(a+1,a+n+1,cmp); while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; if(judge(mid))r=mid; else l=mid+1; &#125; printf("%d",l+1); return 0;&#125;]]></content>

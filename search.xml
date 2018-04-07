@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj3264]]></title>
+    <url>%2Fpoj3264%2F</url>
+    <content type="text"><![CDATA[链接:poj3264 题解 区间最值,先上线段树做法123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define lson o&lt;&lt;1,l,mid#define rson o&lt;&lt;1|1,mid+1,r#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)using namespace std;typedef pair&lt;int,int&gt; s;const int N=1e6;s rt[N&lt;&lt;2];int n,m,a[N];inline void build(int o,int l,int r)&#123; if(l==r)&#123;rt[o]=s(a[l],a[l]);return ;&#125; int mid=l+r&gt;&gt;1; build(lson); build(rson); rt[o]=s(max(rt[o&lt;&lt;1].first,rt[o&lt;&lt;1|1].first),min(rt[o&lt;&lt;1].second,rt[o&lt;&lt;1|1].second));&#125;inline int query(int o,int l,int r,int ll,int rr,int op)&#123; if(l==ll&amp;&amp;r==rr)return op?rt[o].first:rt[o].second; int mid=l+r&gt;&gt;1; if(rr&lt;=mid)return query(lson,ll,rr,op); else if(ll&gt;mid) return query(rson,ll,rr,op); else &#123; int x=query(lson,ll,mid,op); int y=query(rson,mid+1,rr,op); return op?max(x,y):min(x,y); &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)scanf("%d",&amp;a[i]); build(1,1,n); rep(i,1,m)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); int ans=query(1,1,n,x,y,1); ans-=query(1,1,n,x,y,0); printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>RMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[zoj1610]]></title>
+    <url>%2Fzoj1610%2F</url>
+    <content type="text"><![CDATA[链接:zoj1610 题解 和poj2528差不多,但是不需要离散化. 注意,这里染的不是点是区间,比如0 1 1, 1 2 1这组数据输出应该是1 2,解决方法是所有左标+1 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)using namespace std;const int N=1e5;const int M=8000;int rt[N&lt;&lt;2],num[N],n,m,nc;inline void pushdown(int o)&#123;rt[o&lt;&lt;1]=rt[o&lt;&lt;1|1]=rt[o];rt[o]=-1;&#125;void update(int o,int l,int r,int ll,int rr,int c)&#123; if(ll&lt;=l&amp;&amp;rr&gt;=r)&#123;rt[o]=c;return ;&#125; if(rt[o]!=-1)pushdown(o); int mid=l+r&gt;&gt;1; if(ll&lt;=mid)update(o&lt;&lt;1,l,mid,ll,rr,c); if(rr&gt;mid)update(o&lt;&lt;1|1,mid+1,r,ll,rr,c);&#125;void query(int o,int l,int r)&#123; if(l==r)&#123;if(rt[o]&gt;=0&amp;&amp;rt[o]!=nc)num[rt[o]]++;nc=rt[o];return ;&#125; if(rt[o]!=-1)pushdown(o); int mid=l+r&gt;&gt;1; query(o&lt;&lt;1,l,mid); query(o&lt;&lt;1|1,mid+1,r);&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; nc=-1; memset(rt,-1,sizeof(rt)); memset(num,0,sizeof(num)); rep(i,1,n)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); update(1,1,M,a+1,b,c); &#125; query(1,1,M); rep(i,0,M)if(num[i])printf("%d %d\n",i,num[i]); printf("\n"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu1698]]></title>
+    <url>%2Fhdu1698%2F</url>
+    <content type="text"><![CDATA[链接:hdu1698 题解 区间修改线段树模板题,注意输出格式 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&lt;=y;++i)using namespace std;const int N=1e6;int tr[N&lt;&lt;2],lz[N&lt;&lt;2],n,m,T;inline void pushdown(int o,int l,int r)&#123; if(l==r)&#123;tr[o]=lz[o];&#125; lz[o&lt;&lt;1|1]=lz[o&lt;&lt;1]=lz[o]; int mid=l+r&gt;&gt;1; tr[o&lt;&lt;1]=lz[o]*(mid-l+1); tr[o&lt;&lt;1|1]=lz[o]*(r-mid); lz[o]=0;&#125;void build(int o,int l,int r)&#123; if(l==r)&#123;tr[o]=1;return ;&#125; int mid=l+r&gt;&gt;1; build(o&lt;&lt;1,l,mid); build(o&lt;&lt;1|1,mid+1,r); tr[o]=tr[o&lt;&lt;1]+tr[o&lt;&lt;1|1];&#125;void update(int o,int l,int r,int ll,int rr,int c)&#123; if(ll&lt;=l&amp;&amp;rr&gt;=r)&#123;lz[o]=c,tr[o]=c*(r-l+1);return ;&#125; if(lz[o])pushdown(o,l,r); int mid=l+r&gt;&gt;1; if(ll&lt;=mid)update(o&lt;&lt;1,l,mid,ll,rr,c); if(rr&gt;mid)update(o&lt;&lt;1|1,mid+1,r,ll,rr,c); tr[o]=tr[o&lt;&lt;1]+tr[o&lt;&lt;1|1];&#125;int main()&#123; scanf("%d",&amp;T); rep(k,1,T)&#123; memset(lz,0,sizeof(lz)); scanf("%d%d",&amp;n,&amp;m); build(1,1,n); rep(i,1,m)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); update(1,1,n,a,b,c); &#125; printf("Case %d: The total value of the hook is %d.\n",k,tr[1]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj2528]]></title>
+    <url>%2Fpoj2528%2F</url>
+    <content type="text"><![CDATA[链接:poj2528 题解 线段树+离散化,注意离散化的时候在相邻距离大于1的点之间要插入一个点,避免覆盖问题,比如1-10 1-4 6-10 如果不加点,答案是2, 显然不正确12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)using namespace std;const int N=1e6;int hash[N],rt[N&lt;&lt;2],x[N],y[N],a[N],n,nn,m,T,ans;void pushdown(int o)&#123;rt[o&lt;&lt;1]=rt[o&lt;&lt;1|1]=rt[o];rt[o]=-1;&#125;void update(int o,int l,int r,int ll,int rr,int c)&#123; if(ll&lt;=l&amp;&amp;rr&gt;=r)&#123;rt[o]=c;return ;&#125; if(rt[o]!=-1)pushdown(o); int mid=l+r&gt;&gt;1; if(ll&lt;=mid)update(o&lt;&lt;1,l,mid,ll,rr,c); if(rr&gt;mid)update(o&lt;&lt;1|1,mid+1,r,ll,rr,c);&#125;void query(int o,int l,int r)&#123; if(l==r)&#123;if(rt[o]!=-1&amp;&amp;!hash[rt[o]])ans++,hash[rt[o]]=1;return ;&#125; if(rt[o]!=-1)pushdown(o); int mid=l+r&gt;&gt;1; query(o&lt;&lt;1,l,mid); query(o&lt;&lt;1|1,mid+1,r);&#125;int ask(int c)&#123; int l=1,r=m; while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; if(a[mid]==c)return mid; if(a[mid]&lt;c)l=mid+1; else r=mid-1; &#125; return l;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; m=1;ans=nn=0; memset(hash,0,sizeof(hash)); memset(rt,-1,sizeof(rt)); scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%d%d",&amp;x[i],&amp;y[i]);a[++nn]=x[i];a[++nn]=y[i];&#125; sort(a,a+nn); rep(i,2,nn-1)if(a[i]!=a[i-1])a[++m]=a[i]; repd(i,m,1)if(a[i]-a[i-1]&gt;1)a[++m]=a[i]-1; sort(a+1,a+m+1); rep(i,1,n)&#123; int l=ask(x[i]); int r=ask(y[i]); update(1,1,m,l,r,i); &#125; query(1,1,m); printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj3026]]></title>
     <url>%2Fpoj3026%2F</url>
     <content type="text"><![CDATA[链接:poj3026 题解 这题很有意思,不用管A,S,当成一样的就好,跑一遍bfs跑出所有A的相关信息,然后套模板,然而我疯狂WA,原因是输入有坑,巨坑,详情看代 码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;typedef pair&lt;int,int&gt; s;int T,n,m,dis[N][N],d[N][N],cnt,t[N][N],vis[N],ds[N];int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;char g[107][107];queue&lt;s&gt; q;void bfs(int a,int b)&#123; while(!q.empty())q.pop(); memset(t,-1,sizeof(t)); q.push(s(a,b)); t[a][b]=0; while(!q.empty())&#123; int x=q.front().first; int y=q.front().second; if(d[x][y])dis[d[a][b]][d[x][y]]=t[x][y]; q.pop(); rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||g[nx][ny]=='#'||t[nx][ny]!=-1)continue; t[nx][ny]=t[x][y]+1; q.push(s(nx,ny)); &#125; &#125;&#125;int prim(int n)&#123; int ans=0; memset(ds,0,sizeof(ds)); memset(vis,0,sizeof(vis)); vis[1]=1; rep(i,1,n)ds[i]=dis[1][i]; rep(i,2,n)&#123; int minm=inf,p; rep(j,1,n)if(!vis[j]&amp;&amp;ds[j]&lt;minm)minm=ds[j],p=j; if(minm==inf)return -1; ans+=minm; vis[p]=1; rep(j,1,n)if(!vis[j]&amp;&amp;ds[j]&gt;dis[p][j])ds[j]=dis[p][j]; &#125; return ans;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; char c; cnt=0; scanf("%d%d",&amp;m,&amp;n); memset(d,0,sizeof(d)); do&#123; //坑点 c=getchar(); &#125;while(c!='\n'); rep(i,1,n)&#123; gets(g[i]+1); rep(j,1,m)if(g[i][j]=='S'||g[i][j]=='A')d[i][j]=++cnt; &#125; rep(i,1,n)rep(j,1,m)if(d[i][j])bfs(i,j); printf("%d\n",prim(cnt)); &#125; return 0;&#125;]]></content>

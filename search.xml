@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu1540]]></title>
+    <url>%2Fhdu1540%2F</url>
+    <content type="text"><![CDATA[链接:hdu1540 题解 线段树维护连续区间,状态维护有点麻烦。。。 有个巨坑。。。多组输入。。。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define lson o&lt;&lt;1,l,mid#define rson o&lt;&lt;1|1,mid+1,rusing namespace std;const int N=1e5;int llen[N&lt;&lt;2],rlen[N&lt;&lt;2],mlen[N&lt;&lt;2],d[N];int n,m,t,cnt;char c;inline void pushup(int o,int l,int r)&#123; int mid=l+r&gt;&gt;1; llen[o]=llen[o&lt;&lt;1]; rlen[o]=rlen[o&lt;&lt;1|1]; mlen[o]=max(max(mlen[o&lt;&lt;1],mlen[o&lt;&lt;1|1]),rlen[o&lt;&lt;1]+llen[o&lt;&lt;1|1]); if(llen[o&lt;&lt;1]==mid-l+1)llen[o]+=llen[o&lt;&lt;1|1]; if(rlen[o&lt;&lt;1|1]==r-mid)rlen[o]+=rlen[o&lt;&lt;1];&#125;inline void build(int o,int l,int r)&#123; llen[o]=rlen[o]=mlen[o]=r-l+1; if(l==r)return; int mid=l+r&gt;&gt;1; build(lson); build(rson);&#125;inline void update(int o,int l,int r,int x,int c)&#123; if(l==r)&#123;llen[o]=rlen[o]=mlen[o]=c;return ;&#125; int mid=l+r&gt;&gt;1; if(x&lt;=mid)update(lson,x,c); else update(rson,x,c); pushup(o,l,r);&#125;inline int query(int o,int l,int r,int x)&#123; if(l==r||!mlen[o]||mlen[o]==r-l+1)return mlen[o]; int mid=l+r&gt;&gt;1; if(x&lt;=mid)&#123; if(x&gt;mid-rlen[o&lt;&lt;1])return query(lson,x)+query(rson,mid+1); else return query(lson,x); &#125; else &#123; if(x&lt;=mid+llen[o&lt;&lt;1|1])return query(lson,mid)+query(rson,x); else return query(rson,x); &#125;&#125;int main()&#123; ios::sync_with_stdio(false); while(cin&gt;&gt;n&gt;&gt;m)&#123; build(1,1,n); while(m--)&#123; cin&gt;&gt;c; if(c=='D')&#123;cin&gt;&gt;t;d[++cnt]=t;update(1,1,n,t,0);&#125; else if(c=='Q')&#123;cin&gt;&gt;t;cout&lt;&lt;query(1,1,n,t)&lt;&lt;endl;&#125; else &#123;update(1,1,n,d[cnt--],1);&#125; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu4027]]></title>
+    <url>%2Fhdu4027%2F</url>
+    <content type="text"><![CDATA[链接:hdu4027 题解 注意区间里如果都是1就不用更新了,然后坑点是输入会有l&gt;r的情况。。。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define lson o&lt;&lt;1,l,mid#define rson o&lt;&lt;1|1,mid+1,r#define LL long longusing namespace std;const int N=1e6;LL rt[N&lt;&lt;2];int n,m,cnt;inline void pushup(int o)&#123;rt[o]=rt[o&lt;&lt;1]+rt[o&lt;&lt;1|1];&#125;inline void build(int o,int l,int r)&#123; if(l==r)&#123;scanf("%lld",&amp;rt[o]);return ;&#125; int mid=l+r&gt;&gt;1; build(lson); build(rson); pushup(o);&#125;inline void update(int o,int l,int r,int ll,int rr)&#123; if(l==r)&#123;rt[o]=sqrt(rt[o]);return ;&#125; if(rt[o]==r-l+1)return ; int mid=l+r&gt;&gt;1; if(ll&lt;=mid)update(lson,ll,rr); if(rr&gt;mid)update(rson,ll,rr); pushup(o);&#125;inline LL query(int o,int l,int r,int ll,int rr)&#123; if(ll&lt;=l&amp;&amp;rr&gt;=r)return rt[o]; int mid=l+r&gt;&gt;1; LL ans=0; if(ll&lt;=mid)ans+=query(lson,ll,rr); if(rr&gt;mid)ans+=query(rson,ll,rr); return ans;&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; printf("Case #%d:\n",++cnt); build(1,1,n); scanf("%d",&amp;m); while(m--)&#123; int op,x,y; scanf("%d%d%d",&amp;op,&amp;x,&amp;y); if(x&gt;y)swap(x,y); if(op)printf("%lld\n",query(1,1,n,x,y)); else update(1,1,n,x,y); &#125; printf("\n"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[RMQ]]></title>
     <url>%2FRMQ%2F</url>
     <content type="text"><![CDATA[RMQ算法 是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。 算法分析 这个算法其实就是dp+位运算,dp[i][j]表示$i到i+2^j-1$这个区间的最值, 因为状态定义的关系,我们可以很方便的把d[i][j]表示的区间划分为两部分, 分别为$i到i+2^j-1$以及$i+2^{j-1}-1$到$i+2^j-1$ 这两个部分,那么转移方程也就很容易出来了 dp[i][j]=max(dp[i][j-1],dp[i+(1&lt;&lt;j-1)][j-1]); 代码1234567891011121314151617void rmq()&#123; int end=log(n+0.0)/log(2.0); rep(i,1,n)mx[i][0]=mn[i][0]=a[i]; rep(j,1,end)&#123; int end_i=n-(1&lt;&lt;j)+1; rep(i,1,end_i)&#123; mx[i][j]=max(mx[i][j-1],mx[i+(1&lt;&lt;j-1)][j-1]); mn[i][j]=min(mn[i][j-1],mn[i+(1&lt;&lt;j-1)][j-1]); &#125; &#125;&#125;int ask(int l,int r)&#123; int k=log(r-l+1.0)/log(2.0); int ans1=max(mx[l][k],mx[r-(1&lt;&lt;k)+1][k]); int ans2=min(mn[l][k],mn[r-(1&lt;&lt;k)+1][k]); return ans1-ans2;&#125;]]></content>

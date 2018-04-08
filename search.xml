@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[RMQ]]></title>
     <url>%2FRMQ%2F</url>
-    <content type="text"><![CDATA[RMQ算法 是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法，当然这个问题用线段树同 样能够解决。 算法分析 这个算法其实就是dp+位运算,dp[i][j]表示$i到i+2^j-1$这个区间的最值, 因为状态定义的关系,我们可以很方便的把d[i][j]表示的区间划分为两部分, 分别为$i到i+2^j-1$以及$i+2^{j-1}-1$到$i+2^j-1$ 这两个部分,那么转移方程也就很容易出来了 dp[i][j]=max(dp[i][j-1],dp[i+(1&lt;&lt;j-1)][j-1]); 代码1234567891011121314151617void rmq()&#123; int end=log(n+0.0)/log(2.0); rep(i,1,n)mx[i][0]=mn[i][0]=a[i]; rep(j,1,end)&#123; int end_i=n-(1&lt;&lt;j)+1; rep(i,1,end_i)&#123; mx[i][j]=max(mx[i][j-1],mx[i+(1&lt;&lt;j-1)][j-1]); mn[i][j]=min(mn[i][j-1],mn[i+(1&lt;&lt;j-1)][j-1]); &#125; &#125;&#125;int ask(int l,int r)&#123; int k=log(r-l+1.0)/log(2.0); int ans1=max(mx[l][k],mx[r-(1&lt;&lt;k)+1][k]); int ans2=min(mn[l][k],mn[r-(1&lt;&lt;k)+1][k]); return ans1-ans2;&#125;]]></content>
+    <content type="text"><![CDATA[RMQ算法 是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。 算法分析 这个算法其实就是dp+位运算,dp[i][j]表示$i到i+2^j-1$这个区间的最值, 因为状态定义的关系,我们可以很方便的把d[i][j]表示的区间划分为两部分, 分别为$i到i+2^j-1$以及$i+2^{j-1}-1$到$i+2^j-1$ 这两个部分,那么转移方程也就很容易出来了 dp[i][j]=max(dp[i][j-1],dp[i+(1&lt;&lt;j-1)][j-1]); 代码1234567891011121314151617void rmq()&#123; int end=log(n+0.0)/log(2.0); rep(i,1,n)mx[i][0]=mn[i][0]=a[i]; rep(j,1,end)&#123; int end_i=n-(1&lt;&lt;j)+1; rep(i,1,end_i)&#123; mx[i][j]=max(mx[i][j-1],mx[i+(1&lt;&lt;j-1)][j-1]); mn[i][j]=min(mn[i][j-1],mn[i+(1&lt;&lt;j-1)][j-1]); &#125; &#125;&#125;int ask(int l,int r)&#123; int k=log(r-l+1.0)/log(2.0); int ans1=max(mx[l][k],mx[r-(1&lt;&lt;k)+1][k]); int ans2=min(mn[l][k],mn[r-(1&lt;&lt;k)+1][k]); return ans1-ans2;&#125;]]></content>
       <categories>
         <category>学习笔记</category>
         <category>dp</category>

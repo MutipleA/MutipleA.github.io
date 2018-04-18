@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="线段树," />
+  <meta name="keywords" content="树形dp," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:poj2528">
-<meta name="keywords" content="线段树">
+<meta name="description" content="链接1:选课[树形dp]链接2:选课[树形dp] 题解  乍一看是有依赖的背包问题,然而并不是。因为有依赖的背包问题没有间接依赖关系,然而这题有 正解是树形dp。 建图之后是一个森林? 人为加一个源点就OK 因为第二个链接中要求输出决策  我建图为二叉树,多跑一遍dfs记录决策多叉树1234567891011121314151617181920212223242526272829303132333">
+<meta name="keywords" content="树形dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="poj2528">
-<meta property="og:url" content="http://yoursite.com/poj2528/index.html">
+<meta property="og:title" content="选课[树形dp]">
+<meta property="og:url" content="http://yoursite.com/选课-树形dp/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:poj2528">
+<meta property="og:description" content="链接1:选课[树形dp]链接2:选课[树形dp] 题解  乍一看是有依赖的背包问题,然而并不是。因为有依赖的背包问题没有间接依赖关系,然而这题有 正解是树形dp。 建图之后是一个森林? 人为加一个源点就OK 因为第二个链接中要求输出决策  我建图为二叉树,多跑一遍dfs记录决策多叉树1234567891011121314151617181920212223242526272829303132333">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T12:02:05.436Z">
+<meta property="og:updated_time" content="2018-04-18T16:19:43.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="poj2528">
-<meta name="twitter:description" content="链接:poj2528">
+<meta name="twitter:title" content="选课[树形dp]">
+<meta name="twitter:description" content="链接1:选课[树形dp]链接2:选课[树形dp] 题解  乍一看是有依赖的背包问题,然而并不是。因为有依赖的背包问题没有间接依赖关系,然而这题有 正解是树形dp。 建图之后是一个森林? 人为加一个源点就OK 因为第二个链接中要求输出决策  我建图为二叉树,多跑一遍dfs记录决策多叉树1234567891011121314151617181920212223242526272829303132333">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/poj2528/"/>
+  <link rel="canonical" href="http://yoursite.com/选课-树形dp/"/>
 
 
 
 
 
-  <title>poj2528 | Angora's Blog</title>
+  <title>选课[树形dp] | Angora's Blog</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/poj2528/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/选课-树形dp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angora">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">poj2528</h1>
+          <h1 class="post-title" itemprop="name headline">选课[树形dp]</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T15:21:58+08:00">
-                2018-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-19T00:07:14+08:00">
+                2018-04-19
               </time>
             
 
@@ -350,19 +350,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/数据结构/线段树/" itemprop="url" rel="index">
-                    <span itemprop="name">线段树</span>
+                  <a href="/categories/算法/动态规划/" itemprop="url" rel="index">
+                    <span itemprop="name">动态规划</span>
                   </a>
                 </span>
 
@@ -403,14 +392,17 @@
       
 
       
-        <p>链接:<a href="http://poj.org/problem?id=2528" target="_blank" rel="noopener">poj2528</a><br><a id="more"></a></p>
+        <p>链接1:<a href="http://codevs.cn/problem/1378/" target="_blank" rel="noopener">选课[树形dp]</a><br>链接2:<a href="http://acm.swust.edu.cn/#/Problems/450/-1?_k=z7a7bp" target="_blank" rel="noopener">选课[树形dp]</a></p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
 <ul>
-<li>线段树+离散化,注意离散化的时候在相邻距离大于1的点之间要插入一个点,避免覆盖问题,比如1-10 1-4 6-10 如果不加点,答案</li>
-<li>是2,显然不正确</li>
+<li>乍一看是有依赖的背包问题,然而并不是。因为有依赖的背包问题没有间接依赖关系,然而这题有</li>
+<li>正解是树形dp。</li>
+<li>建图之后是一个森林? 人为加一个源点就OK</li>
+<li>因为第二个链接中要求输出决策  我建图为二叉树,多跑一遍dfs记录决策<h2 id="多叉树"><a href="#多叉树" class="headerlink" title="多叉树"></a>多叉树</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson o&lt;&lt;1,l,mid</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson o&lt;&lt;1|1,mid+1,r</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e3</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;edge[N];</span><br><span class="line"><span class="keyword">int</span> dp[N][N],pre[N],n,m,w[N],root;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	rep(i,<span class="number">1</span>,m)dp[u][i]=w[u];</span><br><span class="line">	<span class="keyword">int</span> len=edge[u].size()<span class="number">-1</span>;</span><br><span class="line">	rep(i,<span class="number">0</span>,len)&#123;</span><br><span class="line">		<span class="keyword">int</span> v=edge[u][i];</span><br><span class="line">		dfs(v);</span><br><span class="line">		repd(j,m,<span class="number">1</span>)rep(k,<span class="number">1</span>,(u==root?j:j<span class="number">-1</span>))dp[u][j]=max(dp[u][j],dp[u][j-k]+dp[v][k]);   </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;pre[i],&amp;w[i]);</span><br><span class="line">		<span class="keyword">if</span>(pre[i])edge[pre[i]].push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	root=<span class="number">0</span>;</span><br><span class="line">	rep(i,<span class="number">1</span>,n)<span class="keyword">if</span>(!pre[i])edge[root].push_back(i);</span><br><span class="line">	dfs(root);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[root][m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>;</span><br><span class="line"><span class="keyword">int</span> hash[N],rt[N&lt;&lt;<span class="number">2</span>],x[N],y[N],a[N],n,nn,m,T,ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> o)</span></span>&#123;rt[o&lt;&lt;<span class="number">1</span>]=rt[o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]=rt[o];rt[o]=<span class="number">-1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ll,<span class="keyword">int</span> rr,<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ll&lt;=l&amp;&amp;rr&gt;=r)&#123;rt[o]=c;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    <span class="keyword">if</span>(rt[o]!=<span class="number">-1</span>)pushdown(o);</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(ll&lt;=mid)update(o&lt;&lt;<span class="number">1</span>,l,mid,ll,rr,c);</span><br><span class="line">    <span class="keyword">if</span>(rr&gt;mid)update(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r,ll,rr,c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;<span class="keyword">if</span>(rt[o]!=<span class="number">-1</span>&amp;&amp;!hash[rt[o]])ans++,hash[rt[o]]=<span class="number">1</span>;<span class="keyword">return</span> ;&#125;</span><br><span class="line">    <span class="keyword">if</span>(rt[o]!=<span class="number">-1</span>)pushdown(o);</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    query(o&lt;&lt;<span class="number">1</span>,l,mid);</span><br><span class="line">    query(o&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,mid+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l=<span class="number">1</span>,r=m;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid]==c)<span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span>(a[mid]&lt;c)l=mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        m=<span class="number">1</span>;ans=nn=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(hash,<span class="number">0</span>,<span class="keyword">sizeof</span>(hash));</span><br><span class="line">        <span class="built_in">memset</span>(rt,<span class="number">-1</span>,<span class="keyword">sizeof</span>(rt));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x[i],&amp;y[i]);a[++nn]=x[i];a[++nn]=y[i];&#125;</span><br><span class="line">        sort(a,a+nn);</span><br><span class="line">        rep(i,<span class="number">2</span>,nn<span class="number">-1</span>)<span class="keyword">if</span>(a[i]!=a[i<span class="number">-1</span>])a[++m]=a[i];</span><br><span class="line">        repd(i,m,<span class="number">1</span>)<span class="keyword">if</span>(a[i]-a[i<span class="number">-1</span>]&gt;<span class="number">1</span>)a[++m]=a[i]<span class="number">-1</span>;</span><br><span class="line">        sort(a+<span class="number">1</span>,a+m+<span class="number">1</span>);</span><br><span class="line">        rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">            <span class="keyword">int</span> l=ask(x[i]);</span><br><span class="line">            <span class="keyword">int</span> r=ask(y[i]);</span><br><span class="line">            update(<span class="number">1</span>,<span class="number">1</span>,m,l,r,i);</span><br><span class="line">        &#125;</span><br><span class="line">        query(<span class="number">1</span>,<span class="number">1</span>,m);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e3</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N][N],lson[N],rson[N],w[N],n,m,ans[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maketree</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">		w[i]=b;</span><br><span class="line">		rson[i]=lson[a];</span><br><span class="line">		lson[a]=i;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(dp[x][y]||x==<span class="number">0</span>||y==<span class="number">0</span>)<span class="keyword">return</span> ;</span><br><span class="line">	dfs(rson[x],y);</span><br><span class="line">	rep(i,<span class="number">0</span>,y<span class="number">-1</span>)&#123;</span><br><span class="line">		dfs(rson[x],i);</span><br><span class="line">		dfs(lson[x],y-i<span class="number">-1</span>);</span><br><span class="line">		dp[x][y]=max(dp[x][y],max(dp[rson[x]][y],dp[rson[x]][i]+dp[lson[x]][y-i<span class="number">-1</span>]+w[x]));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">path</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>||y==<span class="number">0</span>)&#123;dp[x][y]=<span class="number">0</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">	dfs(rson[x],y);</span><br><span class="line">	rep(i,<span class="number">0</span>,y<span class="number">-1</span>)<span class="keyword">if</span>(dp[x][y]==dp[rson[x]][i]+dp[lson[x]][y-i<span class="number">-1</span>]+w[x])&#123;</span><br><span class="line">		path(rson[x],i);</span><br><span class="line">		path(lson[x],y-i<span class="number">-1</span>);</span><br><span class="line">		ans[x]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	maketree();</span><br><span class="line">	dfs(lson[<span class="number">0</span>],m);</span><br><span class="line">	path(lson[<span class="number">0</span>],m);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[lson[<span class="number">0</span>]][m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	rep(i,<span class="number">1</span>,n)<span class="keyword">if</span>(ans[i])<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -427,7 +419,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/线段树/" rel="tag"># 线段树</a>
+            <a href="/tags/树形dp/" rel="tag"># 树形dp</a>
           
         </div>
       
@@ -440,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/poj3026/" rel="next" title="poj3026">
-                <i class="fa fa-chevron-left"></i> poj3026
+              <a href="/hdu4578-多标记/" rel="next" title="hdu4578[多标记]">
+                <i class="fa fa-chevron-left"></i> hdu4578[多标记]
               </a>
             
           </div>
@@ -449,10 +441,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/hdu1698/" rel="prev" title="hdu1698">
-                hdu1698 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -619,7 +607,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多叉树"><span class="nav-number">1.1.</span> <span class="nav-text">多叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -4,6 +4,14 @@
     <title><![CDATA[hdu2665,poj2104,51nod1175]]></title>
     <url>%2Fhdu2665-poj2104-51nod1175%2F</url>
     <content type="text"><![CDATA[链接:51nod链接:poj链接:hdu 题解 主席树(划分树)入门主席树123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;typedef pair&lt;int,int&gt; q;int rt[N*20],root[N],rk[N],lson[N*20],rson[N*20],cnt=1,n,m,T;q nm[N];inline void update(int &amp;o,int l,int r,int num)&#123; rt[cnt]=rt[o];lson[cnt]=lson[o];rson[cnt++]=rson[o];o=cnt-1;rt[o]++; if(l==r)return ; int mid=l+r&gt;&gt;1; if(num&lt;=mid)update(lson[o],l,mid,num); else update(rson[o],mid+1,r,num);&#125;inline int query(int i,int j,int l,int r,int k)&#123; int t=rt[lson[j]]-rt[lson[i]]; if(l==r)return l; int mid=l+r&gt;&gt;1; if(k&lt;=t)return query(lson[i],lson[j],l,mid,k); else return query(rson[i],rson[j],mid+1,r,k-t);&#125;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)&#123; int x; scanf("%d",&amp;x); nm[i]=q(x,i); &#125; scanf("%d",&amp;m); sort(nm+1,nm+n+1); rep(i,1,n)rk[nm[i].second]=i; rep(i,1,n)&#123;root[i]=root[i-1];update(root[i],1,n,rk[i]);&#125; while(m--)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); a++;b++; c=b-a+2-c; printf("%d\n",nm[query(root[a-1],root[b],1,n,c)].first); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>主席树</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[选课[树形dp]]]></title>

@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[hdu2665,poj2104,51nod1175]]></title>
-    <url>%2Fhdu2665-poj2104-51nod1175%2F</url>
-    <content type="text"><![CDATA[链接:51nod链接:poj链接:hdu 题解 主席树(划分树)入门主席树123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;typedef pair&lt;int,int&gt; q;int rt[N*20],root[N],rk[N],lson[N*20],rson[N*20],cnt=1,n,m,T;q nm[N];inline void update(int &amp;o,int l,int r,int num)&#123; rt[cnt]=rt[o];lson[cnt]=lson[o];rson[cnt++]=rson[o];o=cnt-1;rt[o]++; if(l==r)return ; int mid=l+r&gt;&gt;1; if(num&lt;=mid)update(lson[o],l,mid,num); else update(rson[o],mid+1,r,num);&#125;inline int query(int i,int j,int l,int r,int k)&#123; int t=rt[lson[j]]-rt[lson[i]]; if(l==r)return l; int mid=l+r&gt;&gt;1; if(k&lt;=t)return query(lson[i],lson[j],l,mid,k); else return query(rson[i],rson[j],mid+1,r,k-t);&#125;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)&#123; int x; scanf("%d",&amp;x); nm[i]=q(x,i); &#125; scanf("%d",&amp;m); sort(nm+1,nm+n+1); rep(i,1,n)rk[nm[i].second]=i; rep(i,1,n)&#123;root[i]=root[i-1];update(root[i],1,n,rk[i]);&#125; while(m--)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); a++;b++; c=b-a+2-c; printf("%d\n",nm[query(root[a-1],root[b],1,n,c)].first); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[lg3919【板子】]]></title>
+    <url>%2Flg3919%E3%80%90%E6%9D%BF%E5%AD%90%E3%80%91%2F</url>
+    <content type="text"><![CDATA[链接:lg3919【板子】 题解 主席树板子 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int rt[N&lt;&lt;5],lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N];int n,m,cnt;inline void build(int &amp;o,int l,int r)&#123; o=++cnt; if(l==r)&#123;scanf("%d",&amp;rt[o]);return ;&#125; int mid=l+r&gt;&gt;1; build(lson[o],l,mid); build(rson[o],mid+1,r);&#125;inline void update(int pre,int &amp;o,int l,int r,int k,int x)&#123; o=++cnt;rt[o]=rt[pre];lson[o]=lson[pre];rson[o]=rson[pre]; if(l==r)&#123;rt[o]=x;return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[pre],lson[o],l,mid,k,x); else update(rson[pre],rson[o],mid+1,r,k,x);&#125;inline int query(int o,int l,int r,int k)&#123; if(l==r)return rt[o]; int mid=l+r&gt;&gt;1; if(k&lt;=mid)return query(lson[o],l,mid,k); return query(rson[o],mid+1,r,k);&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); build(root[0],1,n); rep(i,1,m)&#123; int pre,op,k,x; scanf("%d%d%d",&amp;pre,&amp;op,&amp;k); if(op==1)&#123;scanf("%d",&amp;x);update(root[pre],root[i],1,n,k,x);&#125; else &#123;printf("%d\n",query(root[pre],1,n,k));root[i]=root[pre];&#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>算法</category>
         <category>数据结构</category>
         <category>线段树</category>
       </categories>
       <tags>
+        <tag>线段树</tag>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu2665,poj2104,51nod1175]]></title>
+    <url>%2Fhdu2665-poj2104-51nod1175%2F</url>
+    <content type="text"><![CDATA[链接:51nod链接:poj链接:hdu链接:luogu 题解 主席树(划分树)入门主席树123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;typedef pair&lt;int,int&gt; q;int rt[N*20],root[N],rk[N],lson[N*20],rson[N*20],cnt=1,n,m,T;q nm[N];inline void update(int &amp;o,int l,int r,int num)&#123; rt[cnt]=rt[o];lson[cnt]=lson[o];rson[cnt++]=rson[o];o=cnt-1;rt[o]++; if(l==r)return ; int mid=l+r&gt;&gt;1; if(num&lt;=mid)update(lson[o],l,mid,num); else update(rson[o],mid+1,r,num);&#125;inline int query(int i,int j,int l,int r,int k)&#123; int t=rt[lson[j]]-rt[lson[i]]; if(l==r)return l; int mid=l+r&gt;&gt;1; if(k&lt;=t)return query(lson[i],lson[j],l,mid,k); else return query(rson[i],rson[j],mid+1,r,k-t);&#125;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)&#123; int x; scanf("%d",&amp;x); nm[i]=q(x,i); &#125; scanf("%d",&amp;m); sort(nm+1,nm+n+1); rep(i,1,n)rk[nm[i].second]=i; rep(i,1,n)&#123;root[i]=root[i-1];update(root[i],1,n,rk[i]);&#125; while(m--)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); a++;b++; c=b-a+2-c; printf("%d\n",nm[query(root[a-1],root[b],1,n,c)].first); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
         <tag>主席树</tag>
       </tags>
   </entry>

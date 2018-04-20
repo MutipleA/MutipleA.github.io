@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="主席树," />
+  <meta name="keywords" content="线段树,主席树," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="链接:51nod链接:poj链接:hdu">
-<meta name="keywords" content="主席树">
+<meta name="description" content="链接:51nod链接:poj链接:hdu链接:luogu">
+<meta name="keywords" content="线段树,主席树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hdu2665,poj2104,51nod1175">
 <meta property="og:url" content="http://yoursite.com/hdu2665-poj2104-51nod1175/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="链接:51nod链接:poj链接:hdu">
+<meta property="og:description" content="链接:51nod链接:poj链接:hdu链接:luogu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-20T08:40:10.286Z">
+<meta property="og:updated_time" content="2018-04-20T10:10:43.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hdu2665,poj2104,51nod1175">
-<meta name="twitter:description" content="链接:51nod链接:poj链接:hdu">
+<meta name="twitter:description" content="链接:51nod链接:poj链接:hdu链接:luogu">
 
 
 
@@ -403,7 +403,7 @@
       
 
       
-        <p>链接:<a href="http://www.51nod.com/onlineJudge/questionCode.html#problemId=1175&noticeId=436385" target="_blank" rel="noopener">51nod</a><br>链接:<a href="http://poj.org/problem?id=1182" target="_blank" rel="noopener">poj</a><br>链接:<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2665" target="_blank" rel="noopener">hdu</a><br><a id="more"></a></p>
+        <p>链接:<a href="http://www.51nod.com/onlineJudge/questionCode.html#problemId=1175&noticeId=436385" target="_blank" rel="noopener">51nod</a><br>链接:<a href="http://poj.org/problem?id=1182" target="_blank" rel="noopener">poj</a><br>链接:<a href="http://acm.hdu.edu.cn/showproblem.php?pid=2665" target="_blank" rel="noopener">hdu</a><br>链接:<a href="https://www.luogu.org/problemnew/show/P3834" target="_blank" rel="noopener">luogu</a><br><a id="more"></a></p>
 <h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
 <ul>
 <li>主席树(划分树)入门<h2 id="主席树"><a href="#主席树" class="headerlink" title="主席树"></a>主席树</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="keyword">int</span> rt[N*<span class="number">20</span>],root[N],rk[N],lson[N*<span class="number">20</span>],rson[N*<span class="number">20</span>],cnt=<span class="number">1</span>,n,m,T;</span><br><span class="line">q nm[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> &amp;o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">    rt[cnt]=rt[o];lson[cnt]=lson[o];rson[cnt++]=rson[o];o=cnt<span class="number">-1</span>;rt[o]++;</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(num&lt;=mid)update(lson[o],l,mid,num);</span><br><span class="line">    <span class="keyword">else</span> update(rson[o],mid+<span class="number">1</span>,r,num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=rt[lson[j]]-rt[lson[i]];</span><br><span class="line">    <span class="keyword">if</span>(l==r)<span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(k&lt;=t)<span class="keyword">return</span> query(lson[i],lson[j],l,mid,k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(rson[i],rson[j],mid+<span class="number">1</span>,r,k-t);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">        nm[i]=q(x,i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">    sort(nm+<span class="number">1</span>,nm+n+<span class="number">1</span>);</span><br><span class="line">    rep(i,<span class="number">1</span>,n)rk[nm[i].second]=i;</span><br><span class="line">    rep(i,<span class="number">1</span>,n)&#123;root[i]=root[i<span class="number">-1</span>];update(root[i],<span class="number">1</span>,n,rk[i]);&#125;</span><br><span class="line">    <span class="keyword">while</span>(m--)&#123;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">        a++;b++;</span><br><span class="line">        c=b-a+<span class="number">2</span>-c;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,nm[query(root[a<span class="number">-1</span>],root[b],<span class="number">1</span>,n,c)].first);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
@@ -425,6 +425,8 @@
     <footer class="post-footer">
       
         <div class="post-tags">
+          
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
           
             <a href="/tags/主席树/" rel="tag"># 主席树</a>
           
@@ -448,6 +450,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lg3919【板子】/" rel="prev" title="lg3919【板子】">
+                lg3919【板子】 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -533,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

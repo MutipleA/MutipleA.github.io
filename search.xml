@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg1383]]></title>
+    <url>%2Flg1383%2F</url>
+    <content type="text"><![CDATA[链接:lg1383 题解 主席树水题 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int M=1e5;char rt[N&lt;&lt;5];int lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N],cnt,now,len[N],n;inline void update(int pre,int &amp;o,int l,int r,int k,char x)&#123; o=++cnt; lson[o]=lson[pre];rson[o]=rson[pre]; if(l==r)&#123;rt[o]=x; return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[pre],lson[o],l,mid,k,x); else update(rson[pre],rson[o],mid+1,r,k,x);&#125;inline void query(int o,int l,int r,int k)&#123; if(l==r)&#123;cout&lt;&lt;rt[o]&lt;&lt;endl;return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)return query(lson[o],l,mid,k); return query(rson[o],mid+1,r,k);&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n; while(n--)&#123; char op,c;int x; cin&gt;&gt;op; if(op=='T')&#123;cin&gt;&gt;c; root[++now]=root[now-1]; len[now]=len[now-1]+1; update(root[now-1],root[now],1,M,len[now],c); &#125; else if(op=='U')&#123;cin&gt;&gt;x;root[++now]=root[now-x-1];len[now]=len[now-x-1];&#125; else &#123;cin&gt;&gt;x;query(root[now],1,M,x);&#125; &#125; return 0; &#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg3919【板子】]]></title>
     <url>%2Flg3919%E3%80%90%E6%9D%BF%E5%AD%90%E3%80%91%2F</url>
     <content type="text"><![CDATA[链接:lg3919【板子】 题解 主席树板子 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int rt[N&lt;&lt;5],lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N];int n,m,cnt;inline void build(int &amp;o,int l,int r)&#123; o=++cnt; if(l==r)&#123;scanf("%d",&amp;rt[o]);return ;&#125; int mid=l+r&gt;&gt;1; build(lson[o],l,mid); build(rson[o],mid+1,r);&#125;inline void update(int pre,int &amp;o,int l,int r,int k,int x)&#123; o=++cnt;rt[o]=rt[pre];lson[o]=lson[pre];rson[o]=rson[pre]; if(l==r)&#123;rt[o]=x;return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[pre],lson[o],l,mid,k,x); else update(rson[pre],rson[o],mid+1,r,k,x);&#125;inline int query(int o,int l,int r,int k)&#123; if(l==r)return rt[o]; int mid=l+r&gt;&gt;1; if(k&lt;=mid)return query(lson[o],l,mid,k); return query(rson[o],mid+1,r,k);&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); build(root[0],1,n); rep(i,1,m)&#123; int pre,op,k,x; scanf("%d%d%d",&amp;pre,&amp;op,&amp;k); if(op==1)&#123;scanf("%d",&amp;x);update(root[pre],root[i],1,n,k,x);&#125; else &#123;printf("%d\n",query(root[pre],1,n,k));root[i]=root[pre];&#125; &#125; return 0;&#125;]]></content>

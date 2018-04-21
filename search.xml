@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3168[求区间前k小的和]]]></title>
+    <url>%2Flg3168-%E6%B1%82%E5%8C%BA%E9%97%B4%E5%89%8Dk%E5%B0%8F%E7%9A%84%E5%92%8C%2F</url>
+    <content type="text"><![CDATA[链接:lg3168[求区间前k小的和] 题解 显然对于区间优先级加k操作进行差分,对时间建主席树,维护优先级前缀和以及在这个优先级区间里的任务个数,更新就很简单了 ,查询类似查区间第k小. #include&lt;iostream&gt; #include&lt;cstdio&gt; #include&lt;cmath&gt; #include&lt;cstring&gt; #include&lt;algorithm&gt; #define rep(i,x,y) for(register int i=x;i&lt;=y;++i) #define repd(i,x,y) for(register int i=x;i&gt;=y;--i) #define ll long long using namespace std; const int N=2e5+7; struct node{ int l,val,p; node(int l,int val,int p):l(l),val(val),p(p){} node(){} }e[N&lt;&lt;2]; ll tr[N&lt;&lt;5],size[N&lt;&lt;5]; int lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N],a[N],len,n,m,cnt; inline int cmpv(node x,node y){return x.val&lt;y.val;} inline int cmpt(node x,node y){return x.l&lt;y.l;} inline void update(int &amp;o,int l,int r,int k,int p){ lson[++cnt]=lson[o];rson[cnt]=rson[o];tr[cnt]=tr[o];size[cnt]=size[o]; o=cnt;tr[o]+=a[k]*p;size[o]+=p; if(l==r)return; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[o],l,mid,k,p); else update(rson[o],mid+1,r,k,p); } inline ll query(int o,int l,int r,int k){ if(size[o]&lt;=k)return tr[o]; if(l==r)return tr[o]/size[o]*k; int mid=l+r&gt;&gt;1; if(k&lt;=size[lson[o]])return query(lson[o],l,mid,k); return tr[lson[o]]+query(rson[o],mid+1,r,k-size[lson[o]]); } inline void solve(){ scanf(&quot;%d%d&quot;,&amp;n,&amp;m); rep(i,1,n){ int a,b,c; scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c); e[(i&lt;&lt;1)-1]=node(a,c,1);e[i&lt;&lt;1]=node(b+1,c,-1); } sort(e+1,e+n*2+1,cmpv); rep(i,1,n*2){if(e[i].val!=a[len])a[++len]=e[i].val;e[i].val=len;} sort(e+1,e+n*2+1,cmpt); ll pre=1;int k=1; rep(i,1,m){ root[i]=root[i-1]; while(e[k].l==i)update(root[i],1,len,e[k].val,e[k].p),k++; } rep(i,1,m){ int x,A,B,c; scanf(&quot;%d%d%d%d&quot;,&amp;x,&amp;A,&amp;B,&amp;c); pre=(pre*A+B)%c+1; printf(&quot;%lld\n&quot;,pre=query(root[x],1,len,pre)); } } int main(){ solve(); return 0; }]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg1383]]></title>
     <url>%2Flg1383%2F</url>
     <content type="text"><![CDATA[链接:lg1383 题解 主席树水题 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int M=1e5;char rt[N&lt;&lt;5];int lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N],cnt,now,len[N],n;inline void update(int pre,int &amp;o,int l,int r,int k,char x)&#123; o=++cnt; lson[o]=lson[pre];rson[o]=rson[pre]; if(l==r)&#123;rt[o]=x; return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[pre],lson[o],l,mid,k,x); else update(rson[pre],rson[o],mid+1,r,k,x);&#125;inline void query(int o,int l,int r,int k)&#123; if(l==r)&#123;cout&lt;&lt;rt[o]&lt;&lt;endl;return ;&#125; int mid=l+r&gt;&gt;1; if(k&lt;=mid)return query(lson[o],l,mid,k); return query(rson[o],mid+1,r,k);&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n; while(n--)&#123; char op,c;int x; cin&gt;&gt;op; if(op=='T')&#123;cin&gt;&gt;c; root[++now]=root[now-1]; len[now]=len[now-1]+1; update(root[now-1],root[now],1,M,len[now],c); &#125; else if(op=='U')&#123;cin&gt;&gt;x;root[++now]=root[now-x-1];len[now]=len[now-x-1];&#125; else &#123;cin&gt;&gt;x;query(root[now],1,M,x);&#125; &#125; return 0; &#125;]]></content>

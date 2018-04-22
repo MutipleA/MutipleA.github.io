@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu1394[树状数组,逆序对]]]></title>
+    <url>%2Fhdu1394-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E9%80%86%E5%BA%8F%E5%AF%B9%2F</url>
+    <content type="text"><![CDATA[链接:hdu1394[树状数组,逆序对] 题解 求出逆序数,O(N)遍历一遍 123456789101112131415161718192021222324252627282930#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5;const int inf=0x3f3f3f3f;typedef pair&lt;int,int&gt; s;int tr[N],a[N],n,res,ans;s q[N];inline void update(int x,int y)&#123;for(register int i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;&#125;inline int query(int x)&#123;int ans=0;for(register int i=x;i;i-=lowbit(i))ans+=tr[i];return ans;&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; ans=inf;res=0; memset(tr,0,sizeof(tr)); rep(i,1,n)&#123;scanf("%d",&amp;a[i]);q[i]=s(a[i],i);&#125; sort(q+1,q+n+1); rep(i,1,n)&#123;update(q[i].second,1);res+=i-query(q[i].second);&#125; if(ans&gt;res)ans=res; rep(i,1,n)&#123;res=res-a[i]+n-a[i]-1;ans=min(ans,res);&#125; printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>树状数组</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj2828[单点修改]]]></title>
+    <url>%2Fpoj2828-%E5%8D%95%E7%82%B9%E4%BF%AE%E6%94%B9%2F</url>
+    <content type="text"><![CDATA[链接:poj2828[单点修改] 题解 倒着单点更新1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long#define lson o&lt;&lt;1,l,mid#define rson o&lt;&lt;1|1,mid+1,rusing namespace std;const int N=2e5+7;typedef pair&lt;int,int&gt; s;s q[N];int tr[N&lt;&lt;2],ans[N],n;inline void build(int o,int l,int r)&#123; tr[o]=r-l+1; if(l==r)return ; int mid=l+r&gt;&gt;1; build(lson); build(rson);&#125;inline void update(int o,int l,int r,int x,int p)&#123; if(l==r)&#123;ans[l]=p;tr[o]=0;return ;&#125; int mid=l+r&gt;&gt;1; if(x&lt;=tr[o&lt;&lt;1])update(lson,x,p); else update(rson,x-tr[o&lt;&lt;1],p); tr[o]-=1;&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; int m=n+1; build(1,1,m); rep(i,1,n)scanf("%d%d",&amp;q[i].first,&amp;q[i].second); repd(i,n,1)update(1,1,m,q[i].first+1,q[i].second); rep(i,1,n)printf("%d ",ans[i]); puts(""); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数据结构</category>
+        <category>线段树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg3168[求区间前k小的和]]]></title>
     <url>%2Flg3168-%E6%B1%82%E5%8C%BA%E9%97%B4%E5%89%8Dk%E5%B0%8F%E7%9A%84%E5%92%8C%2F</url>
     <content type="text"><![CDATA[链接:lg3168[求区间前k小的和] 题解 显然对于区间优先级加k操作进行差分,对时间建主席树,维护优先级前缀和以及在这个优先级区间里的任务个数,更新就很简单了 ,查询类似查区间第k小. #include&lt;iostream&gt; #include&lt;cstdio&gt; #include&lt;cmath&gt; #include&lt;cstring&gt; #include&lt;algorithm&gt; #define rep(i,x,y) for(register int i=x;i&lt;=y;++i) #define repd(i,x,y) for(register int i=x;i&gt;=y;--i) #define ll long long using namespace std; const int N=2e5+7; struct node{ int l,val,p; node(int l,int val,int p):l(l),val(val),p(p){} node(){} }e[N&lt;&lt;2]; ll tr[N&lt;&lt;5],size[N&lt;&lt;5]; int lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N],a[N],len,n,m,cnt; inline int cmpv(node x,node y){return x.val&lt;y.val;} inline int cmpt(node x,node y){return x.l&lt;y.l;} inline void update(int &amp;o,int l,int r,int k,int p){ lson[++cnt]=lson[o];rson[cnt]=rson[o];tr[cnt]=tr[o];size[cnt]=size[o]; o=cnt;tr[o]+=a[k]*p;size[o]+=p; if(l==r)return; int mid=l+r&gt;&gt;1; if(k&lt;=mid)update(lson[o],l,mid,k,p); else update(rson[o],mid+1,r,k,p); } inline ll query(int o,int l,int r,int k){ if(size[o]&lt;=k)return tr[o]; if(l==r)return tr[o]/size[o]*k; int mid=l+r&gt;&gt;1; if(k&lt;=size[lson[o]])return query(lson[o],l,mid,k); return tr[lson[o]]+query(rson[o],mid+1,r,k-size[lson[o]]); } inline void solve(){ scanf(&quot;%d%d&quot;,&amp;n,&amp;m); rep(i,1,n){ int a,b,c; scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c); e[(i&lt;&lt;1)-1]=node(a,c,1);e[i&lt;&lt;1]=node(b+1,c,-1); } sort(e+1,e+n*2+1,cmpv); rep(i,1,n*2){if(e[i].val!=a[len])a[++len]=e[i].val;e[i].val=len;} sort(e+1,e+n*2+1,cmpt); ll pre=1;int k=1; rep(i,1,m){ root[i]=root[i-1]; while(e[k].l==i)update(root[i],1,len,e[k].val,e[k].p),k++; } rep(i,1,m){ int x,A,B,c; scanf(&quot;%d%d%d%d&quot;,&amp;x,&amp;A,&amp;B,&amp;c); pre=(pre*A+B)%c+1; printf(&quot;%lld\n&quot;,pre=query(root[x],1,len,pre)); } } int main(){ solve(); return 0; }]]></content>
@@ -191,8 +217,8 @@
         <category>树链剖分</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
       </tags>
   </entry>
   <entry>
@@ -899,8 +925,8 @@
         <category>生成树</category>
       </categories>
       <tags>
-        <tag>位运算</tag>
         <tag>生成树</tag>
+        <tag>位运算</tag>
       </tags>
   </entry>
   <entry>

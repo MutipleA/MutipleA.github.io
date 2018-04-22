@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg2292[dp+trie树]]]></title>
+    <url>%2Flg2292-dp-trie%E6%A0%91%2F</url>
+    <content type="text"><![CDATA[链接:lg2292[dp+trie树] 题解 dp[i]表示表示前缀i能否匹配,那么转移方程显然是dp[i]=dp[j]&amp;&amp;(j-i能否匹配) (j&lt;=i) 走的方向是唯一的,那么显然可以用Trie树来维护. 但是还有一个问题,我们是往前匹配,然而正常的Trie树上反向走并不好走,解决方法是反向建Trie树 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int tr[N][26],end[N],dp[N],cnt,n,m;char a[N];inline void add(char *str)&#123; int len=strlen(str)-1,p=0; repd(i,len,0)&#123; int k=str[i]-'a'; if(!tr[p][k])tr[p][k]=++cnt; p=tr[p][k]; &#125; end[p]++;&#125;inline void query(char *str,int pos)&#123; int p=0,flag=0; repd(i,pos-1,0)&#123; if(!tr[p][str[i]-'a'])break; p=tr[p][str[i]-'a'];if(dp[i]&amp;&amp;end[p])flag=1; &#125; dp[pos]=flag;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123;scanf("%s",a);add(a);&#125; rep(i,1,m)&#123; int ans=0; scanf("%s",a); memset(dp,0,sizeof(dp)); int len=strlen(a); dp[0]=1; rep(i,1,len)&#123;query(a,i);if(dp[i])ans=max(i,ans);&#125; printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>树</category>
+        <category>Trie树</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>Trie树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg2580[板子]]]></title>
     <url>%2Flg2580-%E6%9D%BF%E5%AD%90%2F</url>
     <content type="text"><![CDATA[链接:lg2580[板子] 题解 Trie树板子123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int tr[N][26],end[N],cnt,n,m,x;char a[N];inline void add(char* str)&#123; int len=strlen(str)-1,p=1; rep(i,0,len)&#123; int k=str[i]-'a'; if(!tr[p][k])tr[p][k]=++cnt; p=tr[p][k]; &#125; end[p]=1;&#125;inline int query(char* str)&#123; int len=strlen(str)-1,p=1; rep(i,0,len)&#123; p=tr[p][str[i]-'a']; if(p==0)return 0; &#125; return end[p]++;&#125;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%s",a);add(a);&#125; scanf("%d",&amp;m); rep(i,1,m)&#123; scanf("%s",a);int t=query(a); if(t==1)&#123;puts("OK");&#125; else if(t&gt;1)puts("REPEAT"); else puts("WRONG"); &#125; return 0;&#125;]]></content>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="最短路  从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径解决算法： floyd dijkstra spfa dijktsra优化 spfa优化">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T11:54:20.905Z">
+<meta property="og:updated_time" content="2018-04-22T03:54:20.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dijkstra算法详解">
 <meta name="twitter:description" content="最短路  从图中的某个顶点出发到达另外一个顶点的所经过的边的权重和最小的一条路径，称为最短路径解决算法： floyd dijkstra spfa dijktsra优化 spfa优化">
@@ -406,7 +406,7 @@
 <li>每次找到dis值最小的顶点（这个dis值就是改点到源点的最短距离），标记它，然后用它来松弛可以松弛的点，</li>
 <li>时间复杂度：</li>
 <li>很显然是O(n2)的</li>
-<li>缺点：无法处理负权<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="lang-c++">  int dijkstra(int s,int t){
+<li>缺点：无法处理负权<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><pre><code class="lang-c++">int dijkstra(int s,int t){
       rep(i,1,n+1){
           d[i]=g[s][i];
           vis[i]=0;
@@ -557,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">83</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -568,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

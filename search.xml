@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg2580[板子]]]></title>
+    <url>%2Flg2580-%E6%9D%BF%E5%AD%90%2F</url>
+    <content type="text"><![CDATA[链接:lg2580[板子] 题解 Trie树板子123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int tr[N][26],end[N],cnt,n,m,x;char a[N];inline void add(char* str)&#123; int len=strlen(str)-1,p=1; rep(i,0,len)&#123; int k=str[i]-'a'; if(!tr[p][k])tr[p][k]=++cnt; p=tr[p][k]; &#125; end[p]=1;&#125;inline int query(char* str)&#123; int len=strlen(str)-1,p=1; rep(i,0,len)&#123; p=tr[p][str[i]-'a']; if(p==0)return 0; &#125; return end[p]++;&#125;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%s",a);add(a);&#125; scanf("%d",&amp;m); rep(i,1,m)&#123; scanf("%s",a);int t=query(a); if(t==1)&#123;puts("OK");&#125; else if(t&gt;1)puts("REPEAT"); else puts("WRONG"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>树</category>
+        <category>Trie树</category>
+      </categories>
+      <tags>
+        <tag>Trie树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg3567[简单的主席树]]]></title>
     <url>%2Flg3567-%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%BB%E5%B8%AD%E6%A0%91%2F</url>
     <content type="text"><![CDATA[链接:lg3567[简单的主席树] 题解 数据范围比较小可以不离散化,然后就是模板主席树往2*(sum[j]-sum[i])&gt;r-l+1那边走注意是不带等号的 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=5e5;int tr[N&lt;&lt;5],lson[N&lt;&lt;5],rson[N&lt;&lt;5],rt[N],cnt,n,m;inline void update(int &amp;o,int l,int r,int x)&#123; tr[++cnt]=tr[o];lson[cnt]=lson[o];rson[cnt]=rson[o]; o=cnt;tr[o]++; if(l==r)return ; int mid=l+r&gt;&gt;1; if(x&lt;=mid)update(lson[o],l,mid,x); else update(rson[o],mid+1,r,x);&#125;inline int query(int i,int j,int l,int r,int x)&#123; if(l==r)return l; int mid=l+r&gt;&gt;1; if(2*(tr[lson[j]]-tr[lson[i]])&gt;x)return query(lson[i],lson[j],l,mid,x); if(2*(tr[rson[j]]-tr[rson[i]])&gt;x)return query(rson[i],rson[j],mid+1,r,x); return 0;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123;int x;rt[i]=rt[i-1];scanf("%d",&amp;x);update(rt[i],1,n,x);&#125; rep(i,1,m)&#123;int l,r;scanf("%d%d",&amp;l,&amp;r);printf("%d\n",query(rt[l-1],rt[r],1,n,r-l+1));&#125; return 0;&#125;]]></content>
@@ -245,8 +258,8 @@
         <category>树链剖分</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
       </tags>
   </entry>
   <entry>

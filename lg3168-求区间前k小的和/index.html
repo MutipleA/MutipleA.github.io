@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="链接:lg3168[求区间前k小的和]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-22T10:36:21.600Z">
+<meta property="og:updated_time" content="2018-04-23T10:13:29.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lg3168[求区间前k小的和]">
 <meta name="twitter:description" content="链接:lg3168[求区间前k小的和]">
@@ -410,68 +410,7 @@
 <li>,查询类似查区间第k小.</li>
 </ul>
 </blockquote>
-<pre><code class="lang-c++">#include&lt;iostream&gt;
-#include&lt;cstdio&gt;
-#include&lt;cmath&gt;
-#include&lt;cstring&gt;
-#include&lt;algorithm&gt;
-#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)
-#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)
-#define ll long long
-using namespace std;
-const int N=2e5+7;
-struct node{
-    int l,val,p;
-    node(int l,int val,int p):l(l),val(val),p(p){}
-    node(){}
-}e[N&lt;&lt;2];
-ll tr[N&lt;&lt;5],size[N&lt;&lt;5];
-int lson[N&lt;&lt;5],rson[N&lt;&lt;5],root[N],a[N],len,n,m,cnt;
-inline int cmpv(node x,node y){return x.val&lt;y.val;}
-inline int cmpt(node x,node y){return x.l&lt;y.l;}
-inline void update(int &amp;o,int l,int r,int k,int p){
-    lson[++cnt]=lson[o];rson[cnt]=rson[o];tr[cnt]=tr[o];size[cnt]=size[o];
-    o=cnt;tr[o]+=a[k]*p;size[o]+=p;
-    if(l==r)return; 
-    int mid=l+r&gt;&gt;1;
-    if(k&lt;=mid)update(lson[o],l,mid,k,p);
-    else update(rson[o],mid+1,r,k,p);
-}
-inline ll query(int o,int l,int r,int k){
-    if(size[o]&lt;=k)return tr[o];
-    if(l==r)return tr[o]/size[o]*k;
-    int mid=l+r&gt;&gt;1;
-    if(k&lt;=size[lson[o]])return query(lson[o],l,mid,k);
-    return tr[lson[o]]+query(rson[o],mid+1,r,k-size[lson[o]]);
-}
-inline void solve(){
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-    rep(i,1,n){
-        int a,b,c;
-        scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c);
-        e[(i&lt;&lt;1)-1]=node(a,c,1);e[i&lt;&lt;1]=node(b+1,c,-1);
-    }
-    sort(e+1,e+n*2+1,cmpv);
-    rep(i,1,n*2){if(e[i].val!=a[len])a[++len]=e[i].val;e[i].val=len;}
-    sort(e+1,e+n*2+1,cmpt);
-    ll pre=1;int k=1;
-    rep(i,1,m){
-        root[i]=root[i-1];
-        while(e[k].l==i)update(root[i],1,len,e[k].val,e[k].p),k++;
-    }
-    rep(i,1,m){
-        int x,A,B,c;
-        scanf(&quot;%d%d%d%d&quot;,&amp;x,&amp;A,&amp;B,&amp;c);
-        pre=(pre*A+B)%c+1;
-        printf(&quot;%lld\n&quot;,pre=query(root[x],1,len,pre));
-    }
-}
-int main(){
-    solve();
-    return 0;
-}
-</code></pre>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e5</span>+<span class="number">7</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l,val,p;</span><br><span class="line">	node(<span class="keyword">int</span> l,<span class="keyword">int</span> val,<span class="keyword">int</span> p):l(l),val(val),p(p)&#123;&#125;</span><br><span class="line">	node()&#123;&#125;</span><br><span class="line">&#125;e[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line">ll tr[N&lt;&lt;<span class="number">5</span>],size[N&lt;&lt;<span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> lson[N&lt;&lt;<span class="number">5</span>],rson[N&lt;&lt;<span class="number">5</span>],root[N],a[N],len,n,m,cnt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">cmpv</span><span class="params">(node x,node y)</span></span>&#123;<span class="keyword">return</span> x.val&lt;y.val;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">cmpt</span><span class="params">(node x,node y)</span></span>&#123;<span class="keyword">return</span> x.l&lt;y.l;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> &amp;o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	lson[++cnt]=lson[o];rson[cnt]=rson[o];tr[cnt]=tr[o];size[cnt]=size[o];</span><br><span class="line">	o=cnt;tr[o]+=a[k]*p;size[o]+=p;</span><br><span class="line">	<span class="keyword">if</span>(l==r)<span class="keyword">return</span>; </span><br><span class="line">	<span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(k&lt;=mid)update(lson[o],l,mid,k,p);</span><br><span class="line">	<span class="keyword">else</span> update(rson[o],mid+<span class="number">1</span>,r,k,p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(size[o]&lt;=k)<span class="keyword">return</span> tr[o];</span><br><span class="line">	<span class="keyword">if</span>(l==r)<span class="keyword">return</span> tr[o]/size[o]*k;</span><br><span class="line">	<span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(k&lt;=size[lson[o]])<span class="keyword">return</span> query(lson[o],l,mid,k);</span><br><span class="line">	<span class="keyword">return</span> tr[lson[o]]+query(rson[o],mid+<span class="number">1</span>,r,k-size[lson[o]]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	rep(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b,c;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">		e[(i&lt;&lt;<span class="number">1</span>)<span class="number">-1</span>]=node(a,c,<span class="number">1</span>);e[i&lt;&lt;<span class="number">1</span>]=node(b+<span class="number">1</span>,c,<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	sort(e+<span class="number">1</span>,e+n*<span class="number">2</span>+<span class="number">1</span>,cmpv);</span><br><span class="line">	rep(i,<span class="number">1</span>,n*<span class="number">2</span>)&#123;<span class="keyword">if</span>(e[i].val!=a[len])a[++len]=e[i].val;e[i].val=len;&#125;</span><br><span class="line">	sort(e+<span class="number">1</span>,e+n*<span class="number">2</span>+<span class="number">1</span>,cmpt);</span><br><span class="line">	ll pre=<span class="number">1</span>;<span class="keyword">int</span> k=<span class="number">1</span>;</span><br><span class="line">	rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">		root[i]=root[i<span class="number">-1</span>];</span><br><span class="line">		<span class="keyword">while</span>(e[k].l==i)update(root[i],<span class="number">1</span>,len,e[k].val,e[k].p),k++;</span><br><span class="line">	&#125;</span><br><span class="line">	rep(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,A,B,c;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;x,&amp;A,&amp;B,&amp;c);</span><br><span class="line">		pre=(pre*A+B)%c+<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,pre=query(root[x],<span class="number">1</span>,len,pre));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	solve();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -599,7 +538,7 @@ int main(){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3332]]></title>
+    <url>%2Flg3332%2F</url>
+    <content type="text"><![CDATA[链接:lg3332 题解 线段树套线段树,动态开点,标记下传不方便,而且会T(我会说我T了一次吗…),更快的方法是CDQ分治或者整体二分… 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=5e4+7;const int M=N*400;ll tr[M],lz[M],C[N],n,m,cnt,rk[N];int ls[M],rs[M],root[N&lt;&lt;2],A[N],B[N],op[N],len,ct;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar(); if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;inline void update(int &amp;o,int l,int r,int L,int R)&#123; if(!o)o=++cnt; tr[o]+=min(r,R)-max(l,L)+1; if(L&lt;=l&amp;&amp;R&gt;=r)&#123;lz[o]++;return ;&#125; int mid=l+r&gt;&gt;1; if(L&lt;=mid)update(ls[o],l,mid,L,R); if(R&gt;mid)update(rs[o],mid+1,r,L,R);&#125;inline void UPDATE(int a,int b,int c)&#123; int l=1,r=len,k=1; while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; update(root[k],1,n,a,b); if(c&lt;=mid)k&lt;&lt;=1,r=mid; else k=k&lt;&lt;1|1,l=mid+1; &#125; update(root[k],1,n,a,b);&#125;inline ll query(int o,int l,int r,int L,int R)&#123; if(!o)return 0; if(L&lt;=l&amp;&amp;R&gt;=r)return tr[o]; int mid=l+r&gt;&gt;1;ll ans=lz[o]*(min(r,R)-max(L,l)+1); if(L&lt;=mid)ans+=query(ls[o],l,mid,L,R); if(R&gt;mid)ans+=query(rs[o],mid+1,r,L,R); return ans;&#125;inline int QUERY(int a,int b,int c)&#123; int l=1,r=len,k=1; while(l&lt;r)&#123; int mid=l+r&gt;&gt;1;ll t=query(root[k&lt;&lt;1],1,n,a,b); if(c&lt;=t)r=mid,k&lt;&lt;=1; else l=mid+1,k=k&lt;&lt;1|1,c-=t; &#125; return l;&#125;int main()&#123; read(n);read(m); rep(i,1,m)&#123;read(op[i]);read(A[i]);read(B[i]);read(C[i]);if(op[i]==1)rk[++ct]=C[i];&#125; sort(rk+1,rk+ct+1); len=unique(rk+1,rk+ct+1)-rk-1; rep(i,1,m)if(op[i]==1)C[i]=lower_bound(rk+1,rk+len+1,C[i])-rk; rep(i,1,m)&#123; if(op[i]==1)&#123;UPDATE(A[i],B[i],len-C[i]+1);&#125; else printf("%d\n",rk[len-QUERY(A[i],B[i],C[i])+1]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>树</category>
+        <category>树套树</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>树套树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg2617[动态区间第k小]]]></title>
     <url>%2Flg2617-%E5%8A%A8%E6%80%81%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F%2F</url>
     <content type="text"><![CDATA[链接:lg2617[动态区间第k小] 题解 动态区间第k小,我的做法是树状数组套线段树,空间开小了,RE无数次,看了大佬们的题解,建点方式不太一样大佬们的建点方式空间效率常数比我小。。。 数太大了,所以离散化,但是修改的值可能并没有出现过所以必须离线做…12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=1e4+7;int tr[N*800],lson[N*800],rson[N*800],root[N],L[30],R[30];int a[N],b[N&lt;&lt;2],s[N][3],llen,rlen,len,cnt,n,m;inline void update(int &amp;o,int l,int r,int x,int v)&#123; if(!o)o=++cnt; tr[o]+=v; if(l==r)return ; int mid=l+r&gt;&gt;1; if(x&lt;=mid)update(lson[o],l,mid,x,v); else update(rson[o],mid+1,r,x,v);&#125;inline void UPDATE(int x,int v)&#123; int k=lower_bound(b+1,b+len+1,a[x])-b; for(;x&lt;=n;x+=lowbit(x))update(root[x],1,len,k,v);&#125;inline int query(int l,int r,int k)&#123; if(l==r)return l; int sum=0,mid=l+r&gt;&gt;1; rep(i,1,rlen)sum+=tr[lson[R[i]]]; rep(i,1,llen)sum-=tr[lson[L[i]]]; if(k&lt;=sum)&#123; rep(i,1,rlen)R[i]=lson[R[i]]; rep(i,1,llen)L[i]=lson[L[i]]; return query(l,mid,k); &#125; rep(i,1,rlen)R[i]=rson[R[i]]; rep(i,1,llen)L[i]=rson[L[i]]; return query(mid+1,r,k-sum);&#125;inline int QUERY(int l,int r,int k)&#123; llen=rlen=0; for(register int i=l-1;i;i-=lowbit(i))L[++llen]=root[i]; for(register int i=r;i;i-=lowbit(i))R[++rlen]=root[i]; return query(1,len,k);&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123;scanf("%d",&amp;a[i]);b[i]=a[i];&#125;len=n; rep(i,1,m)&#123; char op;while(isspace(op=getchar())); scanf("%d%d",&amp;s[i][0],&amp;s[i][1]); if(op=='Q')scanf("%d",&amp;s[i][2]); else &#123;b[++len]=s[i][1];s[i][2]=-1;&#125; &#125; sort(b+1,b+len+1); len=unique(b+1,b+len+1)-b-1; rep(i,1,n)UPDATE(i,1); rep(i,1,m)&#123; if(s[i][2]==-1)&#123;UPDATE(s[i][0],-1);a[s[i][0]]=s[i][1];UPDATE(s[i][0],1);&#125; else printf("%d\n",b[QUERY(s[i][0],s[i][1],s[i][2])]); &#125; return 0;&#125;]]></content>
@@ -10,8 +24,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

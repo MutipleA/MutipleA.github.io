@@ -3,7 +3,15 @@
   <entry>
     <title><![CDATA[hdu2222]]></title>
     <url>%2Fhdu2222%2F</url>
-    <content type="text"><![CDATA[链接:hdu2222 Description InputOutputSample InputSample Output题解1]]></content>
+    <content type="text"><![CDATA[链接:hdu2222 题解 ac自动机模板 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rint register int #define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int tr[N][26],End[N],fail[N],cnt,ans,T,n;char a[N];inline void build(char *str,int len)&#123; int now=0; rep(i,1,len)&#123; int k=str[i]-'a'; if(!tr[now][k])tr[now][k]=++cnt; now=tr[now][k]; &#125; End[now]++;&#125;inline void pre()&#123; queue&lt;int&gt; q; q.push(0); fail[0]=-1; while(!q.empty())&#123; int k=q.front();q.pop(); rep(i,0,25)if(tr[k][i])&#123; int son=tr[k][i],p=fail[k]; while(p&gt;=0&amp;&amp;!tr[p][i])p=fail[p]; fail[son]=p&gt;=0?tr[p][i]:0; q.push(son); &#125; &#125;&#125;inline void query(char *str,int len)&#123; int now=0; rep(i,1,len)&#123; int p=now,k=str[i]-'a'; while(p&gt;=0&amp;&amp;!tr[p][k])p=fail[p]; now=p&gt;=0?tr[p][k]:0; int tmp=now; while(tmp)&#123;if(End[tmp]&gt;=0)ans+=End[tmp],End[tmp]=-1;else break;tmp=fail[tmp];&#125; &#125;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; memset(tr,0,sizeof(tr)); memset(fail,0,sizeof(fail)); memset(End,0,sizeof(End)); scanf("%d",&amp;n);ans=cnt=0; rep(i,1,n)&#123;scanf("%s",a+1); build(a,strlen(a+1));&#125; pre(); scanf("%s",a+1); query(a,strlen(a+1)); printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>字符串</category>
+        <category>ac自动机</category>
+      </categories>
+      <tags>
+        <tag>ac自动机</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[lg3157[动态逆序对]]]></title>

@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu6140[思维]]]></title>
+    <url>%2Fhdu6140-%E6%80%9D%E7%BB%B4%2F</url>
+    <content type="text"><![CDATA[链接:hdu6140[思维] 题解 ZZ的我一开始没看数据范围,直接上dp,结果显然T了 a_i \le \sum_{j = 1}^{i - 1}a_j[b_j = N] + \sum_{j = 1}^{i - 1}a_j[b_i = L \cap b_j = L] + \sum_{j = 1}^{i - 1} a_j[b_i = D \cap b_j = D] (2 \le i \le n). 根据题上的这个公式,就可以发现这就是个巨水的题12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int ans1,ans2,n,m,T,nm[N];char c;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar(); if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;inline void init()&#123; ans1=ans2=0; read(n);read(m); rep(i,1,n)read(nm[i]); rep(i,1,n)&#123; while(isspace(c=getchar())); if(c=='L')ans1+=nm[i]; else if(c=='D')ans2-=nm[i]; else ans1+=nm[i],ans2-=nm[i]; &#125;&#125;inline int solve()&#123;return m&gt;=ans2&amp;&amp;m&lt;=ans1;&#125;int main()&#123; read(T); while(T--)&#123; init(); puts(solve()?"yes":"no"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>思维</category>
+      </categories>
+      <tags>
+        <tag>思维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu6143[思维,排列组合]]]></title>
+    <url>%2Fhdu6143-%E6%80%9D%E7%BB%B4-%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88%2F</url>
+    <content type="text"><![CDATA[链接:hdu6143[思维,排列组合] 题解 一开始想的方程是\sum_{i=1}^{m}{C_m^i*!i*(m-i)^n} 之后发现会有重复 dp[i]表示m种字母中选i个出来放在姓上的情况(全部用完) 显然dp[i]=i^n-\sum_{j=1}^{i-1}{C_i^j*dp[j]} 最后答案就是\sum_{i=1}^{m}{C_m^i*dp[i]*(m-i)^n} 1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define ll long longusing namespace std;const ll p=1e9+7;const int N=2000+7;ll a[N],b[N][N],c[N],dp[N],n,m,T;inline void exgcd(ll a,ll b,ll &amp;x,ll &amp;y)&#123; if(!b)&#123;x=1;y=0;return ;&#125; exgcd(b,a%b,x,y); ll t=x;x=y;y=t-a/b*y;&#125;inline ll inv(ll d)&#123;ll x,y;exgcd(d,p,x,y);return x&gt;0?x:x+p;&#125;inline void init()&#123; a[0]=1; rep(i,1,N-7)a[i]=i*a[i-1]%p,c[i]=inv(a[i]); rep(i,1,N-7)b[i][1]=i; rep(i,1,N-7)rep(j,2,N-7)b[i][j]=b[i][j-1]*i%p;&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;T; init(); while(T--)&#123; ll ans=0; cin&gt;&gt;n&gt;&gt;m; rep(i,1,m)&#123;dp[i]=b[i][n];rep(j,1,i-1)dp[i]=(dp[i]-a[i]*c[i-j]%p*c[j]%p*dp[j]%p+p)%p;&#125; rep(i,1,m)ans=(ans+a[m]*c[m-i]%p*c[i]%p*dp[i]%p*b[m-i][n])%p; cout&lt;&lt;ans&lt;&lt;endl; &#125;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数学</category>
+        <category>排列组合</category>
+      </categories>
+      <tags>
+        <tag>排列组合</tag>
+        <tag>思维</tag>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu6138]]></title>
     <url>%2Fhdu6138%2F</url>
     <content type="text"><![CDATA[链接:hdu6138 题解 多记录一个深度,用第一个串进行匹配,沿途做标记,第二个串匹配的时候更新答案123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rint register int #define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;int tr[N][26],id[N],fail[N],deep[N],flag[N],ans,T,n,x,y,cnt,m;string a[N];inline void build(string &amp;str,int len)&#123; int now=0; rep(i,1,len)&#123; int k=str[i-1]-'a'; if(!tr[now][k])tr[now][k]=++cnt; deep[tr[now][k]]=deep[now]+1; now=tr[now][k]; &#125;&#125;inline void pre()&#123; queue&lt;int&gt; q; q.push(0); fail[0]=-1; while(!q.empty())&#123; int k=q.front();q.pop(); rep(i,0,25)if(tr[k][i])&#123; int son=tr[k][i],p=fail[k]; while(p&gt;=0&amp;&amp;!tr[p][i])p=fail[p]; fail[son]=p&gt;=0?tr[p][i]:0; q.push(son); &#125; &#125;&#125;inline void update(string &amp;str,int len,int op)&#123; int now=0; rep(i,1,len)&#123; int k=str[i-1]-'a',p=now; while(p&gt;=0&amp;&amp;!tr[p][k])p=fail[p]; now=p&gt;=0?tr[p][k]:0; int tmp=now; if(op)while(tmp)&#123;flag[tmp]=1;tmp=fail[tmp];&#125; else while(tmp)&#123; if(flag[tmp])ans=max(ans,deep[tmp]);tmp=fail[tmp];&#125; if(!op&amp;&amp;flag[now])ans=max(ans,deep[now]); if(op)flag[now]=1; &#125;&#125;int main()&#123; ios::sync_with_stdio(false); cin&gt;&gt;T; while(T--)&#123; memset(tr,0,sizeof(tr)); memset(fail,0,sizeof(fail)); memset(deep,0,sizeof(deep)); cin&gt;&gt;n;cnt=0; rep(i,1,n)&#123;cin&gt;&gt;a[i]; build(a[i],a[i].size());&#125; pre(); cin&gt;&gt;m; while(m--)&#123; memset(flag,0,sizeof(flag)); ans=0; cin&gt;&gt;x&gt;&gt;y; update(a[x],a[x].size(),1); update(a[y],a[y].size(),0); cout&lt;&lt;ans&lt;&lt;endl; &#125; &#125; return 0;&#125;]]></content>

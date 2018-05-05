@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3147]]></title>
+    <url>%2Flg3147%2F</url>
+    <content type="text"><![CDATA[链接:lg3147 题解 dp[i][j] 表示第i个位置合成到j所需的长度 123456789101112131415161718192021222324252627282930313233343536#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;map&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define lowbit(x) (x&amp;(-x))#define ll long longusing namespace std;const int N=1e6;int dp[N][70],a[N],n,ans;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int main()&#123; read(n); rep(i,1,n)read(a[i]); rep(i,1,n)&#123; dp[i][a[i]]=1; int j=i-1; while(dp[j][a[i]])&#123; j-=dp[j][a[i]]; a[i]++;dp[i][a[i]]=i-j; &#125; ans=max(ans,a[i]); &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>动态规划</category>
+        <category>区间DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg3146[简单区间DP]]]></title>
     <url>%2Flg3146-%E7%AE%80%E5%8D%95%E5%8C%BA%E9%97%B4DP%2F</url>
     <content type="text"><![CDATA[链接:lg3146[简单区间DP] 题解 简单区间DP,dp[i][j]表示i-j所取得的最大的值 dp[i][j]=max(dp[i][j],dp[i][k]+1) 当dp[i][k]==dp[k+1][j]的时候才可以转移 12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;map&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define lowbit(x) (x&amp;(-x))#define ll long longusing namespace std;const int N=1e3;int dp[N][N],n,ans;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int main()&#123; read(n); rep(i,1,n)&#123;read(dp[i][i]),ans=max(ans,dp[i][i]);&#125; repd(i,n-1,1)rep(j,i+1,n)&#123; rep(k,i,j-1)if(dp[i][k]==dp[k+1][j])dp[i][j]=max(dp[i][j],dp[i][k]+1); ans=max(ans,dp[i][j]); &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
@@ -72,8 +85,8 @@
       </categories>
       <tags>
         <tag>排列组合</tag>
-        <tag>DP</tag>
         <tag>思维</tag>
+        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
@@ -131,8 +144,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj2955]]></title>
+    <url>%2Fpoj2955%2F</url>
+    <content type="text"><![CDATA[链接:poj2955 题解 DP[i][j]表示区间i~j的最大括号匹配数量,显然str[i]与str[j]如果匹配DP[i][j]=DP[i+1][j-1]+2 并且对于区间i~j-1内的k必然有DP[i][j]=max(DP[i][j],DP[i][k]+DP[k+1][j]) 123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;int dp[N][N],n;char str[N];int main()&#123; while(~scanf("%s",str+1))&#123; if(strcmp(str+1,"end")==0)break; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; if((str[i]=='('&amp;&amp;str[j]==')')||(str[i]=='['&amp;&amp;str[j]==']'))dp[i][j]=dp[i+1][j-1]+2; rep(k,i,j-1)dp[i][j]=max(dp[i][j],dp[i][k]+dp[k+1][j]); &#125; printf("%d\n",dp[1][n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lightoj1422]]></title>
     <url>%2Flightoj1422%2F</url>
     <content type="text"><![CDATA[链接:lightoj1422 题解 DP[i][j]表示区间i~j所需的最少服装 1: 如果i这件衣服后面无法重复使用DP[i][j]=DP[i+1][j]+1 2: 如果i+1~j内有一个k与i一样,可以考虑在k这个位置重复利用i这件衣服即DP[i][j]=min(DP[i][j],DP[i][k-1]+DP[k+1][j])123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;int dp[N][N],c[N],n,T;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;c[i]); rep(i,1,n)dp[i][i]=1; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=dp[i+1][j]+1; rep(k,i+1,j)if(c[k]==c[i])dp[i][j]=min(dp[i][j],dp[i][k-1]+dp[k+1][j]); &#125; printf("Case %d: %d\n",cnt,dp[1][n]); &#125; return 0;&#125;]]></content>
@@ -96,8 +108,8 @@
       </categories>
       <tags>
         <tag>DP</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -155,8 +167,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1161,8 +1173,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

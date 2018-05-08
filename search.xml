@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[codeforces149D]]></title>
+    <url>%2Fcodeforces149D%2F</url>
+    <content type="text"><![CDATA[链接:codeforces149D 题解 区间l~r可以划分为l~mach[l] mach[l]+1~r,dfs一下分类处理就好12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regitser int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int p=1e9+7;const int N=800;ll dp[N][N][3][3],ans;int mach[N],tmp[N],n,cnt;char str[N+1];inline void init()&#123; scanf("%s",str+1);n=strlen(str+1); rep(i,1,n)if(str[i]=='(')tmp[++cnt]=i;else if(str[i]==')')mach[tmp[cnt--]]=i;&#125;ll dfs(int l,int r)&#123; if(r==l+1)return dp[l][r][0][1]=dp[l][r][0][2]=dp[l][r][1][0]=dp[l][r][2][0]=1; if(mach[l]==r)&#123; dfs(l+1,r-1); rep(i,0,2)rep(j,0,2)&#123; if(j!=1)dp[l][r][0][1]=(dp[l][r][0][1]+dp[l+1][r-1][i][j])%p; if(j!=2)dp[l][r][0][2]=(dp[l][r][0][2]+dp[l+1][r-1][i][j])%p; if(i!=1)dp[l][r][1][0]=(dp[l][r][1][0]+dp[l+1][r-1][i][j])%p; if(i!=2)dp[l][r][2][0]=(dp[l][r][2][0]+dp[l+1][r-1][i][j])%p; &#125; &#125; else &#123; dfs(l,mach[l]); dfs(mach[l]+1,r); rep(i,0,2)rep(j,0,2)rep(x,0,2)rep(y,0,2)&#123; if(x&amp;&amp;x==y)continue; dp[l][r][i][j]=(dp[l][r][i][j]+dp[l][mach[l]][i][x]*dp[mach[l]+1][r][y][j]%p)%p; &#125; &#125;&#125;int main()&#123; init(); dfs(1,n); rep(i,0,2)rep(j,0,2)ans=(ans+dp[1][n][i][j])%p; printf("%d\n",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+        <tag>DFS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj2955]]></title>
     <url>%2Fpoj2955%2F</url>
     <content type="text"><![CDATA[链接:poj2955 题解 DP[i][j]表示区间i~j的最大括号匹配数量,显然str[i]与str[j]如果匹配DP[i][j]=DP[i+1][j-1]+2 并且对于区间i~j-1内的k必然有DP[i][j]=max(DP[i][j],DP[i][k]+DP[k+1][j]) 123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;int dp[N][N],n;char str[N];int main()&#123; while(~scanf("%s",str+1))&#123; if(strcmp(str+1,"end")==0)break; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; if((str[i]=='('&amp;&amp;str[j]==')')||(str[i]=='['&amp;&amp;str[j]==']'))dp[i][j]=dp[i+1][j-1]+2; rep(k,i,j-1)dp[i][j]=max(dp[i][j],dp[i][k]+dp[k+1][j]); &#125; printf("%d\n",dp[1][n]); &#125; return 0;&#125;]]></content>
@@ -108,8 +121,8 @@
       </categories>
       <tags>
         <tag>DP</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -167,8 +180,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1173,8 +1186,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

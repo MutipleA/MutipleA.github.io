@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj1651]]></title>
+    <url>%2Fpoj1651%2F</url>
+    <content type="text"><![CDATA[链接:poj1651 题解 区间i~j可以划分为i~k k+1~j 答案加上nm[k]nm[i-1]nm[j]就好12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const ll inf=0x3f3f3f3f3f3f3f;ll dp[N][N],nm[N];int n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n-1)rep(i,2,n-l+2)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j-1)dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+nm[k]*nm[i-1]*nm[j]); &#125; printf("%lld\n",dp[2][n]); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[codeforces149D]]></title>
     <url>%2Fcodeforces149D%2F</url>
     <content type="text"><![CDATA[链接:codeforces149D 题解 区间l~r可以划分为l~mach[l] mach[l]+1~r,dfs一下分类处理就好12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regitser int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int p=1e9+7;const int N=800;ll dp[N][N][3][3],ans;int mach[N],tmp[N],n,cnt;char str[N+1];inline void init()&#123; scanf("%s",str+1);n=strlen(str+1); rep(i,1,n)if(str[i]=='(')tmp[++cnt]=i;else if(str[i]==')')mach[tmp[cnt--]]=i;&#125;ll dfs(int l,int r)&#123; if(r==l+1)return dp[l][r][0][1]=dp[l][r][0][2]=dp[l][r][1][0]=dp[l][r][2][0]=1; if(mach[l]==r)&#123; dfs(l+1,r-1); rep(i,0,2)rep(j,0,2)&#123; if(j!=1)dp[l][r][0][1]=(dp[l][r][0][1]+dp[l+1][r-1][i][j])%p; if(j!=2)dp[l][r][0][2]=(dp[l][r][0][2]+dp[l+1][r-1][i][j])%p; if(i!=1)dp[l][r][1][0]=(dp[l][r][1][0]+dp[l+1][r-1][i][j])%p; if(i!=2)dp[l][r][2][0]=(dp[l][r][2][0]+dp[l+1][r-1][i][j])%p; &#125; &#125; else &#123; dfs(l,mach[l]); dfs(mach[l]+1,r); rep(i,0,2)rep(j,0,2)rep(x,0,2)rep(y,0,2)&#123; if(x&amp;&amp;x==y)continue; dp[l][r][i][j]=(dp[l][r][i][j]+dp[l][mach[l]][i][x]*dp[mach[l]+1][r][y][j]%p)%p; &#125; &#125;&#125;int main()&#123; init(); dfs(1,n); rep(i,0,2)rep(j,0,2)ans=(ans+dp[1][n][i][j])%p; printf("%d\n",ans); return 0;&#125;]]></content>
@@ -23,6 +35,7 @@
       </categories>
       <tags>
         <tag>区间DP</tag>
+        <tag>DFS</tag>
       </tags>
   </entry>
   <entry>
@@ -972,8 +985,8 @@
         <category>树状数组</category>
       </categories>
       <tags>
+        <tag>DFS</tag>
         <tag>树状数组</tag>
-        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="RMQ," />
+  <meta name="keywords" content="区间DP," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="RMQ算法  是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。">
-<meta name="keywords" content="RMQ">
+<meta name="description" content="链接:hdu4283">
+<meta name="keywords" content="区间DP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RMQ">
-<meta property="og:url" content="http://yoursite.com/RMQ/index.html">
+<meta property="og:title" content="hdu4283">
+<meta property="og:url" content="http://yoursite.com/hdu4283/index.html">
 <meta property="og:site_name" content="Angora&#39;s Blog">
-<meta property="og:description" content="RMQ算法  是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。">
+<meta property="og:description" content="链接:hdu4283">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T12:02:55.833Z">
+<meta property="og:updated_time" content="2018-05-09T13:24:23.514Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RMQ">
-<meta name="twitter:description" content="RMQ算法  是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。">
+<meta name="twitter:title" content="hdu4283">
+<meta name="twitter:description" content="链接:hdu4283">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/RMQ/"/>
+  <link rel="canonical" href="http://yoursite.com/hdu4283/"/>
 
 
 
 
 
-  <title>RMQ | Angora's Blog</title>
+  <title>hdu4283 | Angora's Blog</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/RMQ/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hdu4283/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Angora">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RMQ</h1>
+          <h1 class="post-title" itemprop="name headline">hdu4283</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T23:26:52+08:00">
-                2018-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T21:19:39+08:00">
+                2018-05-09
               </time>
             
 
@@ -339,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">学习笔记</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -350,8 +350,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习笔记/dp/" itemprop="url" rel="index">
-                    <span itemprop="name">dp</span>
+                  <a href="/categories/算法/DP/" itemprop="url" rel="index">
+                    <span itemprop="name">DP</span>
                   </a>
                 </span>
 
@@ -392,20 +392,15 @@
       
 
       
-        <h1 id="RMQ算法"><a href="#RMQ算法" class="headerlink" title="RMQ算法"></a>RMQ算法</h1><blockquote>
+        <p>链接:<a href="http://acm.hdu.edu.cn/showproblem.php?pid=4283" target="_blank" rel="noopener">hdu4283</a><br><a id="more"></a></p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><blockquote>
 <ul>
-<li>是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法，</li>
-<li>当然这个问题用线段树同样能够解决。<a id="more"></a>
-<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2></li>
-<li>这个算法其实就是dp+位运算,dp[i][j]表示$i到i+2^j-1$这个区间的最值,</li>
-<li>因为状态定义的关系,我们可以很方便的把d[i][j]表示的区间划分为两部分,</li>
-<li>分别为$i到i+2^j-1$以及$i+2^{j-1}-1$到$i+2^j-1$</li>
-<li>这两个部分,那么转移方程也就很容易出来了</li>
-<li><center>dp[i][j]=max(dp[i][j-1],dp[i+(1&lt;&lt;j-1)][j-1]);</center></li>
-<li>代码</li>
+<li>菜鸡的我一开始甚至在想是不是模拟搜索/px</li>
+<li>DP[i][j]表示区间i~j取得的最小答案,那么枚举区间i~j内第i个人上台的次序就可以划分为dp[i+1][k],dp[k+1][j]两个问题</li>
+<li>显然i点的ds值是c[i]<em>(k-i)  而i+1~j的ds值为(sum[j]-sum[i])</em>(k-i+1)<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">107</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> dp[N][N],c[N],sum[N],n,T;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">	rep(cnt,<span class="number">1</span>,T)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">		rep(i,<span class="number">1</span>,n)&#123;<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;c[i]);sum[i]=sum[i<span class="number">-1</span>]+c[i];&#125;</span><br><span class="line">		rep(l,<span class="number">2</span>,n)rep(i,<span class="number">1</span>,n-l+<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">int</span> j=i+l<span class="number">-1</span>;</span><br><span class="line">			dp[i][j]=inf;</span><br><span class="line">			rep(k,i,j)dp[i][j]=min(dp[i][j],dp[i+<span class="number">1</span>][k]+dp[k+<span class="number">1</span>][j]+c[i]*(k-i)+(k-i+<span class="number">1</span>)*(sum[j]-sum[k]));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case #%d: %d\n"</span>,cnt,dp[<span class="number">1</span>][n]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </blockquote>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rmq</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> end=<span class="built_in">log</span>(n+<span class="number">0.0</span>)/<span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">	rep(i,<span class="number">1</span>,n)mx[i][<span class="number">0</span>]=mn[i][<span class="number">0</span>]=a[i];</span><br><span class="line">	rep(j,<span class="number">1</span>,end)&#123;</span><br><span class="line">		<span class="keyword">int</span> end_i=n-(<span class="number">1</span>&lt;&lt;j)+<span class="number">1</span>;</span><br><span class="line">		rep(i,<span class="number">1</span>,end_i)&#123;</span><br><span class="line">			mx[i][j]=max(mx[i][j<span class="number">-1</span>],mx[i+(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)][j<span class="number">-1</span>]);</span><br><span class="line">			mn[i][j]=min(mn[i][j<span class="number">-1</span>],mn[i+(<span class="number">1</span>&lt;&lt;j<span class="number">-1</span>)][j<span class="number">-1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k=<span class="built_in">log</span>(r-l+<span class="number">1.0</span>)/<span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">	<span class="keyword">int</span> ans1=max(mx[l][k],mx[r-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k]);</span><br><span class="line">	<span class="keyword">int</span> ans2=min(mn[l][k],mn[r-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k]);</span><br><span class="line">	<span class="keyword">return</span> ans1-ans2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -422,7 +417,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RMQ/" rel="tag"># RMQ</a>
+            <a href="/tags/区间DP/" rel="tag"># 区间DP</a>
           
         </div>
       
@@ -435,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/poj3264/" rel="next" title="poj3264">
-                <i class="fa fa-chevron-left"></i> poj3264
+              <a href="/zoj3469/" rel="next" title="zoj3469">
+                <i class="fa fa-chevron-left"></i> zoj3469
               </a>
             
           </div>
@@ -444,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/hdu4027/" rel="prev" title="hdu4027">
-                hdu4027 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -614,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RMQ算法"><span class="nav-number">1.</span> <span class="nav-text">RMQ算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法分析"><span class="nav-number">1.1.</span> <span class="nav-text">算法分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">1.</span> <span class="nav-text">题解</span></a></li></ol></div>
             
 
           </div>

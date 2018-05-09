@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu4283]]></title>
+    <url>%2Fhdu4283%2F</url>
+    <content type="text"><![CDATA[链接:hdu4283 题解 菜鸡的我一开始甚至在想是不是模拟搜索/px DP[i][j]表示区间i~j取得的最小答案,那么枚举区间i~j内第i个人上台的次序就可以划分为dp[i+1][k],dp[k+1][j]两个问题 显然i点的ds值是c[i](k-i) 而i+1~j的ds值为(sum[j]-sum[i])(k-i+1)123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;int dp[N][N],c[N],sum[N],n,T;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%d",&amp;c[i]);sum[i]=sum[i-1]+c[i];&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j)dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]+c[i]*(k-i)+(k-i+1)*(sum[j]-sum[k])); &#125; printf("Case #%d: %d\n",cnt,dp[1][n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[zoj3469]]></title>
     <url>%2Fzoj3469%2F</url>
     <content type="text"><![CDATA[链接:zoj3469 题解 dp[i][j]表示区间i~j已经分配完之后的最小花费状态转移如下 dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x));1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const ll inf=0x3f3f3f3f;struct node&#123; int x,c; inline void init(int a,int b)&#123;x=a;c=b;&#125;&#125;nm[N];ll dp[N][N][2],sum[N];inline int cmp(node a,node b)&#123;return a.x&lt;b.x;&#125;int n,X,v;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;v,&amp;X))&#123; memset(dp,inf,sizeof(dp)); rep(i,1,n)scanf("%d%d",&amp;nm[i].x,&amp;nm[i].c); nm[n+1].init(X,0);n++; sort(nm+1,nm+n+1,cmp); rep(i,1,n)&#123;sum[i]=sum[i-1]+nm[i].c;if(nm[i].x==X&amp;&amp;nm[i].c==0)dp[i][i][0]=dp[i][i][1]=0;&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x)); &#125; //rep(i,1,n)rep(j,1,n)cout&lt;&lt;dp[i][j][0]&lt;&lt;' '&lt;&lt;dp[i][j][1]&lt;&lt;endl; printf("%lld\n",min(dp[1][n][0],dp[1][n][1])*v); &#125; return 0;&#125;]]></content>
@@ -34,7 +46,7 @@
       </categories>
       <tags>
         <tag>区间DP</tag>
-        <tag>DFS</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -47,7 +59,7 @@
       </categories>
       <tags>
         <tag>区间DP</tag>
-        <tag>DFS</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -107,7 +119,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>DP</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
@@ -145,9 +157,9 @@
         <category>排列组合</category>
       </categories>
       <tags>
-        <tag>DP</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
+        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
@@ -160,7 +172,7 @@
         <category>AC自动机</category>
       </categories>
       <tags>
-        <tag>AC自动机</tag>
+        <tag>ac自动机</tag>
       </tags>
   </entry>
   <entry>
@@ -173,7 +185,7 @@
         <category>AC自动机</category>
       </categories>
       <tags>
-        <tag>AC自动机</tag>
+        <tag>ac自动机</tag>
       </tags>
   </entry>
   <entry>
@@ -205,8 +217,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -997,7 +1009,7 @@
         <category>树状数组</category>
       </categories>
       <tags>
-        <tag>DFS</tag>
+        <tag>dfs</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -1112,7 +1124,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>数位DP</tag>
+        <tag>数位dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1124,7 +1136,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>数位DP</tag>
+        <tag>数位dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1136,7 +1148,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>数位DP</tag>
+        <tag>数位dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1148,7 +1160,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>数位DP</tag>
+        <tag>数位dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1289,7 +1301,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>DP</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>

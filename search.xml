@@ -157,9 +157,9 @@
         <category>排列组合</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>排列组合</tag>
         <tag>思维</tag>
-        <tag>DP</tag>
       </tags>
   </entry>
   <entry>
@@ -381,7 +381,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>树形DP</tag>
+        <tag>树形dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1184,7 +1184,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>树形DP</tag>
+        <tag>树形dp</tag>
       </tags>
   </entry>
   <entry>
@@ -1196,7 +1196,7 @@
         <category>DP</category>
       </categories>
       <tags>
-        <tag>树形DP</tag>
+        <tag>树形dp</tag>
       </tags>
   </entry>
   <entry>

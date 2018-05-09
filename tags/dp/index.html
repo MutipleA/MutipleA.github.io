@@ -290,34 +290,6 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/hdu6143-思维-排列组合/" itemprop="url">
-              
-                <span itemprop="name">hdu6143[思维,排列组合]</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-01T14:42:27+08:00"
-              content="2018-05-01" >
-          05-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
             <a class="post-title-link" href="/lg2292-dp-trie树/" itemprop="url">
               
                 <span itemprop="name">lg2292[dp+trie树]</span>
@@ -416,7 +388,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -968,6 +940,71 @@
       e.stopPropagation();
       if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.4"></script>
+
+
+  
+</body>
+</html>
+hFunc(path, 'local-search-input', 'local-search-result');
       } else {
         proceedsearch();
       };

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[zoj3469]]></title>
+    <url>%2Fzoj3469%2F</url>
+    <content type="text"><![CDATA[链接:zoj3469 题解 dp[i][j]表示区间i~j已经分配完之后的最小花费状态转移如下 dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x));1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const ll inf=0x3f3f3f3f;struct node&#123; int x,c; inline void init(int a,int b)&#123;x=a;c=b;&#125;&#125;nm[N];ll dp[N][N][2],sum[N];inline int cmp(node a,node b)&#123;return a.x&lt;b.x;&#125;int n,X,v;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;v,&amp;X))&#123; memset(dp,inf,sizeof(dp)); rep(i,1,n)scanf("%d%d",&amp;nm[i].x,&amp;nm[i].c); nm[n+1].init(X,0);n++; sort(nm+1,nm+n+1,cmp); rep(i,1,n)&#123;sum[i]=sum[i-1]+nm[i].c;if(nm[i].x==X&amp;&amp;nm[i].c==0)dp[i][i][0]=dp[i][i][1]=0;&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x)); &#125; //rep(i,1,n)rep(j,1,n)cout&lt;&lt;dp[i][j][0]&lt;&lt;' '&lt;&lt;dp[i][j][1]&lt;&lt;endl; printf("%lld\n",min(dp[1][n][0],dp[1][n][1])*v); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj1651]]></title>
     <url>%2Fpoj1651%2F</url>
     <content type="text"><![CDATA[链接:poj1651 题解 区间i~j可以划分为i~k k+1~j 答案加上nm[k]nm[i-1]nm[j]就好12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const ll inf=0x3f3f3f3f3f3f3f;ll dp[N][N],nm[N];int n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n-1)rep(i,2,n-l+2)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j-1)dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+nm[k]*nm[i-1]*nm[j]); &#125; printf("%lld\n",dp[2][n]); return 0;&#125;]]></content>
@@ -134,8 +146,8 @@
       </categories>
       <tags>
         <tag>DP</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -193,8 +205,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

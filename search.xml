@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3205]]></title>
+    <url>%2Flg3205%2F</url>
+    <content type="text"><![CDATA[链接:lg3205 题解 DP[i][j][0/1]表示区间i~j,最后一个人站在左边或者右边可以推出的原始队形的种数 123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int p=19650827;int dp[N][N][2],nm[N],n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)dp[i][i][0]=1; rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; if(nm[j]&gt;nm[j-1])dp[i][j][1]+=dp[i][j-1][1]; if(nm[j]&gt;nm[i])dp[i][j][1]+=dp[i][j-1][0]; if(nm[i]&lt;nm[i+1])dp[i][j][0]+=dp[i+1][j][0]; if(nm[i]&lt;nm[j])dp[i][j][0]+=dp[i+1][j][1]; dp[i][j][0]%=p;dp[i][j][1]%=p; &#125; printf("%d\n",(dp[1][n][0]+dp[1][n][1])%p); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu2476]]></title>
     <url>%2Fhdu2476%2F</url>
     <content type="text"><![CDATA[链接:hdu2476 题解 DP[i][j]表示把a串i~j变为b串的最小变化次数,但是如果a,b中某一对应位相同,可以考虑不变 可以先考虑没有相同的情况然后再处理有相同的情况.ans[j]表示1~j串a变为b的最小变化次数 显然如果a[j]==b[j]ans[j]=min(ans[j],ans[j-1]) 否则ans[j]=min(ans[j],ans[i]+dp[i+1][j]) 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;char str[N],ptr[N];int dp[N][N],ans[N],n;int main()&#123; while(~scanf("%s%s",str+1,ptr+1))&#123; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(i,1,n)dp[i][i]=1; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=dp[i+1][j]+1; rep(k,i+1,j)if(ptr[i]==ptr[k])dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]); &#125; rep(j,1,n)&#123; ans[j]=dp[1][j]; if(str[j]==ptr[j])ans[j]=min(ans[j],ans[j-1]); else rep(i,1,j-1)ans[j]=min(ans[j],ans[i]+dp[i+1][j]); &#125; printf("%d\n",ans[n]); &#125; return 0;&#125;]]></content>
@@ -170,8 +182,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -1235,8 +1247,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

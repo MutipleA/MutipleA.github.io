@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu2476]]></title>
+    <url>%2Fhdu2476%2F</url>
+    <content type="text"><![CDATA[链接:hdu2476 题解 DP[i][j]表示把a串i~j变为b串的最小变化次数,但是如果a,b中某一对应位相同,可以考虑不变 可以先考虑没有相同的情况然后再处理有相同的情况.ans[j]表示1~j串a变为b的最小变化次数 显然如果a[j]==b[j]ans[j]=min(ans[j],ans[j-1]) 否则ans[j]=min(ans[j],ans[i]+dp[i+1][j]) 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;char str[N],ptr[N];int dp[N][N],ans[N],n;int main()&#123; while(~scanf("%s%s",str+1,ptr+1))&#123; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(i,1,n)dp[i][i]=1; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=dp[i+1][j]+1; rep(k,i+1,j)if(ptr[i]==ptr[k])dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]); &#125; rep(j,1,n)&#123; ans[j]=dp[1][j]; if(str[j]==ptr[j])ans[j]=min(ans[j],ans[j-1]); else rep(i,1,j-1)ans[j]=min(ans[j],ans[i]+dp[i+1][j]); &#125; printf("%d\n",ans[n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>DP</category>
+      </categories>
+      <tags>
+        <tag>区间DP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu4283]]></title>
     <url>%2Fhdu4283%2F</url>
     <content type="text"><![CDATA[链接:hdu4283 题解 菜鸡的我一开始甚至在想是不是模拟搜索/px DP[i][j]表示区间i~j取得的最小答案,那么枚举区间i~j内第i个人上台的次序就可以划分为dp[i+1][k],dp[k+1][j]两个问题 显然i点的ds值是c[i](k-i) 而i+1~j的ds值为(sum[j]-sum[i])(k-i+1)123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;int dp[N][N],c[N],sum[N],n,T;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%d",&amp;c[i]);sum[i]=sum[i-1]+c[i];&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j)dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]+c[i]*(k-i)+(k-i+1)*(sum[j]-sum[k])); &#125; printf("Case #%d: %d\n",cnt,dp[1][n]); &#125; return 0;&#125;]]></content>
@@ -158,8 +170,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -1223,8 +1235,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

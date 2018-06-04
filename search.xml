@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3455]]></title>
+    <url>%2Flg3455%2F</url>
+    <content type="text"><![CDATA[链接:lg3455 题解 $ans=\sum_{i}^a{\sum_{j=1}^b{gcd(i,j)=d}}$ $ans=\sum_{i}^{\frac ad}{\sum_{j=1}^{\frac bd}{gcd(i,j)=1}}$ $ans=\sum_{i}^{\frac ad}{\sum_{j=1}^{\frac bd}{\sum_{x|gcd(i,j)}^{}{\mu(x)}}}$ $ans=\sum_{x}^{min(\frac ad,\frac bd)}{\mu(x) \cdot \sum_{i}^{\frac ad}{\sum_{j}^{\frac bd}{x|gcd(i,j)}}}$ 枚举ix jx $ans=\sum_(x)^{min(\frac ad,\frac bd)}{\mu(x) \cdot \sum_{i}^{\frac a{dx}}{\sum_{j}^{\frac b{dx}}}}$ $ans=\sum_(x)^{min(\frac ad,\frac bd)}{[\frac a{dx}]\cdot [\frac b{dx}]}$ 这样就可以O(n)做出来了,但是还是会T,这里用下除法分块就可以在O($sqrt(n)$)做出来 1234567891011121314151617181920212223242526272829303132333435363738#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int mu[N],res[N],p[N],vis[N],cnt,a,b,d,T;ll ans;void get_mu(int n)&#123; mu[1]=1; rep(i,2,n)&#123; if(!vis[i])mu[i]=-1,p[++cnt]=i; for(int j=1;j&lt;=cnt&amp;&amp;i&lt;=n/p[j];++j)&#123; vis[i*p[j]]=1; if(i%p[j]==0)break; mu[i*p[j]]-=mu[i]; &#125; &#125; rep(i,1,n)res[i]=res[i-1]+mu[i];&#125;int main()&#123; scanf("%d",&amp;T); get_mu(500500); while(T--&amp;&amp;~scanf("%d%d%d",&amp;a,&amp;b,&amp;d))&#123; int l=1,r,len=min(a,b);ans=0; while(l&lt;=len)&#123; r=min(a/(a/l),b/(b/l)); ans+=1ll*(a/l/d)*1ll*(b/l/d)*1ll*(res[r]-res[l-1]); l=r+1; &#125; printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+        <category>数论</category>
+        <category>莫比乌斯反演</category>
+      </categories>
+      <tags>
+        <tag>莫比乌斯反演</tag>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[莫比乌斯反演]]></title>
+    <url>%2F%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94%2F</url>
+    <content type="text"><![CDATA[莫比乌斯函数如下 \mu(d)= \begin{cases} 1 &\mbox{d=1}\\ (-1)^k &\mbox{$d=p_1p_2p_3...p_k,p_i$是互异素数}\\ 0 &\mbox{其余情况} \end{cases} 于是有如下两条性质\sum_{d|n}^{}{\mu(d)=[n=1]}\sum_{d|n}^{}{\frac {\mu(d)}{d}}={\frac {\phi(n)}{n}} 第一个性质用组合数可以很方便得到 莫比乌斯反演如下 如果有$f(n)=\sum_{d|n}^{}{g(d)}$ 那么$g(n)=\sum_{d|n}^{}{\mu(d)\cdot f(\frac nd)}$ $\sum_{d|n}^{}{\mu(d)\cdot f(\frac nd)}=\sum_{d|n}^{}{\mu(d)\cdot \sum_{k| \frac nd}^{}g(k)}$ $=\sum_{d|n}^{}{\sum_{k| \frac nd}^{}{\mu(d) \cdot g(k)}}$ 显然其实就是枚举$d\cdot k|n$ 即$=\sum_{k|n}^{}{\sum_{d| \frac nk}^{}{\mu(d) \cdot g(k)}}$ 由性质1可得该式$=g(n)$ (其实我每次都没构造函数,我直接推的2333…) 上一段线筛莫比乌斯函数代码1234567891011void get_mu(int n)&#123; mu[1]=1; for(int i=2;i&lt;=n;++i)&#123; if(!vis[i])mu[i]=-1,p[++cnt]=i; for(int j=1;j&lt;=cnt&amp;&amp;i&lt;=n/p[j];++j)&#123; vis[i*p[j]]=1; if(i%p[j]==0)break; mu[i*p[j]]-=mu[i]; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>数论</category>
+      </categories>
+      <tags>
+        <tag>莫比乌斯反演</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu1007]]></title>
     <url>%2Fhdu1007%2F</url>
     <content type="text"><![CDATA[链接:hdu1007 题解 平面最近点对问题 采用分治,复杂度为O(Knlognlogn) 先考虑一维的情况(虽然可以O(n)扫一遍) 将序列按升序排列,然后划分为两个区间,假设左边最近点对距离为d1 ,右边最近点对距离为d2 d=min(d1,d2)显然不是整个区间的最近点对距离 假设d1,d2已求出的情况下,只需要求出横跨两个区间的最近点对距离d3就好了 显然只有满足dis(p,mid)&lt;d以及dis(q,mid)&lt;d的点才可能会对答案有贡献(p在左区间,q在右区间),求出这部分再按照y轴排序之后在满足y[j]-y[i]&lt;d的点内求就好 具体看代码就好 12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const double dnf=0x3f3f3f3f;const int N=1e5+7;double x[N],y[N];int tmp[N],id[N],cnt,n;inline double dis(int a,int b)&#123;return sqrt((x[a]-x[b])*(x[a]-x[b])+(y[a]-y[b])*(y[a]-y[b]));&#125;inline int cmpx(int a,int b)&#123;return x[a]==x[b]?y[a]&lt;y[b]:x[a]&lt;x[b];&#125;inline int cmpy(int a,int b)&#123;return y[a]&lt;y[b];&#125;double solve(int l,int r)&#123; if(l==r)return dnf; if(r==l+1)return dis(id[l],id[r]); int mid=l+r&gt;&gt;1; double d1=solve(l,mid); double d2=solve(mid+1,r); double d=min(d1,d2);cnt=0; rep(i,l,r)if(dis(id[i],id[mid])&lt;=d)tmp[++cnt]=id[i]; sort(tmp+1,tmp+cnt+1,cmpy); rep(i,1,cnt)for(int j=i+1;j&lt;=cnt&amp;&amp;y[tmp[j]]-y[tmp[i]]&lt;d;j++)&#123;double tp=dis(tmp[i],tmp[j]);d=min(tp,d);&#125; return d;&#125;int main()&#123; while(~scanf("%d",&amp;n)&amp;&amp;n)&#123; rep(i,1,n)&#123;scanf("%lf%lf",&amp;x[i],&amp;y[i]);id[i]=i;&#125; sort(id+1,id+n+1,cmpx); printf("%.2lf\n",solve(1,n)/2); &#125; return 0;&#125; 看到某个大佬用奇怪的方式O(n^2)暴力过了 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const double dnf=0x3f3f3f3f;const int N=1e5+7;struct node&#123; double x,y; inline void init()&#123;scanf("%lf%lf",&amp;x,&amp;y);&#125;&#125;a[N],b[N];int n;inline int cmpx(const node &amp;x,const node &amp;y)&#123;return x.x&lt;y.x;&#125;inline int cmpy(const node &amp;x,const node &amp;y)&#123;return x.y&lt;y.y;&#125;inline double dis(node &amp;x,node &amp;y)&#123;return sqrt((x.x-y.x)*(x.x-y.x)+(x.y-y.y)*(x.y-y.y));&#125;int main()&#123; while(~scanf("%d",&amp;n)&amp;&amp;n)&#123; double d=dnf; int tot1=0,tot2=100; rep(i,1,n)a[i].init(); rep(i,1,n)b[i]=a[i]; sort(a+1,a+n+1,cmpx); sort(b+1,b+n+1,cmpy); for(int i1=2,i2=2,j1=1,j2=1;i1&lt;=n&amp;&amp;i2&lt;=n;)&#123; repd(k,j1,1)&#123; d=min(d,dis(a[i1],a[k])); if(a[i1].x-a[k].x&gt;=d||k==1)&#123;j1=i1++;break;&#125; if(tot1&gt;=tot2)&#123;tot1+=20;j1=k-1;break;&#125; tot1++; &#125; repd(k,j2,1)&#123; d=min(d,dis(b[i2],b[k])); if(b[i2].y-b[k].y&gt;=d||k==1)&#123;j2=i2++;break;&#125; if(tot2&gt;=tot1)&#123;tot2+=20;j2=k-1;break;&#125; tot2++; &#125; &#125; printf("%.2lf\n",d/2); &#125; return 0;&#125;]]></content>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="链接:lg3455">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T05:34:41.498Z">
+<meta property="og:updated_time" content="2018-06-13T08:50:16.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lg3455">
 <meta name="twitter:description" content="链接:lg3455">
@@ -413,7 +413,7 @@
 <li>枚举i<em>x j</em>x</li>
 <li>$ans=\sum_(x)^{min(\frac ad,\frac bd)}{\mu(x) \cdot \sum_{i}^{\frac a{dx}}{\sum_{j}^{\frac b{dx}}}}$</li>
 <li>$ans=\sum_(x)^{min(\frac ad,\frac bd)}{[\frac a{dx}]\cdot [\frac b{dx}]}$</li>
-<li>这样就可以O(n)做出来了,但是还是会T,这里用下除法分块就可以在O($sqrt(n)$)做出来</li>
+<li>这样就可以O(n)做出来了,但是还是会T,这里用下除法分块就可以在O($\sqrt n$)做出来</li>
 </ul>
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rep(i,x,y) for(register int i=x;i&lt;=y;++i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> repd(i,x,y) for(register int i=x;i&gt;=y;--i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e6</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> mu[N],res[N],p[N],vis[N],cnt,a,b,d,T;</span><br><span class="line">ll ans;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_mu</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    rep(i,<span class="number">2</span>,n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!vis[i])mu[i]=<span class="number">-1</span>,p[++cnt]=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=cnt&amp;&amp;i&lt;=n/p[j];++j)&#123;</span><br><span class="line">            vis[i*p[j]]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%p[j]==<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">            mu[i*p[j]]-=mu[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    rep(i,<span class="number">1</span>,n)res[i]=res[i<span class="number">-1</span>]+mu[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">	get_mu(<span class="number">500500</span>);</span><br><span class="line">	<span class="keyword">while</span>(T--&amp;&amp;~<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;d))&#123;</span><br><span class="line">		<span class="keyword">int</span> l=<span class="number">1</span>,r,len=min(a,b);ans=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(l&lt;=len)&#123;</span><br><span class="line">			r=min(a/(a/l),b/(b/l));</span><br><span class="line">			ans+=<span class="number">1l</span>l*(a/l/d)*<span class="number">1l</span>l*(b/l/d)*<span class="number">1l</span>l*(res[r]-res[l<span class="number">-1</span>]);</span><br><span class="line">			l=r+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -457,6 +457,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lg3327/" rel="prev" title="lg3327">
+                lg3327 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -542,7 +546,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj3485]]></title>
+    <url>%2Fpoj3485%2F</url>
+    <content type="text"><![CDATA[链接:poj3485 题解 公路就是x轴，这题其实就是区间选点问题。 以村庄位圆心，D为半径，与x轴两个交点，显然只需要这段区间内选一个点就可以让这个村庄满足题意，所以问题转换为在给定的n个区间中选择最少的点，使得每个区间最少有一个点。 然后就直接贪心一下就可以AC。半夜做题效率确实有点低QWQ123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define ll long long#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;const double eps=1e-10;const int inf=0x3f3f3f3f;typedef pair&lt;double,double&gt; q;q a[N];int ans,L,D,n;int main()&#123; while(~scanf("%d%d%d",&amp;L,&amp;D,&amp;n))&#123; D*=D;ans=1; rep(i,1,n)&#123; double x,y; scanf("%lf%lf",&amp;x,&amp;y); double tp=sqrt(D-y*y); a[i]=q(x+tp,x-tp); &#125; sort(a+1,a+n+1); double lst=a[1].first; rep(i,2,n)if(lst&lt;a[i].second)ans++,lst=a[i].first; printf("%d\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[zoj3993]]></title>
+    <url>%2Fzoj3993%2F</url>
+    <content type="text"><![CDATA[链接:zoj3993 题解 首先要搞清楚这题的概率怎么算，以建筑物为圆心r为半径的圆在大圆以内的面积除以大圆面积。 很显然在点到初始圆心max(2*r-R,R-2*r)以内的建筑物安全概率都是1，如果没有这样的点，就选距离圆心最近的点。 1234567891011121314151617181920212223242526272829303132#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define ll long long#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;const double eps=1e-10;const int inf=0x3f3f3f3f;int T,R,r,n,ans[N];int main()&#123; scanf("%d",&amp;T); while(T--&amp;&amp;~scanf("%d%d%d",&amp;n,&amp;R,&amp;r))&#123; int res=max(2*r-R,R-2*r),mind=inf,tp,cnt=0; res*=res; rep(i,1,n)&#123; int x,y;scanf("%d%d",&amp;x,&amp;y); if(x*x+y*y&lt;=res)tp=0; else tp=x*x+y*y; if(tp&lt;mind)&#123; mind=tp; cnt=0; ans[++cnt]=i; &#125; else if(tp==mind)ans[++cnt]=i; &#125; printf("%d\n",cnt); rep(i,1,cnt)printf("%d%c",ans[i],i!=cnt?' ':'\n'); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>思维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu5412]]></title>
     <url>%2Fhdu5412%2F</url>
-    <content type="text"><![CDATA[链接:hdu5412 题解 注意这题是单点修改，整体二分一下就可以AC，一发过。。。 把所有修改操作看成把这个点删了，再加上一个数。 每次二分一个mid，对于要修改的数小于（因为求得是第k大）这个值，直接加上然后放到左区间,否则放到右区间，对于查询操作，如果这个区间内大于mid的数x小于k那么显然答案应该比mid小，k-=x后放到左区间，否则放到右区间，注意这里的顺序是不能改变的QAQ123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=1e6+7;const int inf=0x3f3f3f3f;int n,m,ans[N],tr[N],a[N];struct node&#123; int x,y,k,cnt,num; inline void init(int _x,int _y,int _k,int _cnt,int _num)&#123;x=_x;y=_y;k=_k;cnt=_cnt;num=_num;&#125;&#125;q[N],b[N];inline void update(int x,int y)&#123;for(int i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;&#125;inline int query(int x)&#123;ll res=0;for(int i=x;i;i-=lowbit(i))res+=tr[i];return res;&#125;void solve(int L,int R,int LL,int RR)&#123; if(LL==RR)&#123;rep(i,L,R)if(q[i].k)ans[q[i].num]=LL;return ;&#125; int mid=LL+RR&gt;&gt;1,l=L,r=R; rep(i,L,R)&#123; if(q[i].k)&#123; q[i].cnt=query(q[i].y)-query(q[i].x-1); if(q[i].cnt&lt;q[i].k)q[i].k-=q[i].cnt,b[r--]=q[i]; else b[l++]=q[i]; &#125; else &#123; if(q[i].y&lt;=mid)b[l++]=q[i],update(q[i].x,q[i].cnt); else b[r--]=q[i]; &#125; &#125; rep(i,L,R)if(!q[i].k&amp;&amp;q[i].y&lt;=mid)update(q[i].x,-q[i].cnt); rep(i,L,l-1)q[i]=b[i]; for(int i=l,j=R;i&lt;=R;--j,++i)q[i]=b[j]; if(l!=L)solve(L,l-1,LL,mid); if(r!=R)solve(r+1,R,mid+1,RR);&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; int len=0; rep(i,1,n)&#123;scanf("%d",&amp;a[i]);q[++len].init(i,a[i],0,1,0);&#125; scanf("%d",&amp;m); rep(i,1,m)&#123; int op;scanf("%d",&amp;op); if(op&amp;1)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); q[++len].init(x,a[x],0,-1,0); q[++len].init(x,y,0,1,0); a[x]=y; ans[i]=0; &#125; else &#123; int x,y,z; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); q[++len].init(x,y,z,0,i); &#125; &#125; solve(1,len,1,inf); rep(i,1,m)if(ans[i])printf("%d\n",ans[i]); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[链接:hdu5412 题解 注意这题是单点修改，整体二分一下就可以AC，一发过。。。 把所有修改操作看成把这个点删了，再加上一个数。 每次二分一个mid，对于要修改的数小于（因为求得是第k大）这个值，直接加上然后放到左区间,否则放到右区间，对于查询操作，如果这个区间内大于mid的数x小于k那么显然答案应该比mid大，k-=x后放到右区间，否则放到左区间，注意这里的顺序是不能改变的QAQ123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=1e6+7;const int inf=0x3f3f3f3f;int n,m,ans[N],tr[N],a[N];struct node&#123; int x,y,k,cnt,num; inline void init(int _x,int _y,int _k,int _cnt,int _num)&#123;x=_x;y=_y;k=_k;cnt=_cnt;num=_num;&#125;&#125;q[N],b[N];inline void update(int x,int y)&#123;for(int i=x;i&lt;=n;i+=lowbit(i))tr[i]+=y;&#125;inline int query(int x)&#123;ll res=0;for(int i=x;i;i-=lowbit(i))res+=tr[i];return res;&#125;void solve(int L,int R,int LL,int RR)&#123; if(LL==RR)&#123;rep(i,L,R)if(q[i].k)ans[q[i].num]=LL;return ;&#125; int mid=LL+RR&gt;&gt;1,l=L,r=R; rep(i,L,R)&#123; if(q[i].k)&#123; q[i].cnt=query(q[i].y)-query(q[i].x-1); if(q[i].cnt&lt;q[i].k)q[i].k-=q[i].cnt,b[r--]=q[i]; else b[l++]=q[i]; &#125; else &#123; if(q[i].y&lt;=mid)b[l++]=q[i],update(q[i].x,q[i].cnt); else b[r--]=q[i]; &#125; &#125; rep(i,L,R)if(!q[i].k&amp;&amp;q[i].y&lt;=mid)update(q[i].x,-q[i].cnt); rep(i,L,l-1)q[i]=b[i]; for(int i=l,j=R;i&lt;=R;--j,++i)q[i]=b[j]; if(l!=L)solve(L,l-1,LL,mid); if(r!=R)solve(r+1,R,mid+1,RR);&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; int len=0; rep(i,1,n)&#123;scanf("%d",&amp;a[i]);q[++len].init(i,a[i],0,1,0);&#125; scanf("%d",&amp;m); rep(i,1,m)&#123; int op;scanf("%d",&amp;op); if(op&amp;1)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); q[++len].init(x,a[x],0,-1,0); q[++len].init(x,y,0,1,0); a[x]=y; ans[i]=0; &#125; else &#123; int x,y,z; scanf("%d%d%d",&amp;x,&amp;y,&amp;z); q[++len].init(x,y,z,0,i); &#125; &#125; solve(1,len,1,inf); rep(i,1,m)if(ans[i])printf("%d\n",ans[i]); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -266,8 +288,8 @@
         <category>排列组合</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>排列组合</tag>
+        <tag>dp</tag>
         <tag>思维</tag>
       </tags>
   </entry>

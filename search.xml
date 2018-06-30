@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[zoj3981]]></title>
+    <url>%2Fzoj3981%2F</url>
+    <content type="text"><![CDATA[链接:zoj3981 题解 假设站在第一个点每个AC的不满意度则是d[i]=(s[a]+m-1-b)%m，可能出现负数，没关系，之后会处理这种情况。 然后sort一下站在第一个点的不满意度,显然如果站在第i个AC点，d[i]会变成0，之后每个点都会变成d[j]-d[i],之前的每个点会变成d[j]-d[i]+m。这也正好处理了出现负数的情况。123456789101112131415161718192021222324252627282930#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define ll long long#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;const ll lnf=0x3f3f3f3f3f3f;ll ans,d[N],res,a,b,s[N],n,m,p,T;int main()&#123; scanf("%d",&amp;T); while(T--&amp;&amp;~scanf("%d%d%d",&amp;n,&amp;m,&amp;p))&#123; res=0;ans=lnf; rep(i,1,n)scanf("%d",&amp;s[i]); rep(i,1,p)&#123; scanf("%lld%lld",&amp;a,&amp;b); d[i]=(ll)((ll)s[a]+m-1-b)%m; res+=d[i]; &#125; sort(d+1,d+p+1); rep(i,1,p)ans=min(ans,res+m*(i-1)-d[i]*p); printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>思维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj3485]]></title>
     <url>%2Fpoj3485%2F</url>
     <content type="text"><![CDATA[链接:poj3485 题解 公路就是x轴，这题其实就是区间选点问题。 以村庄位圆心，D为半径，与x轴两个交点，显然只需要这段区间内选一个点就可以让这个村庄满足题意，所以问题转换为在给定的n个区间中选择最少的点，使得每个区间最少有一个点。 然后就直接贪心一下就可以AC。半夜做题效率确实有点低QWQ123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define ll long long#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;const double eps=1e-10;const int inf=0x3f3f3f3f;typedef pair&lt;double,double&gt; q;q a[N];int ans,L,D,n;int main()&#123; while(~scanf("%d%d%d",&amp;L,&amp;D,&amp;n))&#123; D*=D;ans=1; rep(i,1,n)&#123; double x,y; scanf("%lf%lf",&amp;x,&amp;y); double tp=sqrt(D-y*y); a[i]=q(x+tp,x-tp); &#125; sort(a+1,a+n+1); double lst=a[1].first; rep(i,2,n)if(lst&lt;a[i].second)ans++,lst=a[i].first; printf("%d\n",ans); &#125; return 0;&#125;]]></content>
@@ -288,9 +299,9 @@
         <category>排列组合</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>dp</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -348,8 +359,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu6301[多校第一场D]]]></title>
+    <url>%2Fhdu6301-%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%80%E5%9C%BAD%2F</url>
+    <content type="text"><![CDATA[链接:hdu6301[多校第一场D] 题解 当时忘了set自带排序功能2333,TLE无数发 思路很简单，断开的区间很好处理，无脑填就好，又重复区间的时候，a[lst].l~a[i].l-1这一段是可以重复使用的，把它放到set,然后依次填就好。具体看代码吧0.0 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;set&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long#define ull unsigned long longusing namespace std;const int N=1e5+7;const int M=1e5+7;struct node&#123; int l,r;&#125;a[N],tp[N];int T,n,m,ans[N];set&lt;int&gt;st;inline int cmp(node x,node y)&#123;return x.l!=y.l?x.l&lt;y.l:x.r&lt;y.r;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; st.clear(); scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)st.insert(i); memset(ans,0,sizeof(ans)); rep(i,1,m)&#123; scanf("%d%d",&amp;a[i].l,&amp;a[i].r); &#125; sort(a+1,a+m+1,cmp); int lst=0; rep(i,1,m)&#123; if(a[i].l&lt;=a[lst].r&amp;&amp;a[i].r&lt;=a[lst].r)continue; if(a[i].l&lt;=a[lst].r)&#123; rep(j,a[lst].l,a[i].l-1)st.insert(ans[j]); rep(j,a[lst].r+1,a[i].r)&#123; ans[j]=*st.begin(); st.erase(ans[j]); &#125; &#125; else &#123; if(i!=1)rep(j,a[lst].l,a[lst].r)if(!st.count(ans[j]))st.insert(ans[j]); rep(j,a[i].l,a[i].r)&#123; ans[j]=*st.begin(); st.erase(ans[j]); &#125; &#125; lst=i; &#125; rep(i,1,n)printf("%d%c",ans[i]?ans[i]:1,i!=n?' ':'\n'); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>贪心、思维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[zoj3981]]></title>
     <url>%2Fzoj3981%2F</url>
     <content type="text"><![CDATA[链接:zoj3981 题解 假设站在第一个点每个AC的不满意度则是d[i]=(s[a]+m-1-b)%m，可能出现负数，没关系，之后会处理这种情况。 然后sort一下站在第一个点的不满意度,显然如果站在第i个AC点，d[i]会变成0，之后每个点都会变成d[j]-d[i],之前的每个点会变成d[j]-d[i]+m。这也正好处理了出现负数的情况。123456789101112131415161718192021222324252627282930#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(int i=x;i&lt;=y;++i)#define repd(i,x,y) for(int i=x;i&gt;=y;--i)#define ll long long#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;const ll lnf=0x3f3f3f3f3f3f;ll ans,d[N],res,a,b,s[N],n,m,p,T;int main()&#123; scanf("%d",&amp;T); while(T--&amp;&amp;~scanf("%d%d%d",&amp;n,&amp;m,&amp;p))&#123; res=0;ans=lnf; rep(i,1,n)scanf("%d",&amp;s[i]); rep(i,1,p)&#123; scanf("%lld%lld",&amp;a,&amp;b); d[i]=(ll)((ll)s[a]+m-1-b)%m; res+=d[i]; &#125; sort(d+1,d+p+1); rep(i,1,p)ans=min(ans,res+m*(i-1)-d[i]*p); printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
@@ -359,8 +370,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

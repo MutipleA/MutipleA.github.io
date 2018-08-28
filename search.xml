@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg1903]]></title>
+    <url>%2Flg1903%2F</url>
+    <content type="text"><![CDATA[链接:lg1903 题解 带修改莫队,记录一下当前询问的上一个版本（看起来好像跟可持续化没什么区别） 其他的跟普通莫队没什么区别，具体看代码。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=5e4+7;const int M=1e6+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;struct node&#123; int l,r,pre,id;&#125;q[N];struct node1&#123; int val,id;&#125;change[N];int A[N],pos[N],a[N],col[M],n,m,cntc,cntq;char s[2];inline int cmp_pos(node x,node y)&#123; if(pos[x.l]!=pos[y.l])return x.l&lt;y.l; if(pos[x.r]!=pos[y.r])return x.r&lt;y.r; return x.pre&lt;y.pre;&#125;inline void init()&#123; read(n);read(m); int len=sqrt(n); rep(i,1,n)read(a[i]),pos[i]=(i-1)/len+1; rep(i,1,m)&#123; scanf("%s",s); if(s[0]=='Q')&#123; read(q[++cntq].l); read(q[cntq].r); q[cntq].pre=cntc; q[cntq].id=cntq; &#125; else &#123; read(change[++cntc].id); read(change[cntc].val); &#125; &#125; sort(q+1,q+cntq+1,cmp_pos);&#125;inline void del(ll &amp;ans,int id)&#123; if(--col[id]==0)ans--;&#125;inline void add(ll &amp;ans,int id)&#123; if(++col[id]==1)ans++;&#125;inline void work(ll &amp;ans,int id,int now)&#123; if(change[id].id&gt;=q[now].l&amp;&amp;change[id].id&lt;=q[now].r)&#123; if(--col[a[change[id].id]]==0)ans--; if(++col[change[id].val]==1)ans++; &#125; swap(change[id].val,a[change[id].id]);&#125;void solve()&#123; init(); ll ans=0; int l=1,r=0,now=0;; rep(i,1,cntq)&#123; while(l&gt;q[i].l)add(ans,a[--l]); while(l&lt;q[i].l)del(ans,a[l++]); while(r&lt;q[i].r)add(ans,a[++r]); while(r&gt;q[i].r)del(ans,a[r--]); while(now&lt;q[i].pre)work(ans,++now,i); while(now&gt;q[i].pre)work(ans,now--,i); A[q[i].id]=ans; &#125; rep(i,1,cntq)printf("%d\n",A[i]);&#125;int main()&#123; solve(); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>莫队</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg1972]]></title>
     <url>%2Flg1972%2F</url>
     <content type="text"><![CDATA[链接:lg1972 题解 裸的莫队，板子套上搞一搞123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=5e5+7;const int M=1e6+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int col[N],f[M],pos[N],n,m;ll ans;struct node&#123; int l,r,id,ans;&#125;q[N];inline int cmp_id(node a,node b)&#123;return a.id&lt;b.id;&#125;inline int cmp_pos(node a,node b)&#123;return pos[a.l]==pos[b.l]?((pos[a.l]&amp;1)?a.r&lt;b.r:a.r&gt;b.r):pos[a.l]&lt;pos[b.l];&#125;inline void modify1(int p,ll &amp;ans)&#123;if(++f[col[p]]==1)ans++;&#125;inline void modify2(int p,ll &amp;ans)&#123;if(--f[col[p]]==0)ans--;&#125;inline void init()&#123; read(n); rep(i,1,n)read(col[i]); int x=sqrt(n); rep(i,1,n)pos[i]=(i-1)/x+1; read(m); rep(i,1,m)&#123; read(q[i].l); read(q[i].r); q[i].id=i; &#125; sort(q+1,q+m+1,cmp_pos);&#125;inline void solve()&#123; int l=1,r=0;ans=0; rep(i,1,m)&#123; if(r&lt;q[i].r)&#123; for(r=r+1;r&lt;q[i].r;++r)modify1(r,ans); modify1(r,ans); &#125; if(q[i].l&lt;l)&#123; for(l=l-1;l&gt;q[i].l;--l)modify1(l,ans); modify1(l,ans); &#125; if(r&gt;q[i].r)for(;r&gt;q[i].r;--r)modify2(r,ans); if(q[i].l&gt;l)for(;q[i].l&gt;l;++l)modify2(l,ans); q[i].ans=ans; &#125; sort(q+1,q+m+1,cmp_id); rep(i,1,m)printf("%d\n",q[i].ans);&#125;int main()&#123; init(); solve(); return 0;&#125;]]></content>
@@ -361,8 +372,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -1426,8 +1437,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

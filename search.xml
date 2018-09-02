@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bzoj2763[分层图]]]></title>
+    <url>%2Fbzoj2763-%E5%88%86%E5%B1%82%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[链接:bzoj2763[分层图] 题解 分层图最短路，dis[i][j]表示到节点i用了j次免费的最小花费，更新的时候j&lt;k的话尝试更新j+1次免费的最小花费，具体看代码。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int nxt[N],head[N],w[N],v[N],dis[N][13],vis[N][13];int n,m,h,cnt,s,t;inline void adde(int a,int b,int c)&#123; v[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;struct node&#123; int d,u,id; node(int a=0,int b=0,int c=0):d(a),u(b),id(c)&#123;&#125; bool operator&lt;(const node &amp;a)const &#123;return d&gt;a.d;&#125;&#125;;priority_queue&lt;node&gt; q;void dijkstra()&#123; memset(dis,0x3f,sizeof(dis)); memset(vis,0,sizeof(vis)); q.push(node(0,s,0)); while(!q.empty())&#123; node a=q.top(); q.pop(); int ds=a.d,u=a.u,id=a.id; if(vis[u][id])continue; vis[u][id]=1; for(int i=head[u];i;i=nxt[i])&#123; int k=v[i],c=w[i]; if(id&lt;h&amp;&amp;!vis[k][id+1]&amp;&amp;dis[k][id+1]&gt;ds)&#123; dis[k][id+1]=ds; q.push(node(ds,k,id+1)); &#125; if(!vis[k][id]&amp;&amp;dis[k][id]&gt;ds+c)&#123; dis[k][id]=ds+c; q.push(node(dis[k][id],k,id)); &#125; &#125; &#125;&#125;int main()&#123; read(n);read(m);read(h); read(s);read(t); rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); adde(a,b,c); adde(b,a,c); &#125; dijkstra(); int ans=0x3f3f3f3f; rep(i,0,h)ans=min(ans,dis[t][i]); printf("%d\n",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>最短路</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg1903]]></title>
     <url>%2Flg1903%2F</url>
     <content type="text"><![CDATA[链接:lg1903 题解 带修改莫队,记录一下当前询问的上一个版本（看起来好像跟可持续化没什么区别） 其他的跟普通莫队没什么区别，具体看代码。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=5e4+7;const int M=1e6+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;struct node&#123; int l,r,pre,id;&#125;q[N];struct node1&#123; int val,id;&#125;change[N];int A[N],pos[N],a[N],col[M],n,m,cntc,cntq;char s[2];inline int cmp_pos(node x,node y)&#123; if(pos[x.l]!=pos[y.l])return x.l&lt;y.l; if(pos[x.r]!=pos[y.r])return x.r&lt;y.r; return x.pre&lt;y.pre;&#125;inline void init()&#123; read(n);read(m); int len=sqrt(n); rep(i,1,n)read(a[i]),pos[i]=(i-1)/len+1; rep(i,1,m)&#123; scanf("%s",s); if(s[0]=='Q')&#123; read(q[++cntq].l); read(q[cntq].r); q[cntq].pre=cntc; q[cntq].id=cntq; &#125; else &#123; read(change[++cntc].id); read(change[cntc].val); &#125; &#125; sort(q+1,q+cntq+1,cmp_pos);&#125;inline void del(ll &amp;ans,int id)&#123; if(--col[id]==0)ans--;&#125;inline void add(ll &amp;ans,int id)&#123; if(++col[id]==1)ans++;&#125;inline void work(ll &amp;ans,int id,int now)&#123; if(change[id].id&gt;=q[now].l&amp;&amp;change[id].id&lt;=q[now].r)&#123; if(--col[a[change[id].id]]==0)ans--; if(++col[change[id].val]==1)ans++; &#125; swap(change[id].val,a[change[id].id]);&#125;void solve()&#123; init(); ll ans=0; int l=1,r=0,now=0;; rep(i,1,cntq)&#123; while(l&gt;q[i].l)add(ans,a[--l]); while(l&lt;q[i].l)del(ans,a[l++]); while(r&lt;q[i].r)add(ans,a[++r]); while(r&gt;q[i].r)del(ans,a[r--]); while(now&lt;q[i].pre)work(ans,++now,i); while(now&gt;q[i].pre)work(ans,now--,i); A[q[i].id]=ans; &#125; rep(i,1,cntq)printf("%d\n",A[i]);&#125;int main()&#123; solve(); return 0;&#125;]]></content>
@@ -372,8 +383,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -1437,8 +1448,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

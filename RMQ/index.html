@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="RMQ算法  是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-12T12:02:55.833Z">
+<meta property="og:updated_time" content="2018-09-07T08:33:22.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RMQ">
 <meta name="twitter:description" content="RMQ算法  是一个快速求区间最值的离线算法，预处理时间复杂度O（n*log(n)），查询O(1)，所以是一个很快速的算法， 当然这个问题用线段树同样能够解决。">
@@ -399,7 +399,7 @@
 <h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2></li>
 <li>这个算法其实就是dp+位运算,dp[i][j]表示$i到i+2^j-1$这个区间的最值,</li>
 <li>因为状态定义的关系,我们可以很方便的把d[i][j]表示的区间划分为两部分,</li>
-<li>分别为$i到i+2^j-1$以及$i+2^{j-1}-1$到$i+2^j-1$</li>
+<li>分别为$i到i+2^{j-1}-1$以及$i+2^{j-1}$到$i+2^j-1$</li>
 <li>这两个部分,那么转移方程也就很容易出来了</li>
 <li><center>dp[i][j]=max(dp[i][j-1],dp[i+(1&lt;&lt;j-1)][j-1]);</center></li>
 <li>代码</li>

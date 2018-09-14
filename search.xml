@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2018ICPC-徐州赛区网络赛F]]></title>
+    <url>%2F2018ICPC-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E8%B5%9BF%2F</url>
+    <content type="text"><![CDATA[链接:2018ICPC-徐州赛区网络赛F 题解 求k短路，根据spfa的性质，某个点第k次出队即是源点到这个点的第k短路。 显然根据性质直接做是不可行的，简单的做法是一次spfa之后A*搜索一下123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int M=1e5+7;const int inf=0x3f3f3f3f;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;struct node&#123; int v,to,nxt;&#125;e[M][2];struct A&#123; int to,g,f; bool operator&lt;(const A &amp;a)const &#123; return a.f==f?a.g&lt;g:a.f&lt;f; &#125;&#125;;priority_queue&lt;A&gt; Q;int n,m,S,E,K,T,vis[N],dis[N],head[N][2],cnt[2],inq[N];inline void adde(int a,int b,int c,int op)&#123; e[++cnt[op]][op].to=b; e[cnt[op]][op].v=c; e[cnt[op]][op].nxt=head[a][op]; head[a][op]=cnt[op];&#125;void spfa()&#123; queue&lt;int&gt; q; memset(inq,0,sizeof inq); memset(dis,0x3f,sizeof dis); inq[E]=1; dis[E]=0; q.push(E); while(!q.empty())&#123; int k=q.front(); q.pop(); inq[k]--; if(inq[k]&gt;n)return ; for(int i=head[k][1];i;i=e[i][1].nxt)&#123; int v=e[i][1].to,c=e[i][1].v; if(dis[v]&gt;dis[k]+c)&#123; dis[v]=dis[k]+c; if(!inq[v])&#123; q.push(v); inq[v]++; &#125; &#125; &#125; &#125;&#125;int A_star()&#123; A a,b; int ct=0; if(dis[S]==inf)return -1; a.to=S; a.g=0; a.f=dis[a.to]; Q.push(a); while(!Q.empty())&#123; a=Q.top(); Q.pop(); if(a.to==E)ct++; if(a.to==E&amp;&amp;a.g&gt;T)return -1; if(ct==K)return a.g; for(int i=head[a.to][0];i;i=e[i][0].nxt)&#123; b.to=e[i][0].to; b.g=a.g+e[i][0].v; b.f=b.g+dis[b.to]; Q.push(b); &#125; &#125; return -1;&#125;inline void init()&#123; memset(head,0,sizeof(head)); memset(cnt,0,sizeof(cnt)); read(S);read(E);read(K);read(T); rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); adde(a,b,c,0); adde(b,a,c,1); &#125;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); spfa(); int ans=A_star(); if(ans==-1||ans&gt;T)puts("Whitesnake!"); else puts("yareyaredawa"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>https://nanti.jisuanke.com/t/31458</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lg1439]]></title>
+    <url>%2Flg1439%2F</url>
+    <content type="text"><![CDATA[链接:lg1439 题解 注意是n的全排列，所以用a串作为字典串将b串更改一下,例如a串3 2 1 4 5 b串1 2 3 4 5 更改之后b串变为3 2 1 4 5 ，求最长公共子序列变为求新b串的最长上升子序列1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int inf=0x3f3f3f3f;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int id[N],a[N],n,dp[N],ans;int main()&#123; read(n); int x; memset(dp,0x3f,sizeof dp);dp[0]=0; rep(i,1,n)&#123;read(x);id[x]=i;&#125; rep(i,1,n)&#123;read(x);a[i]=id[x];&#125; rep(i,1,n)&#123; if(a[i]&gt;dp[ans])dp[++ans]=a[i]; else &#123; int k=lower_bound(dp+1,dp+ans+1,a[i])-dp; dp[k]=min(dp[k],a[i]); &#125; &#125; printf("%d\n",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018ICPC-徐州网络赛]]></title>
+    <url>%2F2018ICPC-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E8%B5%9BB%2F</url>
+    <content type="text"><![CDATA[链接:2018ICPC-徐州网络赛 题解 据说博弈也可以A，赛场上题读错了。。。 其实很简单，A会尽量使答案变大，B会尽量使答案变小。这样就是一个简单的DP。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int st=101;template&lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int dp[2][300],op[N][3],n,m,k,l;int main()&#123; read(n);read(m);read(k);read(l); int cur=0; rep(i,1,n)rep(j,0,2)read(op[i][j]); rep(i,-100,100)dp[cur][i+st]=i; repd(i,n,1)&#123; cur^=1; if(i&amp;1)rep(j,-100,100)&#123; dp[cur][j+st]=-100; int k; if(op[i][0])&#123; k=min(100,j+op[i][0]); dp[cur][j+st]=max(dp[cur][j+st],dp[cur^1][k+st]); &#125; if(op[i][1])&#123; k=max(-100,j-op[i][1]); dp[cur][j+st]=max(dp[cur][j+st],dp[cur^1][k+st]); &#125; if(op[i][2])&#123; k=-j; dp[cur][j+st]=max(dp[cur][j+st],dp[cur^1][k+st]); &#125; &#125; else rep(j,-100,100)&#123; dp[cur][j+st]=100; int k; if(op[i][0])&#123; k=min(100,j+op[i][0]); dp[cur][j+st]=min(dp[cur][j+st],dp[cur^1][k+st]); &#125; if(op[i][1])&#123; k=max(-100,j-op[i][1]); dp[cur][j+st]=min(dp[cur][j+st],dp[cur^1][k+st]); &#125; if(op[i][2])&#123; k=-j; dp[cur][j+st]=min(dp[cur][j+st],dp[cur^1][k+st]); &#125; &#125; &#125; if(dp[cur][m+st]&gt;=k)puts("Good Ending"); else if(dp[cur][m+st]&gt;l)puts("Normal Ending"); else puts("Bad Ending"); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>博弈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj2763[分层图]]]></title>
     <url>%2Fbzoj2763-%E5%88%86%E5%B1%82%E5%9B%BE%2F</url>
     <content type="text"><![CDATA[链接:bzoj2763[分层图] 题解 分层图最短路，dis[i][j]表示到节点i用了j次免费的最小花费，更新的时候j&lt;k的话尝试更新j+1次免费的最小花费，具体看代码。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int nxt[N],head[N],w[N],v[N],dis[N][13],vis[N][13];int n,m,h,cnt,s,t;inline void adde(int a,int b,int c)&#123; v[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;struct node&#123; int d,u,id; node(int a=0,int b=0,int c=0):d(a),u(b),id(c)&#123;&#125; bool operator&lt;(const node &amp;a)const &#123;return d&gt;a.d;&#125;&#125;;priority_queue&lt;node&gt; q;void dijkstra()&#123; memset(dis,0x3f,sizeof(dis)); memset(vis,0,sizeof(vis)); q.push(node(0,s,0)); while(!q.empty())&#123; node a=q.top(); q.pop(); int ds=a.d,u=a.u,id=a.id; if(vis[u][id])continue; vis[u][id]=1; for(int i=head[u];i;i=nxt[i])&#123; int k=v[i],c=w[i]; if(id&lt;h&amp;&amp;!vis[k][id+1]&amp;&amp;dis[k][id+1]&gt;ds)&#123; dis[k][id+1]=ds; q.push(node(ds,k,id+1)); &#125; if(!vis[k][id]&amp;&amp;dis[k][id]&gt;ds+c)&#123; dis[k][id]=ds+c; q.push(node(dis[k][id],k,id)); &#125; &#125; &#125;&#125;int main()&#123; read(n);read(m);read(h); read(s);read(t); rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); adde(a,b,c); adde(b,a,c); &#125; dijkstra(); int ans=0x3f3f3f3f; rep(i,0,h)ans=min(ans,dis[t][i]); printf("%d\n",ans); return 0;&#125;]]></content>
@@ -383,8 +417,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -442,8 +476,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1448,8 +1482,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

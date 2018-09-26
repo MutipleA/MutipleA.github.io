@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[2018ICPC-徐州赛区网络赛F]]></title>
-    <url>%2F2018ICPC-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E8%B5%9BF%2F</url>
-    <content type="text"><![CDATA[链接:2018ICPC-徐州赛区网络赛F 题解 求k短路，根据spfa的性质，某个点第k次出队即是源点到这个点的第k短路。 显然根据性质直接做是不可行的，简单的做法是一次spfa之后A*搜索一下123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int M=1e5+7;const int inf=0x3f3f3f3f;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;struct node&#123; int v,to,nxt;&#125;e[M][2];struct A&#123; int to,g,f; bool operator&lt;(const A &amp;a)const &#123; return a.f==f?a.g&lt;g:a.f&lt;f; &#125;&#125;;priority_queue&lt;A&gt; Q;int n,m,S,E,K,T,vis[N],dis[N],head[N][2],cnt[2],inq[N];inline void adde(int a,int b,int c,int op)&#123; e[++cnt[op]][op].to=b; e[cnt[op]][op].v=c; e[cnt[op]][op].nxt=head[a][op]; head[a][op]=cnt[op];&#125;void spfa()&#123; queue&lt;int&gt; q; memset(inq,0,sizeof inq); memset(dis,0x3f,sizeof dis); inq[E]=1; dis[E]=0; q.push(E); while(!q.empty())&#123; int k=q.front(); q.pop(); inq[k]--; if(inq[k]&gt;n)return ; for(int i=head[k][1];i;i=e[i][1].nxt)&#123; int v=e[i][1].to,c=e[i][1].v; if(dis[v]&gt;dis[k]+c)&#123; dis[v]=dis[k]+c; if(!inq[v])&#123; q.push(v); inq[v]++; &#125; &#125; &#125; &#125;&#125;int A_star()&#123; A a,b; int ct=0; if(dis[S]==inf)return -1; a.to=S; a.g=0; a.f=dis[a.to]; Q.push(a); while(!Q.empty())&#123; a=Q.top(); Q.pop(); if(a.to==E)ct++; if(a.to==E&amp;&amp;a.g&gt;T)return -1; if(ct==K)return a.g; for(int i=head[a.to][0];i;i=e[i][0].nxt)&#123; b.to=e[i][0].to; b.g=a.g+e[i][0].v; b.f=b.g+dis[b.to]; Q.push(b); &#125; &#125; return -1;&#125;inline void init()&#123; memset(head,0,sizeof(head)); memset(cnt,0,sizeof(cnt)); read(S);read(E);read(K);read(T); rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); adde(a,b,c,0); adde(b,a,c,1); &#125;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); spfa(); int ans=A_star(); if(ans==-1||ans&gt;T)puts("Whitesnake!"); else puts("yareyaredawa"); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[2018ICPC-沈阳赛区网络赛D]]></title>
+    <url>%2F2018ICPC-%E6%B2%88%E9%98%B3%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E8%B5%9BD%2F</url>
+    <content type="text"><![CDATA[链接:2018ICPC-沈阳赛区网络赛D 题解 求k短路，根据spfa的性质，某个点第k次出队即是源点到这个点的第k短路。 显然根据性质直接做是不可行的，简单的做法是建反向边spfa之后求出所有点到t的最短路 然后用当前距离加上该点到t的最短距离作为优先级A*搜索一下123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int M=1e5+7;const int inf=0x3f3f3f3f;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;struct node&#123; int v,to,nxt;&#125;e[M][2];struct A&#123; int to,g,f; bool operator&lt;(const A &amp;a)const &#123; return a.f==f?a.g&lt;g:a.f&lt;f; &#125;&#125;;priority_queue&lt;A&gt; Q;int n,m,S,E,K,T,vis[N],dis[N],head[N][2],cnt[2],inq[N];inline void adde(int a,int b,int c,int op)&#123; e[++cnt[op]][op].to=b; e[cnt[op]][op].v=c; e[cnt[op]][op].nxt=head[a][op]; head[a][op]=cnt[op];&#125;void spfa()&#123; queue&lt;int&gt; q; memset(inq,0,sizeof inq); memset(dis,0x3f,sizeof dis); inq[E]=1; dis[E]=0; q.push(E); while(!q.empty())&#123; int k=q.front(); q.pop(); inq[k]--; if(inq[k]&gt;n)return ; for(int i=head[k][1];i;i=e[i][1].nxt)&#123; int v=e[i][1].to,c=e[i][1].v; if(dis[v]&gt;dis[k]+c)&#123; dis[v]=dis[k]+c; if(!inq[v])&#123; q.push(v); inq[v]++; &#125; &#125; &#125; &#125;&#125;int A_star()&#123; A a,b; int ct=0; if(dis[S]==inf)return -1; a.to=S; a.g=0; a.f=dis[a.to]; Q.push(a); while(!Q.empty())&#123; a=Q.top(); Q.pop(); if(a.to==E)ct++; if(a.to==E&amp;&amp;a.g&gt;T)return -1; if(ct==K)return a.g; for(int i=head[a.to][0];i;i=e[i][0].nxt)&#123; b.to=e[i][0].to; b.g=a.g+e[i][0].v; b.f=b.g+dis[b.to]; Q.push(b); &#125; &#125; return -1;&#125;inline void init()&#123; memset(head,0,sizeof(head)); memset(cnt,0,sizeof(cnt)); read(S);read(E);read(K);read(T); rep(i,1,m)&#123; int a,b,c; read(a);read(b);read(c); adde(a,b,c,0); adde(b,a,c,1); &#125;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); spfa(); int ans=A_star(); if(ans==-1||ans&gt;T)puts("Whitesnake!"); else puts("yareyaredawa"); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
-        <tag>https://nanti.jisuanke.com/t/31458</tag>
+        <tag>A*</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018ICPC-徐州赛区网络赛F]]></title>
+    <url>%2F2018ICPC-%E5%BE%90%E5%B7%9E%E8%B5%9B%E5%8C%BA%E7%BD%91%E7%BB%9C%E8%B5%9BF%2F</url>
+    <content type="text"><![CDATA[链接:2018ICPC-徐州赛区网络赛F 题解12]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[lg1439]]></title>
@@ -417,8 +425,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -476,8 +484,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1268,8 +1276,8 @@
         <category>树状数组</category>
       </categories>
       <tags>
-        <tag>dfs</tag>
         <tag>树状数组</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1482,8 +1490,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

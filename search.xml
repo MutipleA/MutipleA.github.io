@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj2411]]></title>
+    <url>%2Fpoj2411%2F</url>
+    <content type="text"><![CDATA[链接:poj2411 题解 dp[i][j]表示前i行都合法放置的情况下第i行方法为j的方案数 这里我们规定当前这位如果不放,那么该位为0, 当前这位如果右放,对应两位为1 如果下放,当前位为0,下一行的对应位为1 由于要求完美覆盖,我们可以预处理出所有合法放置及关系,然后一个简单状压dp就解决了(不预处理也能AC)12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=15;const int M=1&lt;&lt;11;int n,m,path[M*M+7][2],cnt;ll dp[N][M];inline void get(int a,int pre,int now)&#123; if(a&gt;m)return ; if(a==m)&#123; path[++cnt][0]=pre; path[cnt][1]=now; &#125; get(a+1,pre&lt;&lt;1|1,now&lt;&lt;1); //不放 get(a+1,pre&lt;&lt;1,now&lt;&lt;1|1); //上方 get(a+2,pre&lt;&lt;2|3,now&lt;&lt;2|3); //右放&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; cnt=0; get(0,0,0); memset(dp,0,sizeof dp); dp[0][(1&lt;&lt;m)-1]=1; rep(i,1,n)rep(j,1,cnt)dp[i][path[j][1]]+=dp[i-1][path[j][0]]; printf("%lld\n",dp[n][(1&lt;&lt;m)-1]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>状压</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu3507]]></title>
     <url>%2Fhdu3507%2F</url>
     <content type="text"><![CDATA[链接:hdu3507 题解 dp方程很容易得到dp[i]表示输出到i的最小花费,dp[i]=min(dp[j]+(s[i]-s[j-1])^2),后面那坨有i有j，显然不能直接单调队列优化 考虑某个状态k(kdp[j]+(s[i]-s[j])^2整理一下，把与i无关的放一边得到s[i]>\frac{dp[j]+s[j-1]^2-(dp[k]+s[k-1]^2)}{s[j-1]-s[k-1]} 到这里斜率就出来了,剩下的就是一个简单的斜率优化dp 1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int n,m,q[N],tail,head;int dp[N],sum[N];inline int X(int a,int b)&#123;return (sum[a]-sum[b])*2;&#125;inline int Y(int a,int b)&#123;return dp[a]-dp[b]+sum[a]*sum[a]-sum[b]*sum[b];&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; head=tail=1; q[1]=0; rep(i,1,n)&#123; scanf("%d",&amp;sum[i]); sum[i]+=sum[i-1]; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head])&lt;=X(q[head+1],q[head])*sum[i])++head; dp[i]=(sum[i]-sum[q[head]])*(sum[i]-sum[q[head]])+m+dp[q[head]]; while(head&lt;tail&amp;&amp;Y(i,q[tail])*X(q[tail],q[tail-1])&lt;=Y(q[tail],q[tail-1])*X(i,q[tail]))--tail; q[++tail]=i; &#125; printf("%d\n",dp[n]); &#125; return 0;&#125;]]></content>
@@ -1288,8 +1300,8 @@
         <category>树状数组</category>
       </categories>
       <tags>
-        <tag>dfs</tag>
         <tag>树状数组</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>

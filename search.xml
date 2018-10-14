@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu4528]]></title>
+    <url>%2Fhdu4528%2F</url>
+    <content type="text"><![CDATA[链接:hdu4528 题解 bfs好题,简单但是有点烦,注意E,D要当成墙2333.123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e2+7;typedef pair&lt;int,int&gt; s;struct node&#123; int x,y,dis,cnt; inline void init(int a,int b,int c,int d)&#123;x=a;y=b;dis=c;cnt=d;&#125;&#125;a;s A,B,S;queue&lt;node&gt; q;char str[N];int map[N][N],vis[4][N][N],n,m,t,T;int dx[]=&#123;0,-1,1,0,0&#125;;int dy[]=&#123;0,0,0,-1,1&#125;;inline int judge(int x,int y)&#123;return x&lt;1||x&gt;n||y&lt;1||y&gt;m||map[x][y]==4;&#125;inline void init()&#123; memset(vis,0,sizeof vis); while(!q.empty())q.pop(); rep(i,1,n)&#123; scanf("%s",str+1); rep(j,1,m)&#123; map[i][j]=(str[j]!='.'&amp;&amp;str[j]!='S')?4:0; if(str[j]=='S')S=s(i,j); else if(str[j]=='E')A=s(i,j); else if(str[j]=='D')B=s(i,j); &#125; &#125; rep(k,1,2)&#123; int x,y; if(k==1)x=A.first,y=A.second; else x=B.first,y=B.second; rep(j,1,4)rep(l,1,j&lt;3?n:m)&#123; int nx=x+dx[j]*l,ny=y+dy[j]*l; if(judge(nx,ny))break; map[nx][ny]+=k; &#125; &#125;&#125;int main()&#123; scanf("%d",&amp;T); rep(cse,1,T)&#123; scanf("%d%d%d",&amp;n,&amp;m,&amp;t); init(); int res=0,ans=-1; a.init(S.first,S.second,0,map[S.first][S.second]); if(a.cnt==4)a.cnt=0; q.push(a);vis[a.cnt][S.first][S.second]; while(!q.empty())&#123; int x=q.front().x,y=q.front().y,dis=q.front().dis,cnt=q.front().cnt; q.pop(); if(cnt==3)&#123;ans=dis;break;&#125; rep(i,1,4)&#123; int nx=x+dx[i],ny=y+dy[i]; if(judge(nx,ny)||dis+1&gt;t)continue; int ncnt=cnt+((map[nx][ny]!=cnt)?map[nx][ny]:0); if(ncnt&gt;3)ncnt=3; if(vis[ncnt][nx][ny])continue; a.init(nx,ny,dis+1,ncnt); vis[ncnt][nx][ny]=1; q.push(a); &#125; &#125; printf("Case %d:\n%d\n",cse,ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu2993]]></title>
+    <url>%2Fhdu2993%2F</url>
+    <content type="text"><![CDATA[链接:hdu2993 题解 论文题2333,某中学大佬写的论文,建议搞懂思路没必要去AC,卡IO,快速读入输出都会T… 题意是求max(\frac{a[i]+a[i+1]+...+a[j]}{j-i+1}) (j-i>k) 分子显然可以用前缀和优化,转换为求max(\frac{sum[i]-sum[j]}{j-i}) (j-i>k) 这其实就是在N+1个点(i,sum[i])中求横坐标距离大于k的点对斜率的最值.显然是斜率dp1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cctype&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int BUF = 25000000;int q[N],sum[N],n,k;char Buf[BUF],*buf=Buf;template &lt;typename T&gt;inline void read(T &amp;x)&#123; for(x=0;*buf&lt;'0';buf++); while(*buf&gt;='0')x=x*10+*buf++-'0';&#125;inline int useless2(int a,int b,int c)&#123;return (1LL*sum[c]-sum[b])*(b-a)&lt;=(1LL*sum[b]-sum[a])*(c-b);&#125;inline int useless1(int a,int b,int c)&#123;return (1LL*sum[c]-sum[b])*(c-a)&lt;=(1LL*sum[c]-sum[a])*(c-b);&#125;int main()&#123; int tot=fread(Buf,1,BUF,stdin); while(1)&#123; if(buf-Buf+1&gt;=tot)break; read(n);read(k); rep(i,1,n)&#123; read(sum[i]); sum[i]+=sum[i-1]; &#125; int head=1,tail=0;double ans=-0x3f3f3f3f; rep(i,k,n)&#123; while(head&lt;tail&amp;&amp;useless2(q[tail-1],q[tail],i-k))tail--; q[++tail]=i-k; while(head&lt;tail&amp;&amp;useless1(q[head+1],q[head],i))head++; ans=max(1.0*(sum[i]-sum[q[head]])/(i-q[head]),ans); &#125; printf("%.2lf\n",ans); &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj2411]]></title>
     <url>%2Fpoj2411%2F</url>
     <content type="text"><![CDATA[链接:poj2411 题解 dp[i][j]表示前i行都合法放置的情况下第i行方法为j的方案数 这里我们规定当前这位如果不放,那么该位为0, 当前这位如果右放,对应两位为1 如果下放,当前位为0,下一行的对应位为1 由于要求完美覆盖,我们可以预处理出所有合法放置及关系,然后一个简单状压dp就解决了(不预处理也能AC)12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=15;const int M=1&lt;&lt;11;int n,m,path[M*M+7][2],cnt;ll dp[N][M];inline void get(int a,int pre,int now)&#123; if(a&gt;m)return ; if(a==m)&#123; path[++cnt][0]=pre; path[cnt][1]=now; &#125; get(a+1,pre&lt;&lt;1|1,now&lt;&lt;1); //不放 get(a+1,pre&lt;&lt;1,now&lt;&lt;1|1); //上方 get(a+2,pre&lt;&lt;2|3,now&lt;&lt;2|3); //右放&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; cnt=0; get(0,0,0); memset(dp,0,sizeof dp); dp[0][(1&lt;&lt;m)-1]=1; rep(i,1,n)rep(j,1,cnt)dp[i][path[j][1]]+=dp[i-1][path[j][0]]; printf("%lld\n",dp[n][(1&lt;&lt;m)-1]); &#125; return 0;&#125;]]></content>
@@ -449,8 +472,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>排列组合</tag>
         <tag>思维</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>
@@ -1300,8 +1323,8 @@
         <category>树状数组</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>dfs</tag>
+        <tag>树状数组</tag>
       </tags>
   </entry>
   <entry>

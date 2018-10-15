@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu3669]]></title>
+    <url>%2Fhdu3669%2F</url>
+    <content type="text"><![CDATA[链接:hdu3669 题解 把给的矩形以长为第一关键词宽为第二关键词降序排列,去掉包含的矩形,定义dp[j][i]表示前i个矩形挖了j个洞的最小花费 则dp[j][i]=min(dp[j-1][k-1]+x[k]*y[i]) 依然考虑p&lt;k,且k比p优则dp[j-1][k-1]+x[k]y[i]&lt;dp[j-1][k-1]+x[j-1][k-1]+x[p]y[i] 即\frac{dp[j-1][k-1]-dp[j-1][p-1]}{x[p]-x[k]}]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu1300]]></title>
+    <url>%2Fhdu1300%2F</url>
+    <content type="text"><![CDATA[链接:hdu1300 题解 其实这个数据量根本不需要优化2333 dp[i]表示前i个数得到的最大价值 然后很容易就可以得到转移方程,每次选j~i这个级别的放在一起 dp[i]=min(dp[j-1]+(sum[i]-sum[j-1])*p[i]) 虽然到这里就可以AC了,还是考虑下斜率优化 考虑k&lt;j,j比k更优 dp[j-1]+(sum[i]-sum[j-1])*p[i]]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu2829]]></title>
     <url>%2Fhdu2829%2F</url>
     <content type="text"><![CDATA[链接:hdu2829 题解 先介绍斜率优化做法 我们用res[i]表示1~i的区间权值,sum[i]表示1~i的前缀和,那么区间a+1~b的权值为res[b]-res[a]-sum[a]*(sum[b]-sum[a]) dp[j][i]表示前i个数断了j次的最小权值 则dp[j][i]=min(dp[j-1][k]+res[i]-res[k]-sum[k]*(sum[i]-sum[k])) 剩下的和hdu3507一样的1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;int n,m,q[N];ll dp[N][N],sum[N],res[N];inline ll Y(int a,int b,int c)&#123;return dp[c][a]-res[a]+sum[a]*sum[a]-dp[c][b]+res[b]-sum[b]*sum[b];&#125;inline ll X(int a,int b)&#123;return sum[a]-sum[b];&#125;inline void init()&#123; rep(i,1,n)&#123; scanf("%d",&amp;sum[i]); res[i]=res[i-1]+sum[i]*sum[i-1]; sum[i]+=sum[i-1]; &#125;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m)&amp;&amp;(n||m))&#123; init(); rep(i,1,n)dp[0][i]=res[i]; rep(j,1,m)&#123; int head=1,tail=1;q[1]=0; rep(i,1,n)&#123; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head],j-1)&lt;sum[i]*X(q[head+1],q[head]))++head; dp[j][i]=dp[j-1][q[head]]+res[i]-res[q[head]]-sum[q[head]]*(sum[i]-sum[q[head]]); while(head&lt;tail&amp;&amp;Y(i,q[tail],j-1)*X(q[tail],q[tail-1])&lt;=Y(q[tail],q[tail-1],j-1)*X(i,q[tail]))tail--; q[++tail]=i; &#125; &#125; printf("%lld\n",dp[m][n]); &#125; return 0;&#125;]]></content>

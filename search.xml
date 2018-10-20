@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[poj3709]]></title>
+    <url>%2Fpoj3709%2F</url>
+    <content type="text"><![CDATA[链接:poj3709 题解 容易得到O(N^2)的dp方程dp[i]=min(dp[j]+sum[i]-sum[j]-a[j+1]*(i-j)) 显然是个斜率dp 12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=x;--i)#define ll long longusing namespace std;const int N=1e6+7;ll dp[N],a[N],sum[N];int n,m,q[N];inline void init()&#123; rep(i,1,n)&#123; scanf("%lld",&amp;a[i]); sum[i]=sum[i-1]+a[i]; &#125;&#125;inline ll Y(int x,int y)&#123;return dp[x]+a[x+1]*x-sum[x]-(dp[y]+a[y+1]*y-sum[y]);&#125;inline ll X(int x,int y)&#123;return a[x+1]-a[y+1];&#125;int main()&#123; scanf("%d",&amp;n); while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); int head=1,tail=1; rep(i,1,2*m-1)dp[i]=sum[i]-a[1]*i; rep(i,2*m,n)&#123; //确保第一段一定是1开始的且长度为m while(head&lt;tail&amp;&amp;Y(q[tail],i-m)*X(q[tail-1],q[tail])&lt;=Y(q[tail-1],q[tail])*X(q[tail],i-m))--tail; q[++tail]=i-m; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head])&lt;=X(q[head+1],q[head])*i)++head; dp[i]=dp[q[head]]+sum[i]-sum[q[head]]-a[q[head]+1]*(i-q[head]); &#125; printf("%lld\n",dp[n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj1160]]></title>
+    <url>%2Fpoj1160%2F</url>
+    <content type="text"><![CDATA[链接:poj1160 题解 首先预处理出i~j放一个邮局的最短距离dis[i][j],dp[j][i]表示前i个村庄放了j个邮局的最短距离 dp[j][i]=min(dp[j-1][k]+dis[k+1][i])123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=307;int dp[N][N],dis[N][N],x[N],n,m;inline void init()&#123; memset(dp,0x3f,sizeof dp); rep(i,1,n)scanf("%d",&amp;x[i]); sort(x+1,x+n+1); rep(i,1,n)rep(j,i+1,n)dis[i][j]=dis[i][j-1]+x[j]-x[i+j&gt;&gt;1];&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); rep(i,1,n)dp[1][i]=dis[1][i]; rep(j,2,m)rep(i,1,n)rep(k,1,i-1)dp[j][i]=min(dp[j][i],dp[j-1][k]+dis[k+1][i]); printf("%d\n",dp[m][n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>区间dp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu3045]]></title>
+    <url>%2Fhdu3045%2F</url>
+    <content type="text"><![CDATA[链接:hdu3045 题解 显然根据题意排序后,所有集合都是连续的,a[i]表示每只cow的Moo~,sum前缀和,dp[i]表示前i只牛组成的集合的最小减少 即dp[i]=min(dp[j]+sum[i]-sum[j]-(i-j)*a[j+1]) j+1~i划为一个集合 显然是个斜率dp 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=4e5+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;ll dp[N],sum[N],a[N];int n,m,q[N];inline void init()&#123; rep(i,1,n)read(a[i]); sort(a+1,a+n+1); rep(i,1,n)sum[i]=a[i]+sum[i-1]; rep(i,m,2*m-1)dp[i]=sum[i]-i*a[1];&#125;inline ll Y(int x,int y)&#123;return dp[x]-sum[x]+a[x+1]*x-(dp[y]-sum[y]+a[y+1]*y);&#125;inline ll X(int x,int y)&#123;return a[x+1]-a[y+1];&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); int head=1,tail=1; rep(i,2*m,n)&#123; while(head&lt;tail&amp;&amp;Y(q[tail],i-m)*X(q[tail-1],q[tail])&lt;=Y(q[tail-1],q[tail])*X(q[tail],i-m))--tail; q[++tail]=i-m; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head])&lt;=X(q[head+1],q[head])*i)++head; dp[i]=dp[q[head]]+sum[i]-sum[q[head]]-a[q[head]+1]*(i-q[head]); &#125; printf("%I64d\n",dp[n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu3669]]></title>
     <url>%2Fhdu3669%2F</url>
-    <content type="text"><![CDATA[链接:hdu3669 题解 把给的矩形以长为第一关键词宽为第二关键词降序排列,去掉包含的矩形,定义dp[j][i]表示前i个矩形挖了j个洞的最小花费 则dp[j][i]=min(dp[j-1][k-1]+x[k]*y[i]) 依然考虑p&lt;k,且k比p优则dp[j-1][k-1]+x[k]y[i]&lt;dp[j-1][k-1]+x[j-1][k-1]+x[p]y[i] 即\frac{dp[j-1][k-1]-dp[j-1][p-1]}{x[p]-x[k]}]]></content>
+    <content type="text"><![CDATA[链接:hdu3669 题解 把给的矩形以长为第一关键词宽为第二关键词降序排列,去掉包含的矩形,定义dp[j][i]表示前i个矩形挖了j个洞的最小花费 则dp[j][i]=min(dp[j-1][k-1]+x[k]*y[i]) 依然考虑p&lt;k,且k比p优则dp[j-1][k-1]+x[k]*y[i]]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -332,10 +368,10 @@
     <url>%2Flg3205%2F</url>
     <content type="text"><![CDATA[链接:lg3205 题解 DP[i][j][0/1]表示区间i~j,最后一个人站在左边或者右边可以推出的原始队形的种数 123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int p=19650827;int dp[N][N][2],nm[N],n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)dp[i][i][0]=1; rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; if(nm[j]&gt;nm[j-1])dp[i][j][1]+=dp[i][j-1][1]; if(nm[j]&gt;nm[i])dp[i][j][1]+=dp[i][j-1][0]; if(nm[i]&lt;nm[i+1])dp[i][j][0]+=dp[i+1][j][0]; if(nm[i]&lt;nm[j])dp[i][j][0]+=dp[i+1][j][1]; dp[i][j][0]%=p;dp[i][j][1]%=p; &#125; printf("%d\n",(dp[1][n][0]+dp[1][n][1])%p); return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -344,10 +380,10 @@
     <url>%2Fhdu2476%2F</url>
     <content type="text"><![CDATA[链接:hdu2476 题解 DP[i][j]表示把a串i~j变为b串的最小变化次数,但是如果a,b中某一对应位相同,可以考虑不变 可以先考虑没有相同的情况然后再处理有相同的情况.ans[j]表示1~j串a变为b的最小变化次数 显然如果a[j]==b[j]ans[j]=min(ans[j],ans[j-1]) 否则ans[j]=min(ans[j],ans[i]+dp[i+1][j]) 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;char str[N],ptr[N];int dp[N][N],ans[N],n;int main()&#123; while(~scanf("%s%s",str+1,ptr+1))&#123; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(i,1,n)dp[i][i]=1; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=dp[i+1][j]+1; rep(k,i+1,j)if(ptr[i]==ptr[k])dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]); &#125; rep(j,1,n)&#123; ans[j]=dp[1][j]; if(str[j]==ptr[j])ans[j]=min(ans[j],ans[j-1]); else rep(i,1,j-1)ans[j]=min(ans[j],ans[i]+dp[i+1][j]); &#125; printf("%d\n",ans[n]); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -356,10 +392,10 @@
     <url>%2Fhdu4283%2F</url>
     <content type="text"><![CDATA[链接:hdu4283 题解 菜鸡的我一开始甚至在想是不是模拟搜索/px DP[i][j]表示区间i~j取得的最小答案,那么枚举区间i~j内第i个人上台的次序就可以划分为dp[i+1][k],dp[k+1][j]两个问题 显然i点的ds值是c[i](k-i) 而i+1~j的ds值为(sum[j]-sum[i])(k-i+1)123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const int inf=0x3f3f3f3f;int dp[N][N],c[N],sum[N],n,T;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; scanf("%d",&amp;n); rep(i,1,n)&#123;scanf("%d",&amp;c[i]);sum[i]=sum[i-1]+c[i];&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j)dp[i][j]=min(dp[i][j],dp[i+1][k]+dp[k+1][j]+c[i]*(k-i)+(k-i+1)*(sum[j]-sum[k])); &#125; printf("Case #%d: %d\n",cnt,dp[1][n]); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -368,22 +404,22 @@
     <url>%2Fzoj3469%2F</url>
     <content type="text"><![CDATA[链接:zoj3469 题解 dp[i][j]表示区间i~j已经分配完之后的最小花费状态转移如下 dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x));1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const ll inf=0x3f3f3f3f;struct node&#123; int x,c; inline void init(int a,int b)&#123;x=a;c=b;&#125;&#125;nm[N];ll dp[N][N][2],sum[N];inline int cmp(node a,node b)&#123;return a.x&lt;b.x;&#125;int n,X,v;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;v,&amp;X))&#123; memset(dp,inf,sizeof(dp)); rep(i,1,n)scanf("%d%d",&amp;nm[i].x,&amp;nm[i].c); nm[n+1].init(X,0);n++; sort(nm+1,nm+n+1,cmp); rep(i,1,n)&#123;sum[i]=sum[i-1]+nm[i].c;if(nm[i].x==X&amp;&amp;nm[i].c==0)dp[i][i][0]=dp[i][i][1]=0;&#125; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][0]+(sum[i]+sum[n]-sum[j])*(nm[i+1].x-nm[i].x)); dp[i][j][0]=min(dp[i][j][0],dp[i+1][j][1]+(sum[i]+sum[n]-sum[j])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][0]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[i].x)); dp[i][j][1]=min(dp[i][j][1],dp[i][j-1][1]+(sum[i-1]+sum[n]-sum[j-1])*(nm[j].x-nm[j-1].x)); &#125; //rep(i,1,n)rep(j,1,n)cout&lt;&lt;dp[i][j][0]&lt;&lt;' '&lt;&lt;dp[i][j][1]&lt;&lt;endl; printf("%lld\n",min(dp[1][n][0],dp[1][n][1])*v); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[poj1651]]></title>
     <url>%2Fpoj1651%2F</url>
-    <content type="text"><![CDATA[链接:poj1651 题解 区间i~j可以划分为i~k k+1~j 答案加上nm[k]nm[i-1]nm[j]就好12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const ll inf=0x3f3f3f3f3f3f3f;ll dp[N][N],nm[N];int n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n-1)rep(i,2,n-l+2)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j-1)dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+nm[k]*nm[i-1]*nm[j]); &#125; printf("%lld\n",dp[2][n]); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[链接:poj1651 题解 区间i~j可以划分为i~k k+1~j 答案加上nm[k]*nm[i-1]*nm[j]就好12345678910111213141516171819202122232425#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;const ll inf=0x3f3f3f3f3f3f3f;ll dp[N][N],nm[N];int n;int main()&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;nm[i]); rep(l,2,n-1)rep(i,2,n-l+2)&#123; int j=i+l-1; dp[i][j]=inf; rep(k,i,j-1)dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j]+nm[k]*nm[i-1]*nm[j]); &#125; printf("%lld\n",dp[2][n]); return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -392,10 +428,10 @@
     <url>%2Fcodeforces149D%2F</url>
     <content type="text"><![CDATA[链接:codeforces149D 题解 区间l~r可以划分为l~mach[l] mach[l]+1~r,dfs一下分类处理就好12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(regitser int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int p=1e9+7;const int N=800;ll dp[N][N][3][3],ans;int mach[N],tmp[N],n,cnt;char str[N+1];inline void init()&#123; scanf("%s",str+1);n=strlen(str+1); rep(i,1,n)if(str[i]=='(')tmp[++cnt]=i;else if(str[i]==')')mach[tmp[cnt--]]=i;&#125;ll dfs(int l,int r)&#123; if(r==l+1)return dp[l][r][0][1]=dp[l][r][0][2]=dp[l][r][1][0]=dp[l][r][2][0]=1; if(mach[l]==r)&#123; dfs(l+1,r-1); rep(i,0,2)rep(j,0,2)&#123; if(j!=1)dp[l][r][0][1]=(dp[l][r][0][1]+dp[l+1][r-1][i][j])%p; if(j!=2)dp[l][r][0][2]=(dp[l][r][0][2]+dp[l+1][r-1][i][j])%p; if(i!=1)dp[l][r][1][0]=(dp[l][r][1][0]+dp[l+1][r-1][i][j])%p; if(i!=2)dp[l][r][2][0]=(dp[l][r][2][0]+dp[l+1][r-1][i][j])%p; &#125; &#125; else &#123; dfs(l,mach[l]); dfs(mach[l]+1,r); rep(i,0,2)rep(j,0,2)rep(x,0,2)rep(y,0,2)&#123; if(x&amp;&amp;x==y)continue; dp[l][r][i][j]=(dp[l][r][i][j]+dp[l][mach[l]][i][x]*dp[mach[l]+1][r][y][j]%p)%p; &#125; &#125;&#125;int main()&#123; init(); dfs(1,n); rep(i,0,2)rep(j,0,2)ans=(ans+dp[1][n][i][j])%p; printf("%d\n",ans); return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
         <tag>dfs</tag>
       </tags>
@@ -405,12 +441,11 @@
     <url>%2Fpoj2955%2F</url>
     <content type="text"><![CDATA[链接:poj2955 题解 DP[i][j]表示区间i~j的最大括号匹配数量,显然str[i]与str[j]如果匹配DP[i][j]=DP[i+1][j-1]+2 并且对于区间i~j-1内的k必然有DP[i][j]=max(DP[i][j],DP[i][k]+DP[k+1][j]) 123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;int dp[N][N],n;char str[N];int main()&#123; while(~scanf("%s",str+1))&#123; if(strcmp(str+1,"end")==0)break; memset(dp,0,sizeof(dp)); n=strlen(str+1); rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; if((str[i]=='('&amp;&amp;str[j]==')')||(str[i]=='['&amp;&amp;str[j]==']'))dp[i][j]=dp[i+1][j-1]+2; rep(k,i,j-1)dp[i][j]=max(dp[i][j],dp[i][k]+dp[k+1][j]); &#125; printf("%d\n",dp[1][n]); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
-        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -418,10 +453,10 @@
     <url>%2Flightoj1422%2F</url>
     <content type="text"><![CDATA[链接:lightoj1422 题解 DP[i][j]表示区间i~j所需的最少服装 1: 如果i这件衣服后面无法重复使用DP[i][j]=DP[i+1][j]+1 2: 如果i+1~j内有一个k与i一样,可以考虑在k这个位置重复利用i这件衣服即DP[i][j]=min(DP[i][j],DP[i][k-1]+DP[k+1][j])123456789101112131415161718192021222324252627#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=107;int dp[N][N],c[N],n,T;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; scanf("%d",&amp;n); rep(i,1,n)scanf("%d",&amp;c[i]); rep(i,1,n)dp[i][i]=1; rep(l,2,n)rep(i,1,n-l+1)&#123; int j=i+l-1; dp[i][j]=dp[i+1][j]+1; rep(k,i+1,j)if(c[k]==c[i])dp[i][j]=min(dp[i][j],dp[i][k-1]+dp[k+1][j]); &#125; printf("Case %d: %d\n",cnt,dp[1][n]); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -430,10 +465,10 @@
     <url>%2Flg3147%2F</url>
     <content type="text"><![CDATA[链接:lg3147 题解 dp[i][j] 表示第i个位置合成到j所需的长度 123456789101112131415161718192021222324252627282930313233343536#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;map&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define lowbit(x) (x&amp;(-x))#define ll long longusing namespace std;const int N=1e6;int dp[N][70],a[N],n,ans;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int main()&#123; read(n); rep(i,1,n)read(a[i]); rep(i,1,n)&#123; dp[i][a[i]]=1; int j=i-1; while(dp[j][a[i]])&#123; j-=dp[j][a[i]]; a[i]++;dp[i][a[i]]=i-j; &#125; ans=max(ans,a[i]); &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -442,10 +477,10 @@
     <url>%2Flg3146-%E7%AE%80%E5%8D%95%E5%8C%BA%E9%97%B4DP%2F</url>
     <content type="text"><![CDATA[链接:lg3146[简单区间DP] 题解 简单区间DP,dp[i][j]表示i-j所取得的最大的值 dp[i][j]=max(dp[i][j],dp[i][k]+1) 当dp[i][k]==dp[k+1][j]的时候才可以转移 12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;map&gt;#include&lt;algorithm&gt;#define rint register int#define rep(i,x,y) for(rint i=x;i&lt;=y;++i)#define repd(i,x,y) for(rint i=x;i&gt;=y;--i)#define lowbit(x) (x&amp;(-x))#define ll long longusing namespace std;const int N=1e3;int dp[N][N],n,ans;template &lt;typename T&gt;inline void read(T &amp;x)&#123; x=0;char c;int sign=1; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0'; c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int main()&#123; read(n); rep(i,1,n)&#123;read(dp[i][i]),ans=max(ans,dp[i][i]);&#125; repd(i,n-1,1)rep(j,i+1,n)&#123; rep(k,i,j-1)if(dp[i][k]==dp[k+1][j])dp[i][j]=max(dp[i][j],dp[i][k]+1); ans=max(ans,dp[i][j]); &#125; cout&lt;&lt;ans&lt;&lt;endl; return 0;&#125;]]></content>
       <categories>
-        <category>算法</category>
-        <category>DP</category>
+        <category>题解</category>
       </categories>
       <tags>
+        <tag>dp</tag>
         <tag>区间DP</tag>
       </tags>
   </entry>
@@ -568,8 +603,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[uva12594]]></title>
+    <url>%2Fuva12594%2F</url>
+    <content type="text"><![CDATA[链接:uva12594 题解 sum[i]=\sum{j=1}^i{(i-1-pos[j])*pos[j]},res[i]=\sum{j=1}^i{pos[j]} 于是dp[j][i]=min(dp[j-1][k]+sum[i]-sum[k]-(res[i]-res[k])*k) k+1~i划为一组 显然可以斜率优化,详情看代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=20007;char str[50],ptr[N];ll a[N],nm[N],sum[N],res[N],dp[507][N];int n,m,T,len=26,q[N];inline void init()&#123; scanf("%s%d",str+1,&amp;m); rep(i,1,len)nm[str[i]-'a']=i-1; scanf("%s",ptr+1); n=strlen(ptr+1); rep(i,1,n)a[i]=nm[ptr[i]-'a']; rep(i,1,n)&#123; sum[i]=sum[i-1]+(i-1-a[i])*a[i]; res[i]=res[i-1]+a[i]; &#125; rep(i,1,n)dp[1][i]=sum[i];&#125;inline ll Y(int x,int y,int c)&#123;return dp[c][x]-sum[x]+res[x]*x-(dp[c][y]-sum[y]+res[y]*y);&#125;inline ll X(int x,int y)&#123;return x-y;&#125;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; init(); rep(j,2,m)&#123; int head=1,tail=0; //q[++tail]=1; rep(i,1,n)&#123; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head],j-1)&lt;=X(q[head+1],q[head])*res[i])++head; dp[j][i]=dp[j-1][q[head]]+sum[i]-sum[q[head]]-(res[i]-res[q[head]])*q[head]; while(head&lt;tail&amp;&amp;Y(q[tail],i-1,j-1)*X(q[tail-1],q[tail])&lt;Y(q[tail-1],q[tail],j-1)*X(q[tail],i-1))--tail; q[++tail]=i-1; &#125; &#125; printf("Case %d: %lld\n",cnt,dp[m][n]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>斜率优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj3709]]></title>
     <url>%2Fpoj3709%2F</url>
     <content type="text"><![CDATA[链接:poj3709 题解 容易得到O(N^2)的dp方程dp[i]=min(dp[j]+sum[i]-sum[j]-a[j+1]*(i-j)) 显然是个斜率dp 12345678910111213141516171819202122232425262728293031323334353637#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=x;--i)#define ll long longusing namespace std;const int N=1e6+7;ll dp[N],a[N],sum[N];int n,m,q[N];inline void init()&#123; rep(i,1,n)&#123; scanf("%lld",&amp;a[i]); sum[i]=sum[i-1]+a[i]; &#125;&#125;inline ll Y(int x,int y)&#123;return dp[x]+a[x+1]*x-sum[x]-(dp[y]+a[y+1]*y-sum[y]);&#125;inline ll X(int x,int y)&#123;return a[x+1]-a[y+1];&#125;int main()&#123; scanf("%d",&amp;n); while(~scanf("%d%d",&amp;n,&amp;m))&#123; init(); int head=1,tail=1; rep(i,1,2*m-1)dp[i]=sum[i]-a[1]*i; rep(i,2*m,n)&#123; //确保第一段一定是1开始的且长度为m while(head&lt;tail&amp;&amp;Y(q[tail],i-m)*X(q[tail-1],q[tail])&lt;=Y(q[tail-1],q[tail])*X(q[tail],i-m))--tail; q[++tail]=i-m; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head])&lt;=X(q[head+1],q[head])*i)++head; dp[i]=dp[q[head]]+sum[i]-sum[q[head]]-a[q[head]+1]*(i-q[head]); &#125; printf("%lld\n",dp[n]); &#125; return 0;&#125;]]></content>
@@ -603,8 +615,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

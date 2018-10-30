@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu6183-2017广西邀请赛]]></title>
+    <url>%2Fhdu6183-2017%E5%B9%BF%E8%A5%BF%E9%82%80%E8%AF%B7%E8%B5%9B%2F</url>
+    <content type="text"><![CDATA[链接:hdu6183-2017广西邀请赛 题解 仔细观察,可以发现我们只要维护每个y轴区间内最小的x就可以了 显然51棵线段树就可以解决,普通线段树是开不下的,所以需要动态开点 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;const int inf=0x3f3f3f3f;int rt[55],lson[N],rson[N],v[N],cnt,op,res,X;void update(int &amp;o,int l,int r,int x,int y)&#123; if(!o)v[o=++cnt]=x; v[o]=min(v[o],x); if(l==r)return ; int mid=l+r&gt;&gt;1; if(y&lt;=mid)update(lson[o],l,mid,x,y); else update(rson[o],mid+1,r,x,y);&#125;void query(int o,int l,int r,int a,int b)&#123; if(!o||res)return ; if(a&lt;=l&amp;&amp;b&gt;=r)&#123;res=(v[o]&lt;=X);return ;&#125; int mid=l+r&gt;&gt;1; if(a&lt;=mid)query(lson[o],l,mid,a,b); if(b&gt;mid)query(rson[o],mid+1,r,a,b);&#125;int main()&#123; while(~scanf("%d",&amp;op)&amp;&amp;op!=3)&#123; if(op==0)&#123; cnt=0; memset(rt,0,sizeof rt); memset(lson,0,sizeof lson); memset(rson,0,sizeof rson); memset(v,0x3f,sizeof v); &#125; else if(op==1)&#123; int x,y,c; scanf("%d%d%d",&amp;x,&amp;y,&amp;c); update(rt[c],1,N-3,x,y); &#125; else &#123; int ans=0,y1,y2; scanf("%d%d%d",&amp;X,&amp;y1,&amp;y2); rep(i,0,50)&#123; res=0; query(rt[i],1,N-3,y1,y2); if(res)ans++; &#125; printf("%d\n",ans); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu3480]]></title>
     <url>%2Fhdu3480%2F</url>
     <content type="text"><![CDATA[链接:hdu3480 题解 数组排个序,容易得到dp[j][i]表示前i个数分成j组的最小值 dp[j][i]=min(dp[j-1][k]+(a[i]-a[k+1])^2) 显然可以斜率优化 12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e4+7;const int M=5e3+7;int dp[M][N],a[N];int n,m,T,q[N];inline int Pow(ll x)&#123;return x*x;&#125;inline void init()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)scanf("%d",&amp;a[i]); sort(a+1,a+n+1); rep(i,1,n)dp[1][i]=Pow(a[i]-a[1]);&#125;inline int Y(int x,int y,int c)&#123;return dp[c][x]+Pow(a[x+1])-(dp[c][y]+Pow(a[y+1]));&#125;inline int X(int x,int y)&#123;return a[x+1]-a[y+1]&lt;&lt;1;&#125;int main()&#123; scanf("%d",&amp;T); rep(cnt,1,T)&#123; init(); rep(j,2,m)&#123; int head=1,tail=1; rep(i,2,n)&#123; while(head&lt;tail&amp;&amp;Y(q[tail],i-1,j-1)*X(q[tail-1],q[tail])&lt;=Y(q[tail-1],q[tail],j-1)*X(q[tail],i-1))--tail; q[++tail]=i-1; while(head&lt;tail&amp;&amp;Y(q[head+1],q[head],j-1)&lt;=X(q[head+1],q[head])*a[i])++head; dp[j][i]=dp[j-1][q[head]]+Pow(a[i]-a[q[head]+1]); &#125; &#125; printf("Case %d: %d\n",cnt,dp[m][n]); &#125; return 0;&#125;]]></content>
@@ -624,8 +635,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Angora&#39;s Blog">
 <meta property="og:description" content="欧几里德算法(gcd)  辗转相除,求最小公因数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-05T03:47:28.618Z">
+<meta property="og:updated_time" content="2018-10-31T12:37:55.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论小结">
 <meta name="twitter:description" content="欧几里德算法(gcd)  辗转相除,求最小公因数">
@@ -458,9 +458,9 @@
 </blockquote>
 <h3 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h3><blockquote>
 <ul>
-<li>欧拉定理：aφ(m)≡1(mod m)  (φ(m)是小于m且与m互质的数的个数。)</li>
-<li>变形得: a⋅aφ(m)−1≡1(mod m)</li>
-<li>故aφ(m)−1为a在模m下的逆元。(aφ(m)−1用快速幂求解即可)<h3 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h3></li>
+<li>欧拉定理：<script type="math/tex">a^{φ(m)}</script>≡1(mod m)  (φ(m)是小于m且与m互质的数的个数。)</li>
+<li>变形得: <script type="math/tex">a^{aφ(m)−1}</script>≡1(mod m)</li>
+<li>故<script type="math/tex">a^{φ(m)−1}</script>为a在模m下的逆元。(<script type="math/tex">a^{φ(m)−1}</script>用快速幂求解即可)<h3 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h3></li>
 <li>假如p是质数，且gcd(a,p)=1，那么 a(p-1)≡1（mod p），例如：假如a是整数，p是质数，则a,p显然互质(即两者只有一个公约数1)，</li>
 <li>那么我们可以得到费马小定理的一个特例，即当p为质数时候， a^(p-1)≡1(mod p)。</li>
 <li>则a*a^(p-2)≡1(mod p) 显然a^(p-2)就是a关于%p的逆元</li>

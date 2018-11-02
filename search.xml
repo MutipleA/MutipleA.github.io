@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[bzoj4916]]></title>
+    <url>%2Fbzoj4916%2F</url>
+    <content type="text"><![CDATA[链接:bzoj4916 题解 显然第一问答案是1,第二问求S(n)=\sum_{i=1}^n{i*\phi{i}} 设f(i)=i*\phi(i) 根据杜教筛的套路\sum_{i=1}^n{h(i)}=\sum_{i=1}^n(f*g)(i)=\sum_{i=1}^n{\sum_{d|i}{f(d) * g(\frac {i}{d})}}=\sum_{i=1}^n{\sum_{d|i}{i * \phi(i) * g(\frac {i}{d})}} 设g(i)=i 则\sum_{i=1}^n{h(i)}=\sum_{i=1}^n{i * \sum_{d|i}{\phi(\frac {i}{d})}} 显然\sum_{i=1}^n{h(i)}=\sum_{i=1}^n{i^2}=\frac {n*(n+1)*(2*n+1)}{6} g(1) * S(n)=\sum_{i=1}^nh(i)-\sum_{i=2}^n{\sum_{d|i}{d * \phi(d) * \frac {i}{d}}}=\sum_{i=1}^nh(i)-\sum_{i=2}^n{\sum_{j=1}^{i * j]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>杜教筛</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[poj2728]]></title>
     <url>%2Fpoj2728%2F</url>
     <content type="text"><![CDATA[链接:poj2728 题解 实际上求\frac {\sum{}{a[i]}}{\sum{}{b[i]}} i\in T,T是一个生成树 显然是个01分数规划,确定一个x之后将a[i]-x*b[i]赋为边权，跑一边最小生成树就可以 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const double esp=1e-5;struct node&#123;int x,y,z;&#125;mp[N];double a[N][N],b[N][N],c[N][N],dis[N];int n,vis[N];inline void init()&#123; rep(i,1,n)scanf("%d%d%d",&amp;mp[i].x,&amp;mp[i].y,&amp;mp[i].z); rep(i,1,n)rep(j,i+1,n)&#123; a[i][j]=a[j][i]=abs(mp[i].z-mp[j].z); b[i][j]=b[j][i]=sqrt(1.0*(mp[i].x-mp[j].x)*(mp[i].x-mp[j].x)+1.0*(mp[i].y-mp[j].y)*(mp[i].y-mp[j].y)); &#125;&#125;double check(double x)&#123; double res=0; memset(vis,0,sizeof vis); rep(i,1,n)rep(j,i+1,n)c[i][j]=c[j][i]=a[i][j]-x*b[i][j]; rep(i,1,n)dis[i]=c[1][i]; vis[1]=1; rep(i,2,n)&#123; int k; double mn=1.0*0x3f3f3f3f; rep(j,1,n)if(!vis[j]&amp;&amp;mn&gt;dis[j])&#123;mn=dis[j];k=j;&#125; res+=mn;vis[k]=1; rep(j,1,n)if(!vis[j]&amp;&amp;dis[j]&gt;c[k][j])dis[j]=c[k][j]; &#125; return res;&#125;double find()&#123; double l=0,r=1.0*0x3f3f3f3f; while(l+esp&lt;r)&#123; double mid=(l+r)/2; if(check(mid)&lt;=0)r=mid; else l=mid; &#125; return l;&#125;int main()&#123; while(~scanf("%d",&amp;n)&amp;&amp;n)&#123; init(); double ans=find(); printf("%.3f\n",ans); &#125; return 0;&#125;]]></content>

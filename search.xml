@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu1010]]></title>
+    <url>%2Fhdu1010%2F</url>
+    <content type="text"><![CDATA[链接:hdu1010 题解 简单dfs+奇偶剪枝 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=20;pair&lt;int,int&gt; S,D;char mp[N][N];int vis[N][N],n,m,T;int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;inline int dis(int x,int y)&#123;return abs(x-D.first)+abs(y-D.second);&#125;int dfs(int x,int y,int c)&#123; if(c==T&amp;&amp;mp[x][y]=='D')return 1; int t=T-dis(x,y)-c; if(c&gt;=T||t&lt;0||t&amp;1)return 0; rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||mp[nx][ny]=='X'||vis[nx][ny])continue; vis[nx][ny]=1; if(dfs(nx,ny,c+1))return 1; vis[nx][ny]=0; &#125; return 0;&#125;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;T)&amp;&amp;n)&#123; memset(vis,0,sizeof vis); rep(i,1,n)scanf("%s",mp[i]+1); rep(i,1,n)rep(j,1,m)&#123; if(mp[i][j]=='S')S=make_pair(i,j); if(mp[i][j]=='D')D=make_pair(i,j); &#125; vis[S.first][S.second]=1; puts(dfs(S.first,S.second,0)?"YES":"NO"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dfs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[bzoj4916]]></title>
     <url>%2Fbzoj4916%2F</url>
     <content type="text"><![CDATA[链接:bzoj4916 题解 显然第一问答案是1,第二问求S(n)=\sum_{i=1}^n{i*\phi{i}} 设f(i)=i*\phi(i) 根据杜教筛的套路\sum_{i=1}^n{h(i)}=\sum_{i=1}^n(f*g)(i)=\sum_{i=1}^n{\sum_{d|i}{f(d) * g(\frac {i}{d})}}=\sum_{i=1}^n{\sum_{d|i}{i * \phi(i) * g(\frac {i}{d})}} 设g(i)=i 则\sum_{i=1}^n{h(i)}=\sum_{i=1}^n{i * \sum_{d|i}{\phi(\frac {i}{d})}} 显然\sum_{i=1}^n{h(i)}=\sum_{i=1}^n{i^2}=\frac {n*(n+1)*(2*n+1)}{6} g(1) * S(n)=\sum_{i=1}^nh(i)-\sum_{i=2}^n{\sum_{d|i}{d * \phi(d) * \frac {i}{d}}}=\sum_{i=1}^nh(i)-\sum_{i=2}^n{\sum_{j=1}^{i * j]]></content>
@@ -610,8 +621,8 @@
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>思维</tag>
         <tag>排列组合</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -669,8 +680,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1675,8 +1686,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

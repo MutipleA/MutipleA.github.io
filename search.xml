@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg1993]]></title>
+    <url>%2Flg1993%2F</url>
+    <content type="text"><![CDATA[链接:lg1993 题解 裸的差分约束，判环注意要用dfs判，spfa判环会TLE 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=xi;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int inf=0x3f3f3f3f;int head[N],nxt[N],to[N],w[N],vis[N],dis[N],cnt,n,m,ans;inline void adde(int a,int b,int c)&#123; to[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;int spfa(int u)&#123; vis[u]=1; for(int i=head[u];i;i=nxt[i])if(dis[to[i]]&lt;dis[u]+w[i])&#123; dis[to[i]]=dis[u]+w[i]; if(vis[to[i]])return 0; if(!spfa(to[i]))return 0; &#125; vis[u]=0; return 1;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)&#123; int op,a,b,c; scanf("%d",&amp;op); if(op!=3)scanf("%d%d%d",&amp;a,&amp;b,&amp;c); else scanf("%d%d",&amp;a,&amp;b); if(op==1)adde(b,a,c); else if(op==2)adde(a,b,-c); else adde(a,b,0),adde(b,a,0); &#125; rep(i,1,n)adde(0,i,0),dis[i]=-inf; puts(spfa(0)?"Yes":"No"); return 0;&#125;]]></content>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lg1250]]></title>
+    <url>%2Flg1250%2F</url>
+    <content type="text"><![CDATA[链接:lg1250 题解 求最小值，即求最长路，区间上的约束问题，结合题意很显然可以转换成前缀和的点上的约束问题，注意要列出所有约束条件。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int to[N],nxt[N],w[N],head[N],inq[N],dis[N],cnt,n,m;inline void adde(int a,int b,int c)&#123; to[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;void spfa()&#123; queue&lt;int&gt;q; q.push(0); dis[0]=0;inq[0]=1; while(!q.empty())&#123; int k=q.front(); q.pop(); inq[k]--; for(int i=head[k];i;i=nxt[i])if(dis[to[i]]&lt;dis[k]+w[i])&#123; dis[to[i]]=dis[k]+w[i]; if(inq[to[i]]==0)&#123; inq[to[i]]++; q.push(to[i]); &#125; &#125; &#125;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); memset(dis,-1,sizeof dis); rep(i,0,n-1)adde(i+1,i,-1); rep(i,0,n-1)adde(i,i+1,0); rep(i,1,m)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); adde(a-1,b,c); &#125; spfa(); printf("%d\n",dis[n]); return 0;&#125;]]></content>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu1011]]></title>
+    <url>%2Fhdu1011%2F</url>
+    <content type="text"><![CDATA[链接:hdu1011 题解 很裸的树形dp,dp[i][j]表示第i个节点去了j个人能拿的最多大脑 dp[i][j]=max(dp[i][j],dp[i][i-k]+dp[son[i]][k])1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=300+7;int dp[N][N],head[N],nxt[N],to[N],c[N],v[N],vis[N],n,m,cnt;inline void adde(int a,int b)&#123; to[++cnt]=b; nxt[cnt]=head[a]; head[a]=cnt;&#125;int dfs(int u)&#123; vis[u]=1; rep(i,c[u],m)dp[u][i]=v[u]; for(int i=head[u],t;i;i=nxt[i])if(!vis[t=to[i]])&#123; dfs(t); repd(i,m,c[u])rep(j,1,i-c[u])if(dp[t][j])dp[u][i]=max(dp[u][i],dp[u][i-j]+dp[t][j]); &#125;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m)&amp;&amp;n!=-1)&#123; memset(vis,0,sizeof vis); memset(head,0,sizeof head); memset(dp,0,sizeof dp); cnt=0; rep(i,1,n)&#123; scanf("%d%d",&amp;c[i],&amp;v[i]); c[i]=(c[i]+19)/20; //if(c[i]==0)c[i]++; &#125; rep(i,1,n-1)&#123; int a,b; scanf("%d%d",&amp;a,&amp;b); adde(a,b);adde(b,a); &#125; dfs(1); printf("%d\n",m==0?0:dp[1][m]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>树形dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu1010]]></title>
     <url>%2Fhdu1010%2F</url>
     <content type="text"><![CDATA[链接:hdu1010 题解 简单dfs+奇偶剪枝 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=20;pair&lt;int,int&gt; S,D;char mp[N][N];int vis[N][N],n,m,T;int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;inline int dis(int x,int y)&#123;return abs(x-D.first)+abs(y-D.second);&#125;int dfs(int x,int y,int c)&#123; if(c==T&amp;&amp;mp[x][y]=='D')return 1; int t=T-dis(x,y)-c; if(c&gt;=T||t&lt;0||t&amp;1)return 0; rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||mp[nx][ny]=='X'||vis[nx][ny])continue; vis[nx][ny]=1; if(dfs(nx,ny,c+1))return 1; vis[nx][ny]=0; &#125; return 0;&#125;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;T)&amp;&amp;n)&#123; memset(vis,0,sizeof vis); rep(i,1,n)scanf("%s",mp[i]+1); rep(i,1,n)rep(j,1,m)&#123; if(mp[i][j]=='S')S=make_pair(i,j); if(mp[i][j]=='D')D=make_pair(i,j); &#125; vis[S.first][S.second]=1; puts(dfs(S.first,S.second,0)?"YES":"NO"); &#125; return 0;&#125;]]></content>
@@ -1686,8 +1714,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

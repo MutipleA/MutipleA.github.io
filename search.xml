@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg2474]]></title>
+    <url>%2Flg2474%2F</url>
+    <content type="text"><![CDATA[链接:lg2474 题解 A+B&lt;i+j ,可以转换为A-i&lt;B-j，根据输入我们可以很容易求得i-j得上界和下界，floyd维护一下上下界，暴力枚举即可。 注意上界求最短路，下界求最长路。1234567891011121314151617181920212223242526272829303132333435363738#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e3+7;const int inf=0x3f3f3f3f;int n,a,b,dx[N][N],dn[N][N],ans1,ans2,ans3;char str[N];inline void init()&#123; scanf("%d%d%d",&amp;n,&amp;a,&amp;b); rep(i,1,n)&#123; scanf("%s",str+1); rep(j,1,n)&#123; if(str[j]=='=')dx[i][j]=dn[i][j]=0; else if(str[j]=='+')dx[i][j]=2,dn[i][j]=1; else if(str[j]=='-')dx[i][j]=-1,dn[i][j]=-2; else dx[i][j]=2,dn[i][j]=-2; &#125; &#125; rep(k,1,n)rep(i,1,n)if(i!=k)rep(j,1,n)if(i!=j&amp;&amp;j!=k)&#123;dx[i][j]=min(dx[i][j],dx[i][k]+dx[k][j]);dn[i][j]=max(dn[i][j],dn[i][k]+dn[k][j]);&#125; rep(i,1,n)rep(j,i+1,n)if(i!=a&amp;&amp;j!=b&amp;&amp;i!=b&amp;&amp;j!=a)&#123; if(dn[a][i]&gt;dx[j][b]||dn[a][j]&gt;dx[i][b])ans1++; if(dx[a][i]&lt;dn[j][b]||dx[a][j]&lt;dn[i][b])ans3++; if((dn[a][i]==dx[a][i]&amp;&amp;dx[j][b]==dn[j][b]&amp;&amp;dx[a][i]==dx[j][b])||(dn[a][j]==dx[a][j]&amp;&amp;dx[i][b]==dn[i][b]&amp;&amp;dx[a][j]==dx[i][b]))ans2++; &#125;&#125;int main()&#123; init(); printf("%d %d %d",ans1,ans2,ans3); return 0;&#125;]]></content>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lg2294]]></title>
+    <url>%2Flg2294%2F</url>
+    <content type="text"><![CDATA[链接:lg2294 题解 显然可以差分约束做，区间上的约束问题，显然可以转换成前缀和的点上的约束问题，注意u-&gt;v建边为c时要建一条v-&gt;u边权为-c的边 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int inf=0x3f3f3f3f;int T,n,m,cnt;int head[N],to[N],nxt[N],inq[N],w[N],dis[N],tot[N];queue&lt;int&gt;q;inline void adde(int a,int b,int c)&#123; to[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;int spfa(int u)&#123; while(!q.empty())q.pop(); q.push(u); inq[u]=1;dis[u]=0; while(!q.empty())&#123; int k=q.front();q.pop(); inq[k]--; for(int i=head[k];i;i=nxt[i])if(dis[to[i]]&gt;dis[k]+w[i])&#123; dis[to[i]]=dis[k]+w[i]; tot[to[i]]++; if(tot[to[i]]&gt;=n)return 0; if(!inq[to[i]])&#123; q.push(to[i]); inq[to[i]]++; &#125; &#125; &#125; return 1;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; cnt=0; memset(dis,0x3f,sizeof dis); memset(inq,0,sizeof inq); memset(head,0,sizeof head); memset(tot,0,sizeof tot); scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); adde(a-1,b,c);adde(b,a-1,-c); &#125; int ans=0; rep(i,0,n)if(!tot[i]&amp;&amp;!spfa(i))&#123;ans=1;break;&#125; puts(ans?"false":"true"); &#125; return 0;&#125;]]></content>
+      <tags>
+        <tag>并查集</tag>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg1993]]></title>
     <url>%2Flg1993%2F</url>
     <content type="text"><![CDATA[链接:lg1993 题解 裸的差分约束，判环注意要用dfs判，spfa判环会TLE 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=xi;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int inf=0x3f3f3f3f;int head[N],nxt[N],to[N],w[N],vis[N],dis[N],cnt,n,m,ans;inline void adde(int a,int b,int c)&#123; to[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;int spfa(int u)&#123; vis[u]=1; for(int i=head[u];i;i=nxt[i])if(dis[to[i]]&lt;dis[u]+w[i])&#123; dis[to[i]]=dis[u]+w[i]; if(vis[to[i]])return 0; if(!spfa(to[i]))return 0; &#125; vis[u]=0; return 1;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)&#123; int op,a,b,c; scanf("%d",&amp;op); if(op!=3)scanf("%d%d%d",&amp;a,&amp;b,&amp;c); else scanf("%d%d",&amp;a,&amp;b); if(op==1)adde(b,a,c); else if(op==2)adde(a,b,-c); else adde(a,b,0),adde(b,a,0); &#125; rep(i,1,n)adde(0,i,0),dis[i]=-inf; puts(spfa(0)?"Yes":"No"); return 0;&#125;]]></content>

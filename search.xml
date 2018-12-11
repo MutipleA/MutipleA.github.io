@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg2375]]></title>
+    <url>%2Flg2375%2F</url>
+    <content type="text"><![CDATA[链接:lg2375 题解 如果不考虑重叠,nm数组可以在求nxt数组的时候一起求出来。考虑重叠的话只需要再用自己匹配自己一次，重叠的部分不乘就ok 12345678910111213141516171819202122232425262728293031323334353637#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define ll long longusing namespace std;const int N=1e6+7;const ll mod=1e9+7;char str[N];int len,T,nm[N],nxt[N];inline void pre()&#123; int k=0;nm[1]=1; rep(i,2,len)&#123; while(k&amp;&amp;str[i]!=str[k+1])k=nxt[k]; if(str[i]==str[k+1])k++; nxt[i]=k; nm[i]=nm[k]+1; &#125;&#125;inline void solve(ll &amp;ans)&#123; int k=0; rep(i,2,len)&#123; while(k&amp;&amp;str[i]!=str[k+1])k=nxt[k]; if(str[i]==str[k+1])k++; while(2*k&gt;i)k=nxt[k]; ans=ans*(nm[k]+1)%mod; &#125;&#125;int main()&#123; scanf("%d",&amp;T); while(T--&amp;&amp;~scanf("%s",str+1))&#123; ll ans=1;len=strlen(str+1); memset(nxt,0,sizeof nxt); pre(); solve(ans); printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>kmp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[cf[educational55]D]]></title>
     <url>%2Fcf-educational55-D%2F</url>
     <content type="text"><![CDATA[链接:cf[educational55]D 题解 首先，如果总度数小于2*n-2的话无解。 对于度数大于1的点，把他们顺序链接 对于度数等于1的点，把他们和度数大于1的点连起来即可 12345678910111213141516171819202122232425262728293031323334#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;template &lt;typename T&gt;inline void read(T &amp;x)&#123; char c;int sign=1;x=0; do&#123;c=getchar();if(c=='-')sign=-1;&#125;while(c&lt;'0'||c&gt;'9'); do&#123;x=x*10+c-'0';c=getchar();&#125;while(c&gt;='0'&amp;&amp;c&lt;='9'); x*=sign;&#125;int n,s,k=1,lst,num,a[N];int main()&#123; read(n); rep(i,1,n)&#123;read(a[i]);s+=a[i];num+=a[i]==1;&#125; if(s&lt;2*n-2)return 0*puts("NO"); printf("YES %d\n%d\n",min(n-num+1,n-1),n-1); rep(i,1,n)if(a[i]&gt;1)&#123; if(lst)printf("%d %d\n",lst,i); else a[i]++; lst=i; &#125; rep(i,1,n)if(a[i]==1)&#123; if(lst)&#123; printf("%d %d\n",i,lst); lst=0;continue; &#125; while(a[k]&lt;=2&amp;&amp;k&lt;=n)++k; a[k]--; printf("%d %d\n",i,k); &#125; return 0;&#125;]]></content>
@@ -742,8 +753,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

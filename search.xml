@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ccf201809-4]]></title>
+    <url>%2Fccf201809-4%2F</url>
+    <content type="text"><![CDATA[链接:ccf201809-4 题解 简单的差分约束，给出的是形如3*x]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg2375]]></title>
     <url>%2Flg2375%2F</url>
     <content type="text"><![CDATA[链接:lg2375 题解 如果不考虑重叠,nm数组可以在求nxt数组的时候一起求出来。考虑重叠的话只需要再用自己匹配自己一次，重叠的部分不乘就ok 12345678910111213141516171819202122232425262728293031323334353637#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define ll long longusing namespace std;const int N=1e6+7;const ll mod=1e9+7;char str[N];int len,T,nm[N],nxt[N];inline void pre()&#123; int k=0;nm[1]=1; rep(i,2,len)&#123; while(k&amp;&amp;str[i]!=str[k+1])k=nxt[k]; if(str[i]==str[k+1])k++; nxt[i]=k; nm[i]=nm[k]+1; &#125;&#125;inline void solve(ll &amp;ans)&#123; int k=0; rep(i,2,len)&#123; while(k&amp;&amp;str[i]!=str[k+1])k=nxt[k]; if(str[i]==str[k+1])k++; while(2*k&gt;i)k=nxt[k]; ans=ans*(nm[k]+1)%mod; &#125;&#125;int main()&#123; scanf("%d",&amp;T); while(T--&amp;&amp;~scanf("%s",str+1))&#123; ll ans=1;len=strlen(str+1); memset(nxt,0,sizeof nxt); pre(); solve(ans); printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
@@ -41,8 +52,8 @@
     <url>%2Flg2294%2F</url>
     <content type="text"><![CDATA[链接:lg2294 题解 显然可以差分约束做，区间上的约束问题，显然可以转换成前缀和的点上的约束问题，注意u-&gt;v建边为c时要建一条v-&gt;u边权为-c的边 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;queue&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e5+7;const int inf=0x3f3f3f3f;int T,n,m,cnt;int head[N],to[N],nxt[N],inq[N],w[N],dis[N],tot[N];queue&lt;int&gt;q;inline void adde(int a,int b,int c)&#123; to[++cnt]=b; w[cnt]=c; nxt[cnt]=head[a]; head[a]=cnt;&#125;int spfa(int u)&#123; while(!q.empty())q.pop(); q.push(u); inq[u]=1;dis[u]=0; while(!q.empty())&#123; int k=q.front();q.pop(); inq[k]--; for(int i=head[k];i;i=nxt[i])if(dis[to[i]]&gt;dis[k]+w[i])&#123; dis[to[i]]=dis[k]+w[i]; tot[to[i]]++; if(tot[to[i]]&gt;=n)return 0; if(!inq[to[i]])&#123; q.push(to[i]); inq[to[i]]++; &#125; &#125; &#125; return 1;&#125;int main()&#123; scanf("%d",&amp;T); while(T--)&#123; cnt=0; memset(dis,0x3f,sizeof dis); memset(inq,0,sizeof inq); memset(head,0,sizeof head); memset(tot,0,sizeof tot); scanf("%d%d",&amp;n,&amp;m); rep(i,1,m)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); adde(a-1,b,c);adde(b,a-1,-c); &#125; int ans=0; rep(i,0,n)if(!tot[i]&amp;&amp;!spfa(i))&#123;ans=1;break;&#125; puts(ans?"false":"true"); &#125; return 0;&#125;]]></content>
       <tags>
-        <tag>并查集</tag>
         <tag>差分约束</tag>
+        <tag>并查集</tag>
       </tags>
   </entry>
   <entry>
@@ -753,8 +764,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
@@ -1759,8 +1770,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>拓展欧几里德</tag>
         <tag>排列组合</tag>
+        <tag>拓展欧几里德</tag>
       </tags>
   </entry>
   <entry>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ccf201909-3]]></title>
+    <url>%2Fccf201909-3%2F</url>
+    <content type="text"><![CDATA[链接:ccf201909-3 题解 超级大模拟，码农题，暂时90分，待继续debug 就简单的弄出树形结构，然后在树上查询就ok。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e2+7;string str[N],s[N];vector&lt;int&gt;p[N*100],c[N]; int n,m,L,cnt,ans[N],f[N],vis[N][N],ct;void init()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n&gt;&gt;m;getline(cin,str[0]); rep(i,1,n)getline(cin,str[i]); rep(i,1,n)&#123; int id=0,len,size; while(str[i][id]=='.')id++; len=(id+1)/2;L=max(L,len); size=str[i].length(); while(id&lt;size&amp;&amp;str[i][id]!='#')&#123; if(str[i][id]!=' '&amp;&amp;str[i][id]&gt;='A'&amp;&amp;str[i][id]&lt;='Z')str[i][id]='a'+str[i][id]-'A'; id++; &#125; c[len].push_back(i); if(len==0)f[++f[0]]=i; if(len)&#123; size=c[len-1].size()-1; p[c[len-1][size]].push_back(i); &#125; &#125;&#125;string ptr;void dfs(int x,int k)&#123; if(vis[x][k])return ; if(k&gt;ct)return ; if(x==1&amp;&amp;k==1&amp;&amp;str[x].find(s[k])!=ptr.npos)&#123; if(k==ct)ans[++cnt]=x; dfs(x,2); &#125; vis[x][k]=1; int size=p[x].size()-1; rep(i,0,size)&#123; int j=p[x][i]; int l=str[j].find(s[k]); if(l!=ptr.npos&amp;&amp;(s[k][0]=='#'||str[j][l-1]!='#'))&#123; if(k==ct)ans[++cnt]=j; else dfs(j,k+1); &#125; dfs(j,k); dfs(j,1); &#125;&#125;void find()&#123; getline(cin,ptr); int size=ptr.length()-1,c=-1;ct=0;cnt=0; rep(i,0,size)&#123; if(ptr[i]==' ')continue; if(ptr[i]=='#')c=ct+1; s[++ct].push_back(ptr[i]); int j=i+1;while(j&lt;=size&amp;&amp;ptr[j]!=' ')&#123;s[ct].push_back(ptr[j]);j++;&#125; i=j; &#125; rep(i,1,ct)if(i!=c)&#123; size=s[i].length()-1; rep(j,0,size)if(s[i][j]&gt;='A'&amp;&amp;s[i][j]&lt;='Z')s[i][j]='a'+s[i][j]-'A'; &#125; rep(i,1,f[0])dfs(f[i],1); rep(i,1,ct)s[i].clear(); memset(vis,0,sizeof vis);&#125;int main()&#123; init(); rep(i,1,m)&#123; find(); sort(ans+1,ans+cnt+1); cout&lt;&lt;cnt; rep(i,1,cnt)cout&lt;&lt;' '&lt;&lt;ans[i]; cout&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ccf201809-4]]></title>
     <url>%2Fccf201809-4%2F</url>
     <content type="text"><![CDATA[链接:ccf201809-4 题解 简单的差分约束，给出的是形如3*x]]></content>
@@ -1770,8 +1781,8 @@
         <category>拓展欧几里德</category>
       </categories>
       <tags>
-        <tag>排列组合</tag>
         <tag>拓展欧几里德</tag>
+        <tag>排列组合</tag>
       </tags>
   </entry>
   <entry>

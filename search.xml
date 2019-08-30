@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu6715]]></title>
+    <url>%2Fhdu6715%2F</url>
+    <content type="text"><![CDATA[链接:hdu6715 题解12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=2e6+7;ll mu[N],p[N],vis[N],cnt,n,m,T,a[N];ll ans;void get_mu(int n)&#123; mu[1]=1; rep(i,2,n)&#123; if(!vis[i])mu[i]=-1,p[++cnt]=i; for(int j=1;j&lt;=cnt&amp;&amp;i&lt;=n/p[j];++j)&#123; vis[i*p[j]]=1; if(i%p[j]==0)break; mu[i*p[j]]-=mu[i]; &#125; &#125; rep(i,1,n)for(int j=i;j&lt;=n;j+=i)a[j]+=mu[i]*mu[j/i];&#125;int main()&#123; scanf("%d",&amp;T); get_mu(1e6+7); while(T--&amp;&amp;~scanf("%d%d",&amp;n,&amp;m))&#123; if(n&gt;m)swap(n,m); ans=0; rep(i,1,n)&#123; int b=0,c=0; for(int j=i;j&lt;=n;j+=i)b+=mu[j]; for(int j=i;j&lt;=m;j+=i)c+=mu[j]; ans+=a[i]*b*c; &#125; printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
+      <tags>
+        <tag>莫比乌斯反演</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[lg1919]]></title>
+    <url>%2Flg1919%2F</url>
+    <content type="text"><![CDATA[链接:lg1919 题解简单FFT模板，将n位数分解为$a_0+a_1 \* x+a_2 \* x^2+...+a_{n-1} \* x^{n-1}$, $a_j=\frac{1}{n} \sum_{k=0}^{n-1} y_k\omega_n^{-kj}$ $$dp[i]=i^n-\sum_{j=1}^{i-1}{C_i^j*dp[j]}$$ FFT1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define PI acos(-1)using namespace std;const int N=1e6+7;struct cpx&#123; double x,y; cpx()&#123;&#125;; cpx(double a,double b)&#123;x=a;y=b;&#125; inline cpx operator * (cpx b)&#123;return cpx(x*b.x-y*b.y,b.x*y+b.y*x);&#125; inline cpx operator *= (cpx b)&#123;*this=*this*b;&#125; inline cpx operator + (cpx b)&#123;return cpx(x+b.x,y+b.y);&#125; inline cpx operator - (cpx b)&#123;return cpx(x-b.x,y-b.y);&#125;&#125;A[N],B[N];char str[N];int n,m,R[N],L,ans[N];void fft(cpx *a,int f)&#123; rep(i,0,n)if(i&lt;R[i])swap(a[i],a[R[i]]); for(register int i=1;i&lt;n;i&lt;&lt;=1)&#123; cpx nw=cpx(cos(PI/i),f*sin(PI/i)); for(register int j=0;j&lt;n;j+=(i&lt;&lt;1))&#123; cpx w=cpx(1,0); for(register int k=0;k&lt;i;k++,w*=nw)&#123; cpx x=a[j+k],y=w*a[i+j+k]; a[j+k]=x+y;a[i+j+k]=x-y; &#125; &#125; &#125; if(f==-1)rep(i,0,n-1)a[i].x/=n;&#125;int main()&#123; scanf("%d",&amp;n); scanf("%s",str); repd(i,n-1,0)A[n-1-i].x=str[i]-'0'; scanf("%s",str); repd(i,n-1,0)B[n-1-i].x=str[i]-'0'; m=n&lt;&lt;1; for(n=1;n&lt;=m;n&lt;&lt;=1,++L); rep(i,0,n-1)R[i]=(R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;(L-1)); fft(A,1);fft(B,1); rep(i,0,n-1)A[i]*=B[i]; fft(A,-1); rep(i,0,n-1)&#123; ans[i]+=(int)(A[i].x+0.5); if(ans[i]&gt;=10)&#123; ans[i+1]+=ans[i]/10; ans[i]%=10; n+=(i==n); &#125; &#125; while(!ans[n]&amp;&amp;n&gt;=1)n--; m++; repd(i,n,0)printf("%d",ans[i]); return 0;&#125; NTT1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long#define mod 998244353using namespace std;const int N=1e6+7;ll A[N],B[N],R[N];int n,m,bit;char str[N];ll qpow(ll x,ll y)&#123; ll z=x,ans=1; for(;y;y&gt;&gt;=1,z=z*z%mod)if(y&amp;1)ans=ans*z%mod; return ans%mod;&#125;void ntt(ll *a,int f)&#123; rep(i,0,n-1)if(i&lt;R[i])swap(a[i],a[R[i]]); for(int i=1;i&lt;n;i&lt;&lt;=1)&#123; ll wn=qpow(3,(mod-1)/(i&lt;&lt;1)); if(f==-1)wn=qpow(wn,mod-2); for(int j=0;j&lt;n;j+=i&lt;&lt;1)&#123; ll w=1; for(int k=0;k&lt;i;k++,w=w*wn%mod)&#123; ll x=a[j+k],y=w*a[i+j+k]%mod; a[j+k]=(x+y+mod)%mod; a[i+j+k]=(x-y+mod)%mod; &#125; &#125; &#125; if(f==-1)&#123; ll inv=qpow(n,mod-2); rep(i,0,n-1)a[i]=a[i]*inv%mod; &#125;&#125;int main()&#123; scanf("%d",&amp;n); scanf("%s",str); repd(i,n-1,0)A[n-1-i]=str[i]-'0'; scanf("%s",str); repd(i,n-1,0)B[n-1-i]=str[i]-'0'; m=n&lt;&lt;1; for(n=1;n&lt;=m;n&lt;&lt;=1,++bit); rep(i,0,n-1)R[i]=(R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)&lt;&lt;(bit-1)); ntt(A,1);ntt(B,1); rep(i,0,n-1)A[i]=A[i]*B[i]%mod; ntt(A,-1); rep(i,0,n-1)&#123; if(A[i]&gt;=10)&#123; A[i+1]+=A[i]/10; A[i]%=10; &#125; &#125; while(A[n-1]==0)--n; repd(i,n-1,0)printf("%d",A[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>FFT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj1201]]></title>
+    <url>%2Fpoj1201%2F</url>
+    <content type="text"><![CDATA[链接:poj1201 题解 板子题，点上区间问题转为前缀和的点上问题，就可以建图了。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longconst int N=1e5+7;const int inf=0x3f3f3f3f;using namespace std;int n,m,cnt,mx,mn,nxt[N],w[N],to[N],head[N],dis[N],inq[N];inline void adde(int a,int b,int c)&#123; w[++cnt]=c; to[cnt]=b; nxt[cnt]=head[a]; head[a]=cnt;&#125;queue&lt;int&gt;q;void spfa()&#123; q.push(mn); inq[mn]++;dis[mn]=0; while(!q.empty())&#123; int k=q.front(); q.pop();inq[k]--; for(int i=head[k],v;i;i=nxt[i])&#123; if(dis[v=to[i]]&gt;=dis[k]+w[i])continue; dis[v]=dis[k]+w[i]; if(!inq[v])&#123;q.push(v);inq[v]++;&#125; &#125; &#125;&#125;int main()&#123; while(~scanf("%d",&amp;n))&#123; mx=0;mn=inf; memset(head,0,sizeof head); memset(dis,0,sizeof dis); rep(i,1,n)&#123; int a,b,c; scanf("%d%d%d",&amp;a,&amp;b,&amp;c); mx=max(mx,b); mn=min(mn,a); adde(a-1,b,c); &#125; rep(i,mn,mx)adde(i-1,i,0),adde(i,i-1,-1),dis[i]=-inf; spfa(); printf("%d\n",dis[mx]); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>差分约束</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ccf201909-3]]></title>
     <url>%2Fccf201909-3%2F</url>
     <content type="text"><![CDATA[链接:ccf201909-3 题解 超级大模拟，码农题，暂时90分，待继续debug 就简单的弄出树形结构，然后在树上查询就ok。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e2+7;string str[N],s[N];vector&lt;int&gt;p[N*100],c[N]; int n,m,L,cnt,ans[N],f[N],vis[N][N],ct;void init()&#123; ios::sync_with_stdio(false); cin&gt;&gt;n&gt;&gt;m;getline(cin,str[0]); rep(i,1,n)getline(cin,str[i]); rep(i,1,n)&#123; int id=0,len,size; while(str[i][id]=='.')id++; len=(id+1)/2;L=max(L,len); size=str[i].length(); while(id&lt;size&amp;&amp;str[i][id]!='#')&#123; if(str[i][id]!=' '&amp;&amp;str[i][id]&gt;='A'&amp;&amp;str[i][id]&lt;='Z')str[i][id]='a'+str[i][id]-'A'; id++; &#125; c[len].push_back(i); if(len==0)f[++f[0]]=i; if(len)&#123; size=c[len-1].size()-1; p[c[len-1][size]].push_back(i); &#125; &#125;&#125;string ptr;void dfs(int x,int k)&#123; if(vis[x][k])return ; if(k&gt;ct)return ; if(x==1&amp;&amp;k==1&amp;&amp;str[x].find(s[k])!=ptr.npos)&#123; if(k==ct)ans[++cnt]=x; dfs(x,2); &#125; vis[x][k]=1; int size=p[x].size()-1; rep(i,0,size)&#123; int j=p[x][i]; int l=str[j].find(s[k]); if(l!=ptr.npos&amp;&amp;(s[k][0]=='#'||str[j][l-1]!='#'))&#123; if(k==ct)ans[++cnt]=j; else dfs(j,k+1); &#125; dfs(j,k); dfs(j,1); &#125;&#125;void find()&#123; getline(cin,ptr); int size=ptr.length()-1,c=-1;ct=0;cnt=0; rep(i,0,size)&#123; if(ptr[i]==' ')continue; if(ptr[i]=='#')c=ct+1; s[++ct].push_back(ptr[i]); int j=i+1;while(j&lt;=size&amp;&amp;ptr[j]!=' ')&#123;s[ct].push_back(ptr[j]);j++;&#125; i=j; &#125; rep(i,1,ct)if(i!=c)&#123; size=s[i].length()-1; rep(j,0,size)if(s[i][j]&gt;='A'&amp;&amp;s[i][j]&lt;='Z')s[i][j]='a'+s[i][j]-'A'; &#125; rep(i,1,f[0])dfs(f[i],1); rep(i,1,ct)s[i].clear(); memset(vis,0,sizeof vis);&#125;int main()&#123; init(); rep(i,1,m)&#123; find(); sort(ans+1,ans+cnt+1); cout&lt;&lt;cnt; rep(i,1,cnt)cout&lt;&lt;' '&lt;&lt;ans[i]; cout&lt;&lt;endl; &#125; return 0;&#125;]]></content>
@@ -775,8 +805,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

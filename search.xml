@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg3431]]></title>
+    <url>%2Flg3431%2F</url>
+    <content type="text"><![CDATA[链接:lg3431 题解nm很小的话可以O(nm)dp 离散化后转移方程f[i]=max(f[j])+val (a[i].y&gt;=a[j].y) 这里显然是个二位偏序,树状数组维护一下 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=1e5+7;struct node&#123; int l,r; ll x;&#125;a[N];int n,m,k,nx,ny;ll c[N],f[N],ans=-1;int X[N],Y[N];map&lt;int,int&gt;hsh_x,hsh_y;inline int cmp(node x,node y)&#123;return x.l==y.l?x.r&lt;=y.r:x.l&lt;y.l;&#125;void update(int x,ll k)&#123; for(int i=x;i&lt;=ny;i+=lowbit(i))c[i]=max(c[i],k);&#125;ll query(int x)&#123; ll res=-1; for(int i=x;i;i-=lowbit(i))res=max(c[i],res); return res;&#125;int main()&#123; scanf("%d%d%d",&amp;n,&amp;m,&amp;k); rep(i,1,k)&#123; scanf("%d%d%lld",&amp;a[i].l,&amp;a[i].r,&amp;a[i].x); X[i]=a[i].l; Y[i]=a[i].r; &#125; sort(X+1,X+k+1); sort(Y+1,Y+k+1); rep(i,1,k)&#123; if(X[i]!=X[i-1])hsh_x[X[i]]=++nx; if(Y[i]!=Y[i-1])hsh_y[Y[i]]=++ny; &#125; rep(i,1,k)a[i].l=hsh_x[a[i].l],a[i].r=hsh_y[a[i].r]; sort(a+1,a+k+1,cmp); rep(i,1,k)&#123; f[i]=query(a[i].r)+a[i].x; update(a[i].r,f[i]); &#125; rep(i,1,k)ans=max(ans,f[i]); printf("%lld\n",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>树状数组</tag>
+        <tag>二位偏序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hdu6715]]></title>
     <url>%2Fhdu6715%2F</url>
     <content type="text"><![CDATA[链接:hdu6715 题解12345678910111213141516171819202122232425262728293031323334353637383940#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstdlib&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=2e6+7;ll mu[N],p[N],vis[N],cnt,n,m,T,a[N];ll ans;void get_mu(int n)&#123; mu[1]=1; rep(i,2,n)&#123; if(!vis[i])mu[i]=-1,p[++cnt]=i; for(int j=1;j&lt;=cnt&amp;&amp;i&lt;=n/p[j];++j)&#123; vis[i*p[j]]=1; if(i%p[j]==0)break; mu[i*p[j]]-=mu[i]; &#125; &#125; rep(i,1,n)for(int j=i;j&lt;=n;j+=i)a[j]+=mu[i]*mu[j/i];&#125;int main()&#123; scanf("%d",&amp;T); get_mu(1e6+7); while(T--&amp;&amp;~scanf("%d%d",&amp;n,&amp;m))&#123; if(n&gt;m)swap(n,m); ans=0; rep(i,1,n)&#123; int b=0,c=0; for(int j=i;j&lt;=n;j+=i)b+=mu[j]; for(int j=i;j&lt;=m;j+=i)c+=mu[j]; ans+=a[i]*b*c; &#125; printf("%lld\n",ans); &#125; return 0;&#125;]]></content>
@@ -76,8 +89,8 @@
     <url>%2Fcf-educational55-E%2F</url>
     <content type="text"><![CDATA[链接:cf[educational55]E 题解 枚举右端点r，考虑最优的左端点l所在的位置，只需要考虑l左边c的个数以及l右边该数的个数。 t[x]表示右端点是x这个数时的最优左端点，那么当前以a[i]为右端点时，考虑能否更新t[a[i]]为i-1 更新条件显然是$$cnt[a[i]]-cntc+cnta[i]&lt;cnt[a[i]]-cntc+cnta[i] 那么显然我们可以直接维护a[i]的cnt[a[i]]-cnt[c]的最小值即可 123456789101112131415161718#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int n,x,c,ans,f[N],cnt[N];int main()&#123; scanf("%d%d",&amp;n,&amp;c); rep(i,1,n)&#123; scanf("%d",&amp;x); f[x]=min(f[x],cnt[x]-cnt[c]); cnt[x]++; ans=max(ans,cnt[x]-cnt[c]-f[x]); &#125; printf("%d\n",ans+cnt[c]); return 0;&#125;]]></content>
       <tags>
-        <tag>思维</tag>
         <tag>贪心</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>
@@ -128,7 +141,7 @@
   <entry>
     <title><![CDATA[hdu1010]]></title>
     <url>%2Fhdu1010%2F</url>
-    <content type="text"><![CDATA[链接:hdu1010 题解 简单dfs+奇偶剪枝 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=20;pair&lt;int,int&gt; S,D;char mp[N][N];int vis[N][N],n,m,T;int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;inline int dis(int x,int y)&#123;return abs(x-D.first)+abs(y-D.second);&#125;int dfs(int x,int y,int c)&#123; if(c==T&amp;&amp;mp[x][y]=='D')return 1; int t=T-dis(x,y)-c; if(c&gt;=T||t&lt;0||t&amp;1)return 0; rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||mp[nx][ny]=='X'||vis[nx][ny])continue; vis[nx][ny]=1; if(dfs(nx,ny,c+1))return 1; vis[nx][ny]=0; &#125; return 0;&#125;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;T)&amp;&amp;n)&#123; memset(vis,0,sizeof vis); rep(i,1,n)scanf("%s",mp[i]+1); rep(i,1,n)rep(j,1,m)&#123; if(mp[i][j]=='S')S=make_pair(i,j); if(mp[i][j]=='D')D=make_pair(i,j); &#125; vis[S.first][S.second]=1; puts(dfs(S.first,S.second,0)?"YES":"NO"); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[链接:hdu1010 题解 简单dfs+奇偶剪枝 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=20;pair&lt;int,int&gt; S,D;char mp[N][N];int vis[N][N],n,m,T;int dx[5]=&#123;0,-1,1,0,0&#125;;int dy[5]=&#123;0,0,0,-1,1&#125;;inline int dis(int x,int y)&#123;return abs(x-D.first)+abs(y-D.second);&#125;int dfs(int x,int y,int c)&#123; if(c==T&amp;&amp;mp[x][y]=='D')return 1; int t=T-dis(x,y)-c;s if(c&gt;=T||t&lt;0||t&amp;1)return 0; rep(i,1,4)&#123; int nx=x+dx[i]; int ny=y+dy[i]; if(nx&lt;1||nx&gt;n||ny&lt;1||ny&gt;m||mp[nx][ny]=='X'||vis[nx][ny])continue; vis[nx][ny]=1; if(dfs(nx,ny,c+1))return 1; vis[nx][ny]=0; &#125; return 0;&#125;int main()&#123; while(~scanf("%d%d%d",&amp;n,&amp;m,&amp;T)&amp;&amp;n)&#123; memset(vis,0,sizeof vis); rep(i,1,n)scanf("%s",mp[i]+1); rep(i,1,n)rep(j,1,m)&#123; if(mp[i][j]=='S')S=make_pair(i,j); if(mp[i][j]=='D')D=make_pair(i,j); &#125; vis[S.first][S.second]=1; puts(dfs(S.first,S.second,0)?"YES":"NO"); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -409,11 +422,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[hdu6319[多校第三场A]]]></title>
-    <url>%2Fhdu6319-%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%B8%89%E5%9C%BAA%2F</url>
-    <content type="text"><![CDATA[链接:hdu6319[多校第三场A] Description InputOutputSample InputSample Output题解1]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[hdu6315[多校第二场G]]]></title>
     <url>%2Fhdu6315-%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BAG%2F</url>
     <content type="text"><![CDATA[链接:hdu6315[多校第二场G] 题解 线段树维护c[i]=b[i]-a[i]%b[i]的最小值以及$ans=\frac{a[i]}{b[i]}$(向下取整)的区间和,当有小于等于0的东西出现的时候就暴力往下更新 有的人可能会说这东西会T 0.0,是的如果没有题目上那句b is a static permutation of 1 to n.这个算法确实会T.既然b是1-n的一个排列,并且a[i]从0最多到m,所以总的是$\sum_{i=0}^n{\frac{m}{i}}$,这东西是个调和级数约等于$mlog(n)$,加个线段树显然复杂度是$O(m*{log^2(n)})$12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstdlib&gt;#include&lt;cmath&gt;#include&lt;cstring&gt;#include&lt;queue&gt;#include&lt;map&gt;#include&lt;vector&gt;#include&lt;algorithm&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long long#define lson o&lt;&lt;1,l,mid#define rson o&lt;&lt;1|1,mid+1,r#define lowbit(x) x&amp;(-x)using namespace std;const int N=1e5+7;int nm[N],tr[N&lt;&lt;2],lz[N&lt;&lt;2],n,m;ll ans[N&lt;&lt;2];char op[10];void pushdown(int o,int l,int r)&#123; int v=lz[o]; lz[o&lt;&lt;1]+=v; lz[o&lt;&lt;1|1]+=v; tr[o&lt;&lt;1]-=v; tr[o&lt;&lt;1|1]-=v; lz[o]=0;&#125;inline void pushup(int o,int l,int r)&#123; tr[o]=min(tr[o&lt;&lt;1],tr[o&lt;&lt;1|1]); ans[o]=ans[o&lt;&lt;1]+ans[o&lt;&lt;1|1];&#125;void build(int o,int l,int r)&#123; lz[o]=0; if(l==r)&#123; scanf("%d",&amp;nm[l]); tr[o]=nm[l]; ans[o]=0; return ; &#125; int mid=l+r&gt;&gt;1; build(lson); build(rson); pushup(o,l,r);&#125;void update(int o,int l,int r,int L,int R)&#123; if(L&lt;=l&amp;&amp;R&gt;=r)&#123; tr[o]--; if(tr[o]&gt;0)&#123;lz[o]++;return ;&#125; if(l==r&amp;&amp;tr[o]&lt;=0)&#123; tr[o]+=nm[l]; ans[o]++; return ; &#125; &#125; if(lz[o])pushdown(o,l,r); int mid=l+r&gt;&gt;1; if(L&lt;=mid)update(lson,L,R); if(R&gt;mid)update(rson,L,R); pushup(o,l,r);&#125;ll query(int o,int l,int r,int L,int R)&#123; if(L&lt;=l&amp;&amp;R&gt;=r)return ans[o]; if(lz[o])pushdown(o,l,r); int mid=l+r&gt;&gt;1; ll res=0; if(L&lt;=mid)res+=query(lson,L,R); if(R&gt;mid)res+=query(rson,L,R); return res;&#125;int main()&#123; while(~scanf("%d%d",&amp;n,&amp;m))&#123; build(1,1,n); while(m--)&#123; int l,r; scanf("%s%d%d",op,&amp;l,&amp;r); if(op[0]=='a')update(1,1,n,l,r); else printf("%lld\n",query(1,1,n,l,r)); &#125; &#125; return 0;&#125;]]></content>
@@ -443,8 +451,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>思维</tag>
         <tag>贪心</tag>
+        <tag>思维</tag>
       </tags>
   </entry>
   <entry>

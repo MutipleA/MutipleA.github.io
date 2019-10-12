@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg2163]]></title>
+    <url>%2Flg2163%2F</url>
+    <content type="text"><![CDATA[链接:lg2163 Description 题解f(a,b,c,d)=sum(c,d)-sum(a-1,d)-sum(c,b-1)+sum(a-1,b-1) 转化后即是一个二维偏序问题,树状数组、cdq分治都可以解决 cdq123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=3e6+7;struct node&#123; int x,y,opt,idx; bool operator &lt;(const node &amp;b) const &#123; return x==b.x?(y==b.y?opt:y&lt;b.y):x&lt;b.x; &#125;&#125;a[N],tmp[N];int n,m,ans_cnt,act;int ans[N];void cdq(int l,int r)&#123; if(l==r)return ; int mid=l+r&gt;&gt;1; cdq(l,mid); cdq(mid+1,r); int posa=l,posb=mid+1,pos=l,tot=0; while(posa&lt;=mid&amp;&amp;posb&lt;=r)&#123; if(a[posa].y&lt;=a[posb].y)tot+=a[posa].opt,tmp[pos++]=a[posa++]; else ans[a[posb].idx]+=tot,tmp[pos++]=a[posb++]; &#125; while(posa&lt;=mid)tmp[pos++]=a[posa++]; while(posb&lt;=r)ans[a[posb].idx]+=tot,tmp[pos++]=a[posb++]; rep(i,l,r)a[i]=tmp[i];&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); a[++act]=node&#123;x,y,1,0&#125;; &#125; rep(i,1,m)&#123; int x,y,c,d; scanf("%d%d%d%d",&amp;x,&amp;y,&amp;c,&amp;d); a[++act]=node&#123;c,d,0,++ans_cnt&#125;; a[++act]=node&#123;c,y-1,0,++ans_cnt&#125;; a[++act]=node&#123;x-1,d,0,++ans_cnt&#125;; a[++act]=node&#123;x-1,y-1,0,++ans_cnt&#125;; &#125; sort(a+1,a+act+1); cdq(1,act); for(int i=1;i+3&lt;=ans_cnt;i+=4)printf("%d\n",ans[i]-ans[i+1]-ans[i+2]+ans[i+3]); return 0;&#125; 树状数组123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;bits/stdc++.h&gt;#include&lt;unordered_map&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=3e6+7;struct node&#123; int x,y,opt,id; bool operator &lt;(const node &amp;b)const &#123; return x==b.x?(y==b.y?opt:y&lt;b.y):x&lt;b.x; &#125;&#125;ques[N];int y[N];unordered_map&lt;int,int&gt;mp;int n,m,ques_tot,ans_tot,nn,cnt,tr[N],ans[N];inline void update(int x,int y)&#123;for(int i=x;i&lt;=cnt;i+=lowbit(i))tr[i]+=y;&#125;inline int query(int x)&#123;int res=0;for(int i=x;i;i-=lowbit(i))res+=tr[i];return res;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123; scanf("%d%d",&amp;ques[i].x,&amp;ques[i].y); ques[++ques_tot].opt=1; y[++nn]=ques[i].y; &#125; rep(i,1,m)&#123; int a,b,c,d; scanf("%d%d%d%d",&amp;a,&amp;b,&amp;c,&amp;d); ques[++ques_tot]=node&#123;c,d,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;c,b-1,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;a-1,d,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;a-1,b-1,0,++ans_tot&#125;; y[++nn]=d;y[++nn]=b-1; &#125; sort(y+1,y+nn+1); rep(i,1,nn)if(y[i]!=y[i+1])mp[y[i]]=++cnt; sort(ques+1,ques+ques_tot+1); rep(i,1,ques_tot)&#123; int id=mp[ques[i].y]; if(ques[i].opt==0)ans[ques[i].id]+=query(id); else update(id,1); &#125; for(int i=1;i+3&lt;=ans_tot;i+=4)printf("%d\n",ans[i]-ans[i+1]-ans[i+2]+ans[i+3]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+        <tag>二维偏序</tag>
+        <tag>cdq分治</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg3431]]></title>
     <url>%2Flg3431%2F</url>
     <content type="text"><![CDATA[链接:lg3431 题解nm很小的话可以O(nm)dp 离散化后转移方程f[i]=max(f[j])+val (a[i].y&gt;=a[j].y) 这里显然是个二位偏序,树状数组维护一下 12345678910111213141516171819202122232425262728293031323334353637383940414243444546#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=1e5+7;struct node&#123; int l,r; ll x;&#125;a[N];int n,m,k,nx,ny;ll c[N],f[N],ans=-1;int X[N],Y[N];map&lt;int,int&gt;hsh_x,hsh_y;inline int cmp(node x,node y)&#123;return x.l==y.l?x.r&lt;=y.r:x.l&lt;y.l;&#125;void update(int x,ll k)&#123; for(int i=x;i&lt;=ny;i+=lowbit(i))c[i]=max(c[i],k);&#125;ll query(int x)&#123; ll res=-1; for(int i=x;i;i-=lowbit(i))res=max(c[i],res); return res;&#125;int main()&#123; scanf("%d%d%d",&amp;n,&amp;m,&amp;k); rep(i,1,k)&#123; scanf("%d%d%lld",&amp;a[i].l,&amp;a[i].r,&amp;a[i].x); X[i]=a[i].l; Y[i]=a[i].r; &#125; sort(X+1,X+k+1); sort(Y+1,Y+k+1); rep(i,1,k)&#123; if(X[i]!=X[i-1])hsh_x[X[i]]=++nx; if(Y[i]!=Y[i-1])hsh_y[Y[i]]=++ny; &#125; rep(i,1,k)a[i].l=hsh_x[a[i].l],a[i].r=hsh_y[a[i].r]; sort(a+1,a+k+1,cmp); rep(i,1,k)&#123; f[i]=query(a[i].r)+a[i].x; update(a[i].r,f[i]); &#125; rep(i,1,k)ans=max(ans,f[i]); printf("%lld\n",ans); return 0;&#125;]]></content>
@@ -813,8 +826,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>树状数组</tag>
         <tag>线段树</tag>
+        <tag>树状数组</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>

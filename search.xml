@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[lg4169]]></title>
+    <url>%2Flg4169%2F</url>
+    <content type="text"><![CDATA[链接:lg4169 题解当满足的点在询问点左下角时去掉绝对值,转换为三维偏序问题,坐标翻转即可将另三个区域的点转换为左下角的点 或4次cdq采用不同的树状数组最后取最值 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)using namespace std;const int INF=0x3f3f3f3f;const int N=1e6+7;struct node&#123; int x,y,t,key,op;&#125;p[N],t[N],a[N];int tr[N];int n,m,mx,my;inline void update(int x,int y)&#123;for(;x&lt;=my;x+=lowbit(x))tr[x]=max(tr[x],y);&#125;inline int query(int x)&#123;int res=-1;for(;x;x-=lowbit(x))res=max(res,tr[x]);return res;&#125;inline int cmpx(node x,node y)&#123;return x.x==y.x?x.y&lt;y.y:x.x&lt;y.x;&#125;void cdq(int l,int r)&#123; if(l==r)return ; int mid=l+r&gt;&gt;1; cdq(l,mid);cdq(mid+1,r); int posa=l,posb=mid+1; while(posb&lt;=r)&#123; while(posa&lt;=mid&amp;&amp;a[posa].x&lt;=a[posb].x)&#123; if(a[posa].op==1)update(a[posa].y,a[posa].x+a[posa].y); ++posa; &#125; if(a[posb].op==0)&#123; int tp=query(a[posb].y); if(tp)p[a[posb].t].key=min(p[a[posb].t].key,a[posb].x+a[posb].y-tp); &#125; ++posb; &#125; rep(i,l,posa-1)if(a[i].op==1)for(int j=a[i].y;j&lt;=my;j+=lowbit(j))tr[j]=0; //sort(a+l,a+r+1,cmpx); int i=l,j=mid+1,k=l-1; while(j&lt;=r)&#123; while(i&lt;=mid&amp;&amp;cmpx(a[i],a[j]))t[++k]=a[i++]; t[++k]=a[j++]; &#125; while(j&lt;=r)t[++k]=a[j++]; while(i&lt;=mid)t[++k]=a[i++]; rep(i,l,r)a[i]=t[i];&#125;inline void init()&#123; rep(i,1,n)a[i]=p[i];&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); x++,y++; p[i]=node&#123;x,y,i,x+y,1&#125;; mx=max(x,mx); my=max(y,my); &#125; while(m--)&#123; int op,x,y; scanf("%d%d%d",&amp;op,&amp;x,&amp;y); x++,y++; if(op==1)p[++n]=node&#123;x,y,n,x+y,1&#125;; else p[++n]=node&#123;x,y,n,INF,0&#125;; mx=max(x,mx); my=max(y,my); &#125; init(); cdq(1,n); rep(i,1,n)p[i].x=mx-p[i].x+1; init(); cdq(1,n); rep(i,1,n)p[i].y=my-p[i].y+1; init(); cdq(1,n); rep(i,1,n)p[i].x=mx-p[i].x+1; init(); cdq(1,n); rep(i,1,n)if(p[i].op==0)printf("%d\n",p[i].key); return 0;&#125;]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>cdq</tag>
+        <tag>三位偏序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[lg2163]]></title>
     <url>%2Flg2163%2F</url>
     <content type="text"><![CDATA[链接:lg2163 Description 题解f(a,b,c,d)=sum(c,d)-sum(a-1,d)-sum(c,b-1)+sum(a-1,b-1) 转化后即是一个二维偏序问题,树状数组、cdq分治都可以解决 cdq123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=3e6+7;struct node&#123; int x,y,opt,idx; bool operator &lt;(const node &amp;b) const &#123; return x==b.x?(y==b.y?opt:y&lt;b.y):x&lt;b.x; &#125;&#125;a[N],tmp[N];int n,m,ans_cnt,act;int ans[N];void cdq(int l,int r)&#123; if(l==r)return ; int mid=l+r&gt;&gt;1; cdq(l,mid); cdq(mid+1,r); int posa=l,posb=mid+1,pos=l,tot=0; while(posa&lt;=mid&amp;&amp;posb&lt;=r)&#123; if(a[posa].y&lt;=a[posb].y)tot+=a[posa].opt,tmp[pos++]=a[posa++]; else ans[a[posb].idx]+=tot,tmp[pos++]=a[posb++]; &#125; while(posa&lt;=mid)tmp[pos++]=a[posa++]; while(posb&lt;=r)ans[a[posb].idx]+=tot,tmp[pos++]=a[posb++]; rep(i,l,r)a[i]=tmp[i];&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123; int x,y; scanf("%d%d",&amp;x,&amp;y); a[++act]=node&#123;x,y,1,0&#125;; &#125; rep(i,1,m)&#123; int x,y,c,d; scanf("%d%d%d%d",&amp;x,&amp;y,&amp;c,&amp;d); a[++act]=node&#123;c,d,0,++ans_cnt&#125;; a[++act]=node&#123;c,y-1,0,++ans_cnt&#125;; a[++act]=node&#123;x-1,d,0,++ans_cnt&#125;; a[++act]=node&#123;x-1,y-1,0,++ans_cnt&#125;; &#125; sort(a+1,a+act+1); cdq(1,act); for(int i=1;i+3&lt;=ans_cnt;i+=4)printf("%d\n",ans[i]-ans[i+1]-ans[i+2]+ans[i+3]); return 0;&#125; 树状数组123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;bits/stdc++.h&gt;#include&lt;unordered_map&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define lowbit(x) x&amp;(-x)#define ll long longusing namespace std;const int N=3e6+7;struct node&#123; int x,y,opt,id; bool operator &lt;(const node &amp;b)const &#123; return x==b.x?(y==b.y?opt:y&lt;b.y):x&lt;b.x; &#125;&#125;ques[N];int y[N];unordered_map&lt;int,int&gt;mp;int n,m,ques_tot,ans_tot,nn,cnt,tr[N],ans[N];inline void update(int x,int y)&#123;for(int i=x;i&lt;=cnt;i+=lowbit(i))tr[i]+=y;&#125;inline int query(int x)&#123;int res=0;for(int i=x;i;i-=lowbit(i))res+=tr[i];return res;&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); rep(i,1,n)&#123; scanf("%d%d",&amp;ques[i].x,&amp;ques[i].y); ques[++ques_tot].opt=1; y[++nn]=ques[i].y; &#125; rep(i,1,m)&#123; int a,b,c,d; scanf("%d%d%d%d",&amp;a,&amp;b,&amp;c,&amp;d); ques[++ques_tot]=node&#123;c,d,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;c,b-1,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;a-1,d,0,++ans_tot&#125;; ques[++ques_tot]=node&#123;a-1,b-1,0,++ans_tot&#125;; y[++nn]=d;y[++nn]=b-1; &#125; sort(y+1,y+nn+1); rep(i,1,nn)if(y[i]!=y[i+1])mp[y[i]]=++cnt; sort(ques+1,ques+ques_tot+1); rep(i,1,ques_tot)&#123; int id=mp[ques[i].y]; if(ques[i].opt==0)ans[ques[i].id]+=query(id); else update(id,1); &#125; for(int i=1;i+3&lt;=ans_tot;i+=4)printf("%d\n",ans[i]-ans[i+1]-ans[i+2]+ans[i+3]); return 0;&#125;]]></content>
@@ -102,8 +114,8 @@
     <url>%2Fcf-educational55-E%2F</url>
     <content type="text"><![CDATA[链接:cf[educational55]E 题解 枚举右端点r，考虑最优的左端点l所在的位置，只需要考虑l左边c的个数以及l右边该数的个数。 t[x]表示右端点是x这个数时的最优左端点，那么当前以a[i]为右端点时，考虑能否更新t[a[i]]为i-1 更新条件显然是$$cnt[a[i]]-cntc+cnta[i]&lt;cnt[a[i]]-cntc+cnta[i] 那么显然我们可以直接维护a[i]的cnt[a[i]]-cnt[c]的最小值即可 123456789101112131415161718#include&lt;bits/stdc++.h&gt;#define rep(i,x,y) for(register int i=x;i&lt;=y;++i)#define repd(i,x,y) for(register int i=x;i&gt;=y;--i)#define ll long longusing namespace std;const int N=1e6+7;int n,x,c,ans,f[N],cnt[N];int main()&#123; scanf("%d%d",&amp;n,&amp;c); rep(i,1,n)&#123; scanf("%d",&amp;x); f[x]=min(f[x],cnt[x]-cnt[c]); cnt[x]++; ans=max(ans,cnt[x]-cnt[c]-f[x]); &#125; printf("%d\n",ans+cnt[c]); return 0;&#125;]]></content>
       <tags>
-        <tag>贪心</tag>
         <tag>思维</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -464,8 +476,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>思维</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -826,8 +838,8 @@
         <category>树套树</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树状数组</tag>
+        <tag>线段树</tag>
         <tag>主席树</tag>
         <tag>树套树</tag>
       </tags>
